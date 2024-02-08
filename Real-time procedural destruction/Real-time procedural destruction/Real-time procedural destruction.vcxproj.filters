@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\GameEngine">
+      <UniqueIdentifier>{57077e66-9384-4b30-8b78-8df20ddaa862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine">
+      <UniqueIdentifier>{cb42b600-3b44-4e0a-9783-a82352691997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{8aa6d73f-6298-4856-8f75-d7ad07b3a018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{88093956-3228-4b5e-954b-e08a22f84d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Project">
+      <UniqueIdentifier>{5fb2ebf2-43dd-4601-972f-04c70096e35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Project">
+      <UniqueIdentifier>{6bac5c1f-0c19-4104-a8a9-412eed4d49fe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Project\Crate.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Curuthers.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\main.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Road.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\GraphicsModel.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\RenderTexture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\GraphicsShader.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\GraphicsTexture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Vao.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Vbo.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\stb_vorbis.c">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Audio.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\AudioListener.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\AudioSource.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\BoxCollider.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Camera.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Component.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Core.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Entity.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Environment.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Exception.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\GUI.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Input.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Model.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\ModelLoader.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\PointLight.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\QuadRenderer.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Resource.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Resources.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Shader.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Texture.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Transform.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Window.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Project\Crate.h">
+      <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Curuthers.h">
+      <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Road.h">
+      <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GraphicsModel.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Graphics.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\RenderTexture.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GraphicsShader.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GraphicsTexture.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Vao.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Vbo.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Audio.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\AudioListener.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\AudioSource.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\BoxCollider.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Camera.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Component.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Core.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Entity.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Environment.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Exception.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\GameComponents.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\GUI.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Input.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Model.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\ModelLoader.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\PointLight.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\QuadRenderer.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Resource.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Resources.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Shader.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Texture.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Transform.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Window.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

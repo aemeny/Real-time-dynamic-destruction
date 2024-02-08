@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{19eb6084-631c-4b84-a012-b5105eb3d63d}</ProjectGuid>
+    <RootNamespace>Realtimeproceduraldestruction</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\contrib\windows-cl-amd64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\contrib\windows-cl-amd64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;OpenAL32.lib;OpenGL32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\contrib\windows-cl-amd64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\contrib\windows-cl-amd64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;OpenAL32.lib;OpenGL32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GameEngine\Audio.cpp" />
+    <ClCompile Include="GameEngine\AudioListener.cpp" />
+    <ClCompile Include="GameEngine\AudioSource.cpp" />
+    <ClCompile Include="GameEngine\BoxCollider.cpp" />
+    <ClCompile Include="GameEngine\Camera.cpp" />
+    <ClCompile Include="GameEngine\Component.cpp" />
+    <ClCompile Include="GameEngine\Core.cpp" />
+    <ClCompile Include="GameEngine\Entity.cpp" />
+    <ClCompile Include="GameEngine\Environment.cpp" />
+    <ClCompile Include="GameEngine\Exception.cpp" />
+    <ClCompile Include="GameEngine\GUI.cpp" />
+    <ClCompile Include="GameEngine\Input.cpp" />
+    <ClCompile Include="GameEngine\Model.cpp" />
+    <ClCompile Include="GameEngine\ModelLoader.cpp" />
+    <ClCompile Include="GameEngine\PointLight.cpp" />
+    <ClCompile Include="GameEngine\QuadRenderer.cpp" />
+    <ClCompile Include="GameEngine\Resource.cpp" />
+    <ClCompile Include="GameEngine\Resources.cpp" />
+    <ClCompile Include="GameEngine\Shader.cpp" />
+    <ClCompile Include="GameEngine\stb_vorbis.c" />
+    <ClCompile Include="GameEngine\Texture.cpp" />
+    <ClCompile Include="GameEngine\Transform.cpp" />
+    <ClCompile Include="GameEngine\Window.cpp" />
+    <ClCompile Include="Graphics\GraphicsModel.cpp" />
+    <ClCompile Include="Graphics\RenderTexture.cpp" />
+    <ClCompile Include="Graphics\GraphicsShader.cpp" />
+    <ClCompile Include="Graphics\GraphicsTexture.cpp" />
+    <ClCompile Include="Graphics\Vao.cpp" />
+    <ClCompile Include="Graphics\Vbo.cpp" />
+    <ClCompile Include="Project\Crate.cpp" />
+    <ClCompile Include="Project\Curuthers.cpp" />
+    <ClCompile Include="Project\main.cpp" />
+    <ClCompile Include="Project\Road.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngine\Audio.h" />
+    <ClInclude Include="GameEngine\AudioListener.h" />
+    <ClInclude Include="GameEngine\AudioSource.h" />
+    <ClInclude Include="GameEngine\BoxCollider.h" />
+    <ClInclude Include="GameEngine\Camera.h" />
+    <ClInclude Include="GameEngine\Component.h" />
+    <ClInclude Include="GameEngine\Core.h" />
+    <ClInclude Include="GameEngine\Entity.h" />
+    <ClInclude Include="GameEngine\Environment.h" />
+    <ClInclude Include="GameEngine\Exception.h" />
+    <ClInclude Include="GameEngine\GameComponents.h" />
+    <ClInclude Include="GameEngine\GUI.h" />
+    <ClInclude Include="GameEngine\Input.h" />
+    <ClInclude Include="GameEngine\Model.h" />
+    <ClInclude Include="GameEngine\ModelLoader.h" />
+    <ClInclude Include="GameEngine\PointLight.h" />
+    <ClInclude Include="GameEngine\QuadRenderer.h" />
+    <ClInclude Include="GameEngine\Resource.h" />
+    <ClInclude Include="GameEngine\Resources.h" />
+    <ClInclude Include="GameEngine\Shader.h" />
+    <ClInclude Include="GameEngine\Texture.h" />
+    <ClInclude Include="GameEngine\Transform.h" />
+    <ClInclude Include="GameEngine\Window.h" />
+    <ClInclude Include="Graphics\GraphicsModel.h" />
+    <ClInclude Include="Graphics\Graphics.h" />
+    <ClInclude Include="Graphics\RenderTexture.h" />
+    <ClInclude Include="Graphics\GraphicsShader.h" />
+    <ClInclude Include="Graphics\GraphicsTexture.h" />
+    <ClInclude Include="Graphics\Vao.h" />
+    <ClInclude Include="Graphics\Vbo.h" />
+    <ClInclude Include="Project\Crate.h" />
+    <ClInclude Include="Project\Curuthers.h" />
+    <ClInclude Include="Project\Road.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
