@@ -9,7 +9,7 @@ namespace GameEngine
 	struct PointLight : Component
 	{
 		void initialize() override;
-		void setFilePath(std::string _path) { m_filepath = _path; } // Setter for the light shader file path
+		void setFilePath(std::string _path) { m_filepath = "../Shaders/Light/" + _path; } // Setter for the light shader file path
 		void setLightPos(glm::vec3 _pos); // Set light position
 		glm::vec3 getLightPos() { return m_position; } // Getter for light position
 

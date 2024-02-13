@@ -4,7 +4,6 @@
 
 namespace GameEngine
 {
-
     /*
     * constructor that initializes OPENAL controller and assigns any found
     */
@@ -37,7 +36,6 @@ namespace GameEngine
 
         m_controller = nullptr;
     }
-
 
     /*
     * returns if a key is currently being held down
@@ -92,7 +90,19 @@ namespace GameEngine
 
         while (SDL_PollEvent(&m_event) != 0)
         {
-            if (m_event.type == SDL_KEYDOWN) //check if any keys have been pressed down
+             if (m_event.type == SDL_MOUSEMOTION) //check for any mouse movement
+             {
+                 m_dm = true;
+                 if (m_mset > 0) //work out mouse input values
+                 {
+                     m_mousePos.x = m_event.motion.x; // Set mouse position on screen from SDL
+                     m_mousePos.y = m_event.motion.y;
+
+                     m_mouseDelta.x += m_mousePos.x - m_core.lock()->m_nativeWindow->m_windowWidth / 2;
+                     m_mouseDelta.y += m_mousePos.y - m_core.lock()->m_nativeWindow->m_windowHeight / 2;
+                 }
+            }
+            else if (m_event.type == SDL_KEYDOWN) //check if any keys have been pressed down
             {
                 m_pressedKeys.push_back(m_event.key.keysym.sym); //Add to pressed keys this frame
 
@@ -117,18 +127,6 @@ namespace GameEngine
                 std::vector<int>::iterator position = std::find(m_keys.begin(), m_keys.end(), m_event.key.keysym.sym); //find key in list
                 if (position != m_keys.end()) // == myVector.end() means the element was not found
                     m_keys.erase(position);
-            }
-            if (m_event.type == SDL_MOUSEMOTION) //check for any mouse movement
-            {
-                m_dm = true;
-                if (m_mset > 0) //work out mouse input values
-                {
-                    m_mousePos.x = m_event.motion.x; // Set mouse position on screen from SDL
-                    m_mousePos.y = m_event.motion.y;
-
-                    m_mouseDelta.x += m_mousePos.x - m_core.lock()->m_nativeWindow->m_windowWidth / 2;
-                    m_mouseDelta.y += m_mousePos.y - m_core.lock()->m_nativeWindow->m_windowHeight / 2;
-                }
             }
             else if (m_event.type == SDL_MOUSEBUTTONDOWN) // Mouse input
             {
@@ -204,7 +202,6 @@ namespace GameEngine
             SDL_WarpMouseInWindow(NULL, m_core.lock()->m_nativeWindow->m_windowWidth / 2, m_core.lock()->m_nativeWindow->m_windowHeight / 2);
         }
 
-        
         // When the mouse first gets on the screen
         if (m_dm)
         {

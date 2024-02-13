@@ -19,12 +19,12 @@ namespace GameEngine
 
 		void setModel(std::string _modelPath) // Set model path and load model
 		{
-			m_model = core().lock()->m_resources->load<Model>(_modelPath)->getModel();
+			m_model = core().lock()->m_resources->load<Model>("../Samples/Models/" + _modelPath)->getModel();
 		}
 
 		void setTexture(std::string _texturePath) // Set texture path and load texture
 		{
-			m_texture = core().lock()->m_resources->load<Texture>(_texturePath)->getTexture();
+			m_texture = core().lock()->m_resources->load<Texture>( "../Samples/Textures/" + _texturePath)->getTexture();
 		}
 
 		void setShaderLightPos(std::string _newLightPos) // Set a new position for a point light in the shader and initliaze

@@ -1,5 +1,5 @@
 #include "../GameEngine/GameComponents.h"
-
+#include "Curuthers.h"
 
 using namespace GameEngine;
 
@@ -25,24 +25,18 @@ int main()
 	std::shared_ptr<Entity> entityLight = core->addEntity();
 	std::shared_ptr<Component> entityLightPointLight = entityLight->addComponent<PointLight>();
 	std::weak_ptr<PointLight> entityPointLightGrab = entityLight->findComponent<PointLight>();
-	entityPointLightGrab.lock()->setFilePath("../Shaders/Light/fragmentShader.txt");
+	entityPointLightGrab.lock()->setFilePath("fragmentShader.txt");
 	entityPointLightGrab.lock()->setLightPos(glm::vec3(0.0f, 10.0f, 0.0f));
 
+	// Entity 3 - Curuthers
+	std::shared_ptr<Entity> entity = core->addEntity();
+	std::shared_ptr<Component> entityTransform = entity->addComponent<Transform>();
+	std::weak_ptr<Transform> transformGrab = entity->findComponent<Transform>();
+	transformGrab.lock()->setPos(glm::vec3(0.0f, 0.0f, 0.0f));
+	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
 
-	// Entity 3 - GUI Button                               
-	std::shared_ptr<Entity> entityGUI = core->addEntity();
-	std::shared_ptr<Component> entityGUITransform = entityGUI->addComponent<Transform>();
-	std::weak_ptr<Transform> transformGrab = entityGUI->findComponent<Transform>();
-	transformGrab.lock()->setPos(glm::vec3{ core->m_nativeWindow->m_windowWidth / 2, core->m_nativeWindow->m_windowHeight / 2, 0.0f });
-	transformGrab.lock()->setRot(glm::vec3{ 180.0f, 0.0f, 0.0f });
-	transformGrab.lock()->setScale(glm::vec3{ (core->m_nativeWindow->m_windowWidth / 2.0f),
-											  (core->m_nativeWindow->m_windowHeight / 2.0f),
-											  0.0f });
-
-	std::shared_ptr<Component> entityGUIGUI = entityGUI->addComponent<GUI>();
-	std::weak_ptr<GUI> entityGUIGrab = entityGUI->findComponent<GUI>();
-	entityGUIGrab.lock()->setTexture("../Samples/Quit/Quit.png");
-	entityGUIGrab.lock()->setClickable(true);
+	std::shared_ptr<Component> entitiyModelLoader = entity->addComponent<ModelLoader>();
+	std::shared_ptr<Component> entitiyCuruthers = entity->addComponent<Curuthers>();
 
 
 	// After entity set up run core main loop

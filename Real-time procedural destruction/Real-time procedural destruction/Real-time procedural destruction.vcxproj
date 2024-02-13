@@ -162,6 +162,7 @@
     <ClCompile Include="Graphics\GraphicsTexture.cpp" />
     <ClCompile Include="Graphics\Vao.cpp" />
     <ClCompile Include="Graphics\Vbo.cpp" />
+    <ClCompile Include="Project\Curuthers.cpp" />
     <ClCompile Include="Project\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +196,7 @@
     <ClInclude Include="Graphics\GraphicsTexture.h" />
     <ClInclude Include="Graphics\Vao.h" />
     <ClInclude Include="Graphics\Vbo.h" />
+    <ClInclude Include="Project\Curuthers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
