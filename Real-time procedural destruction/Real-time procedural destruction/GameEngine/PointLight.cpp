@@ -25,7 +25,7 @@ namespace GameEngine
 		//Find all model loaders
 		std::vector<std::shared_ptr<ModelLoader> > modelLoaders;
 		core().lock()->find<ModelLoader>(modelLoaders);
-		for each (std::shared_ptr<ModelLoader> modelLoader in modelLoaders)
+		for(std::shared_ptr<ModelLoader> modelLoader : modelLoaders)
 		{
 			modelLoader->setShaderLightPos(newPosString);
 		}

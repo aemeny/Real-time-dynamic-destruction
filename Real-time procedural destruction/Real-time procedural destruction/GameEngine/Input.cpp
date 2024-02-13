@@ -44,7 +44,7 @@ namespace GameEngine
     */
     bool Input::isKey(int _key)
     {
-        for each (int key in m_keys)
+        for(int key : m_keys)
         {
             if (_key == key) {
                 return true;
@@ -58,7 +58,7 @@ namespace GameEngine
     */
     bool Input::isKeyPressed(int _key)
     {
-        for each (int key in m_pressedKeys)
+        for(int key : m_pressedKeys)
         {
             if (_key == key) {
                 return true;
@@ -72,7 +72,7 @@ namespace GameEngine
    */
     bool Input::isKeyReleased(int _key)
     {
-        for each (int key in m_releasedKeys)
+        for(int key : m_releasedKeys)
         {
             if (_key == key) {
                 return true;
@@ -98,7 +98,7 @@ namespace GameEngine
 
                 //Check if key is already in list
                 bool check = true;
-                for each (int key in m_keys)
+                for(int key : m_keys)
                 {
                     if (m_event.key.keysym.sym == key) {
                         check = false;

@@ -33,16 +33,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Project\Crate.cpp">
-      <Filter>Source Files\Project</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Curuthers.cpp">
-      <Filter>Source Files\Project</Filter>
-    </ClCompile>
     <ClCompile Include="Project\main.cpp">
-      <Filter>Source Files\Project</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Road.cpp">
       <Filter>Source Files\Project</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\GraphicsModel.cpp">
@@ -134,15 +125,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Project\Crate.h">
-      <Filter>Header Files\Project</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Curuthers.h">
-      <Filter>Header Files\Project</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Road.h">
-      <Filter>Header Files\Project</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\GraphicsModel.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>

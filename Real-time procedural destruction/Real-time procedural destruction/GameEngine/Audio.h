@@ -1,10 +1,8 @@
 #pragma once
 #include "Resource.h"
+#include <vector>
 #include <AL/al.h>
 #include <AL/alc.h>
-#include <vector>
-#include <string>
-#include <stdexcept>
 
 namespace GameEngine
 {

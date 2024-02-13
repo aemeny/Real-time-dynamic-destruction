@@ -20,7 +20,7 @@ namespace GameEngine
 		std::vector<std::shared_ptr<BoxCollider> > boxColliders;
 		core().lock()->find<BoxCollider>(boxColliders);
 
-		for each (std::shared_ptr<BoxCollider> otherCollider in boxColliders)
+		for(std::shared_ptr<BoxCollider> otherCollider : boxColliders)
 		{
 			if (otherCollider->m_entity.lock() != m_entity.lock()) // Dont want to collide with self
 			{

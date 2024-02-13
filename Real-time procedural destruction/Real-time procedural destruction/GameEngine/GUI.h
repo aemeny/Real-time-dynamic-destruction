@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "../Graphics/Graphics.h"
+#include "Texture.h"
 #include "QuadRenderer.h"
 
 namespace GameEngine

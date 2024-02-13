@@ -1,14 +1,14 @@
 #pragma once
+#include "Audio.h"
 #include "Window.h"
 #include "Environment.h"
 #include "Resources.h"
-#include "Audio.h"
-#include "Input.h"
 #include "Exception.h"
+#include "Entity.h"
 
 namespace GameEngine
 {
-struct Entity;
+struct Component;
 
 //!  A Core Struct. 
 /*!
@@ -87,7 +87,7 @@ private:
 	 reference to itself
    */
 	bool m_running;
-	std::vector<std::shared_ptr<Entity>> m_entities;
+	std::vector<std::shared_ptr<Entity> > m_entities;
 	std::weak_ptr<Core> m_self;
 };
 

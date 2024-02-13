@@ -16,7 +16,7 @@ namespace GameEngine
 		//Find all camera to attach main 3D cam
 		std::vector<std::shared_ptr<Camera> > cameras;
 		core().lock()->find<Camera>(cameras);
-		for each (std::shared_ptr<Camera> cam in cameras)
+		for(std::shared_ptr<Camera> cam : cameras)
 		{
 			if (cam->m_orthoCam == false) 
 			{
