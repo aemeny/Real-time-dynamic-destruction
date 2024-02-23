@@ -1,14 +1,52 @@
-﻿  Camera.cpp
+﻿  Audio.cpp
+  AudioListener.cpp
+  AudioSource.cpp
+  BoxCollider.cpp
+  Camera.cpp
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Camera.cpp(38,79): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Camera.cpp(39,79): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  Component.cpp
+  Core.cpp
+  Entity.cpp
+  Environment.cpp
+  Exception.cpp
+  GUI.cpp
   Input.cpp
-C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(100,51): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(98,51): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(101,51): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(99,51): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
           with
           [
               T=float
           ]
+  Model.cpp
+  ModelLoader.cpp
+  PointLight.cpp
+  QuadRenderer.cpp
+  Resource.cpp
+  Resources.cpp
+  Shader.cpp
+  Texture.cpp
   Generating Code...
-  Real-time procedural destruction.vcxproj -> C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe
+  Compiling...
+  Transform.cpp
+  Window.cpp
+  GraphicsModel.cpp
+  RenderTexture.cpp
+  GraphicsShader.cpp
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\GraphicsShader.cpp(61,54): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  GraphicsTexture.cpp
+  Vao.cpp
+  Vbo.cpp
+  Curuthers.cpp
+  main.cpp
+  Generating Code...
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::PointLight>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelLoader>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+  stb_vorbis.c
+LINK : fatal error LNK1104: cannot open file 'SDL2.lib'
