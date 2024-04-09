@@ -1,5 +1,6 @@
 #include "../GameEngine/GameComponents.h"
 #include "Curuthers.h"
+#include "Floor.h"
 
 using namespace GameEngine;
 
@@ -28,6 +29,7 @@ int main()
 	entityPointLightGrab.lock()->setFilePath("fragmentShader.txt");
 	entityPointLightGrab.lock()->setLightPos(glm::vec3(0.0f, 10.0f, 0.0f));
 
+
 	// Entity 3 - Curuthers
 	std::shared_ptr<Entity> entity = core->addEntity();
 	std::shared_ptr<Component> entityTransform = entity->addComponent<Transform>();
@@ -37,6 +39,18 @@ int main()
 
 	std::shared_ptr<Component> entitiyModelLoader = entity->addComponent<ModelLoader>();
 	std::shared_ptr<Component> entitiyCuruthers = entity->addComponent<Curuthers>();
+
+
+	// Entity 4 - Floor
+	entity = core->addEntity();
+	entityTransform = entity->addComponent<Transform>();
+	transformGrab = entity->findComponent<Transform>();
+	transformGrab.lock()->setPos(glm::vec3(0.0f, -2.4f, 0.0f));
+	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
+	transformGrab.lock()->setScale(glm::vec3(0.05f, 1.0f, 0.05f));
+
+	entitiyModelLoader = entity->addComponent<ModelLoader>();
+	entitiyCuruthers = entity->addComponent<Floor>();
 
 
 	// After entity set up run core main loop

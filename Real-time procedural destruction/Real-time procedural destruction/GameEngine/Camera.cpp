@@ -13,7 +13,7 @@ namespace GameEngine
 		m_projectionMatrix = glm::perspective(glm::radians(90.0f), 
 			(float)(core().lock()->m_nativeWindow->m_windowHeight / core().lock()->m_nativeWindow->m_windowWidth), 
 			0.1f, 400.0f);
-		m_mouseSpeedX = 1.0f; m_mouseSpeedY = 0.5f; m_speed = 0.05f; m_cameraAngleX = 0.0f; m_cameraAngleY = 0.0f;
+		m_mouseSpeedX = 0.2f; m_mouseSpeedY = 0.2f; m_speed = 0.05f; m_cameraAngleX = 0.0f; m_cameraAngleY = 0.0f;
 
 		m_camRotation = glm::vec3{ 0.0f,0.0f,0.0f };
 		m_camPosition = glm::vec3{ 0.0f, 0.0f, -5.0f };
@@ -34,9 +34,13 @@ namespace GameEngine
 	/* update camera everyframe to get mouse and keyboard input to update position and rotation creating free camera effect */
 	void Camera::onTick()
 	{
+		if (m_orthoCam)
+			return;
+
+		glm::vec2 mouseDelta = core().lock()->m_input->getMouseDelta();
 		//Getting mouse input from input class and multiplying my set speed then my delta time for a smooth frame by frame feeling
-		m_cameraAngleX -= core().lock()->m_input->getMouseDelta().x * m_mouseSpeedX * getDT();
-		m_cameraAngleY -= core().lock()->m_input->getMouseDelta().y * m_mouseSpeedY * getDT();
+		m_cameraAngleX -= mouseDelta.x * m_mouseSpeedX * getDT();
+		m_cameraAngleY -= mouseDelta.y * m_mouseSpeedY * getDT();
 
 		//Lock Camera turning in the y so the camera doesnt flip upside down
 		if (m_cameraAngleY < -1)

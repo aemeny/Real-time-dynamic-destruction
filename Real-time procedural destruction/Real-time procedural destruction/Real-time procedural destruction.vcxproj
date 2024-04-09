@@ -163,6 +163,7 @@
     <ClCompile Include="Graphics\Vao.cpp" />
     <ClCompile Include="Graphics\Vbo.cpp" />
     <ClCompile Include="Project\Curuthers.cpp" />
+    <ClCompile Include="Project\Floor.cpp" />
     <ClCompile Include="Project\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +198,7 @@
     <ClInclude Include="Graphics\Vao.h" />
     <ClInclude Include="Graphics\Vbo.h" />
     <ClInclude Include="Project\Curuthers.h" />
+    <ClInclude Include="Project\Floor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

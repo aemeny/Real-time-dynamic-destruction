@@ -56,7 +56,7 @@ namespace GameEngine
 	{
 		if (deltaTime == 0)
 		{
-			return 0.001f;
+			return 0.000001f;
 		}
 		return deltaTime;
 	}

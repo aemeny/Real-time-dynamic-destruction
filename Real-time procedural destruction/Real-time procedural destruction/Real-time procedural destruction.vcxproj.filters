@@ -126,6 +126,9 @@
     <ClCompile Include="Project\Curuthers.cpp">
       <Filter>Source Files\Project</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Floor.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -219,6 +222,9 @@
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="Project\Curuthers.h">
+      <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Floor.h">
       <Filter>Header Files\Project</Filter>
     </ClInclude>
   </ItemGroup>

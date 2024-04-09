@@ -1,44 +1,4 @@
-﻿  AudioListener.cpp
-  AudioSource.cpp
-  BoxCollider.cpp
-  Camera.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Camera.cpp(38,79): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Camera.cpp(39,79): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-  Component.cpp
-  Core.cpp
-  Entity.cpp
-  Environment.cpp
-  GUI.cpp
-  Input.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(98,51): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(98,51): warning C4244:         with
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(98,51): warning C4244:         [
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(98,51): warning C4244:             T=float
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(98,51): warning C4244:         ]
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(99,51): warning C4244: '=': conversion from 'Sint32' to 'T', possible loss of data
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(99,51): warning C4244:         with
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(99,51): warning C4244:         [
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(99,51): warning C4244:             T=float
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(99,51): warning C4244:         ]
-  Model.cpp
-  ModelLoader.cpp
-  PointLight.cpp
-  QuadRenderer.cpp
-  Resources.cpp
-  Shader.cpp
-  Texture.cpp
-  Transform.cpp
-  Window.cpp
-  GraphicsModel.cpp
-  Generating Code...
-  Compiling...
-  GraphicsShader.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\GraphicsShader.cpp(61,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-  Curuthers.cpp
-  main.cpp
-  Generating Code...
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::PointLight>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+﻿  Floor.cpp
 C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelLoader>': not all control paths return a value
 C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
   Real-time procedural destruction.vcxproj -> C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe

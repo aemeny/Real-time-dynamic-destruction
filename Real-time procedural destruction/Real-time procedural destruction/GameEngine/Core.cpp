@@ -73,6 +73,7 @@ namespace GameEngine
 
 			//Clear depth buffer
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		}
 	}
 
@@ -143,8 +144,11 @@ namespace GameEngine
 			throw std::runtime_error("Failed to make context current");
 		}
 
-		// Turn vsync off for SDL
-		SDL_GL_SetSwapInterval(0);
+		// Turn vsync on for SDL
+		SDL_GL_SetSwapInterval(1);
+
+		// Turn off cursor
+		SDL_ShowCursor(false);
 
 		// Init glew
 		glewInit();

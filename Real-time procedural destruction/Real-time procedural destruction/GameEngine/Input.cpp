@@ -8,8 +8,9 @@ namespace GameEngine
     * constructor that initializes OPENAL controller and assigns any found
     */
     Input::Input(std::weak_ptr<Core> _core) : 
-        m_keys(), m_pressedKeys(), m_releasedKeys(), m_mousePos(glm::vec2(0)),
-        m_core(_core), m_lockMouse(true), m_mouseDelta(glm::vec2(0)), m_controller(nullptr)
+        m_keys(), m_pressedKeys(), m_releasedKeys(), m_mousePos(glm::ivec2(0)),
+        m_core(_core), m_lockMouse(true), m_mouseDelta(glm::vec2(0)), m_controller(nullptr),
+        m_dm(false), m_mset(0)
     {
         //Init controller support
         SDL_Init(SDL_INIT_GAMECONTROLLER);
@@ -90,17 +91,17 @@ namespace GameEngine
 
         while (SDL_PollEvent(&m_event) != 0)
         {
-             if (m_event.type == SDL_MOUSEMOTION) //check for any mouse movement
-             {
-                 m_dm = true;
-                 if (m_mset > 0) //work out mouse input values
-                 {
-                     m_mousePos.x = m_event.motion.x; // Set mouse position on screen from SDL
-                     m_mousePos.y = m_event.motion.y;
-
-                     m_mouseDelta.x += m_mousePos.x - m_core.lock()->m_nativeWindow->m_windowWidth / 2;
-                     m_mouseDelta.y += m_mousePos.y - m_core.lock()->m_nativeWindow->m_windowHeight / 2;
-                 }
+            if (m_event.type == SDL_MOUSEMOTION) //check for any mouse movement
+            {
+                m_dm = true;
+                if (m_mset > 0) //work out mouse input values
+                {
+                    m_mousePos.x = m_event.motion.x;
+                    m_mousePos.y = m_event.motion.y;
+                     
+                    m_mouseDelta.x += m_mousePos.x - m_core.lock()->m_nativeWindow->m_windowWidth / 2;
+                    m_mouseDelta.y += m_mousePos.y - m_core.lock()->m_nativeWindow->m_windowHeight / 2;
+                }
             }
             else if (m_event.type == SDL_KEYDOWN) //check if any keys have been pressed down
             {
