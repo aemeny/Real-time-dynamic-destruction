@@ -1,4 +1,5 @@
 #include "Core.h"
+#include "..\Physics\RayTracer.h"
 
 namespace GameEngine
 {
@@ -92,6 +93,8 @@ namespace GameEngine
 		rtn->m_input = std::make_shared<Input>(rtn);
 
 		rtn->m_resources = std::make_shared<Resources>();
+
+		rtn->m_rayTracer = std::make_shared<RayTracer>();
 
 		rtn->m_nativeWindow = std::make_shared<Window>();
 		rtn->m_nativeWindow->m_windowHeight = 700;

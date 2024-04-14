@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Project">
       <UniqueIdentifier>{6bac5c1f-0c19-4104-a8a9-412eed4d49fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{53436f90-768d-4c6d-b382-b14749ef772c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{76e5b3d2-84ca-4769-97b0-b34b42458ca9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project\main.cpp">
@@ -64,9 +70,6 @@
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\AudioSource.cpp">
-      <Filter>Source Files\GameEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\BoxCollider.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\Camera.cpp">
@@ -129,6 +132,21 @@
     <ClCompile Include="Project\Floor.cpp">
       <Filter>Source Files\Project</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\Ray.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\ShootRay.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\RayTracer.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\BaseCollider.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\BoxCollider.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -159,9 +177,6 @@
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\AudioSource.h">
-      <Filter>Header Files\GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine\BoxCollider.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Camera.h">
@@ -226,6 +241,21 @@
     </ClInclude>
     <ClInclude Include="Project\Floor.h">
       <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Ray.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\ShootRay.h">
+      <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\RayTracer.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BaseCollider.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\BoxCollider.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "../GameEngine/GameComponents.h"
 #include "Curuthers.h"
 #include "Floor.h"
+#include "ShootRay.h"
 
 using namespace GameEngine;
 
@@ -16,11 +17,18 @@ int main()
 	// Entity 1 - Camera
 	std::shared_ptr<Entity> cameraEntity = core->addEntity();
 	std::shared_ptr<Component> cameraEntityTransform = cameraEntity->addComponent<Transform>();
-	std::shared_ptr<Component> cameraEntityCamera = cameraEntity->addComponent<Camera>(core->m_input); // Perspective 3D camera
+
+	float FOV = 90.0f;
+	std::shared_ptr<Component> cameraEntityCamera = cameraEntity->addComponent<Camera>(core->m_input, FOV); // Perspective 3D camera
 	std::shared_ptr<Component> entityGUICamera = cameraEntity->addComponent<Camera>(); // Orthographic camera
+	
 	std::shared_ptr<Component> entityGUIQuad = cameraEntity->addComponent<QuadRenderer>();
 	std::shared_ptr<Component> entitiyAudioListener = cameraEntity->addComponent<AudioListener>();
 
+	std::shared_ptr<Component> entitiyShootRay = cameraEntity->addComponent<ShootRay>();
+	std::weak_ptr<ShootRay> entityShootRayGrab = cameraEntity->findComponent<ShootRay>();
+	entityShootRayGrab.lock()->setPos(glm::vec2(core->m_nativeWindow->m_windowWidth, core->m_nativeWindow->m_windowHeight));
+		
 
 	// Entity 2 - Point light
 	std::shared_ptr<Entity> entityLight = core->addEntity();
@@ -50,8 +58,10 @@ int main()
 	transformGrab.lock()->setScale(glm::vec3(0.05f, 1.0f, 0.05f));
 
 	entitiyModelLoader = entity->addComponent<ModelLoader>();
-	entitiyCuruthers = entity->addComponent<Floor>();
-
+	std::shared_ptr<Component> entitiyFloor = entity->addComponent<Floor>();
+	std::shared_ptr<Component> entitiyCollider = entity->addComponent<BoxCollider>();
+	std::weak_ptr<BoxCollider> boxcolliderGrab = entity->findComponent<BoxCollider>();
+	core->m_rayTracer->addObject(boxcolliderGrab);
 
 	// After entity set up run core main loop
 	core->run();

@@ -2,6 +2,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "Input.h"
 #include "Component.h"
+#include "..\Physics\Ray.h"
 
 namespace GameEngine 
 {
@@ -11,9 +12,11 @@ namespace GameEngine
 	*/
 	struct Camera : Component
 	{
-		void initialize(std::weak_ptr<Input> _input) override; // Perspective init
+		void initialize(std::weak_ptr<Input> _input, float _FOV) override; // Perspective init
 		void initialize() override; // Orthographic init
 		void onTick() override; // Updates camera position and rotation based off inputs
+		Ray getRay(glm::vec2 windowPos); // Create ray based on window position
+		float mapping(float xold, float xistart, float xiend, float xostart, float xoend); // Map postion out of pixel space
 
 		glm::mat4 getView() { return m_viewingMatrix; }; // Getter for viewing matrix
 		glm::mat4 getProj() { return m_projectionMatrix; }; // Getter for projection matrix
@@ -30,10 +33,16 @@ namespace GameEngine
 		// Matrixies
 		glm::mat4 m_projectionMatrix;
 		glm::mat4 m_viewingMatrix;
+		glm::mat4 m_transformationMatrix;
 
 		// Transform variables
 		glm::vec3 m_camPosition;
 		glm::vec3 m_camRotation;
+
+		//Camera & Window variables
+		float m_windowHeight;
+		float m_windowWidth;
+		float m_FOV;
 
 		// Camera movement based variables
 		glm::vec3 m_upVector;

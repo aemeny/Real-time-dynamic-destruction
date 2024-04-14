@@ -73,7 +73,7 @@ namespace GameEngine
 		 \param _input the first argument.
 	  */
 		virtual void initialize();
-		virtual void initialize(std::weak_ptr<Input> _input);
+		virtual void initialize(std::weak_ptr<Input> _input, float _FOV);
 		virtual void onTick();
 		virtual void onGUI();
 		virtual void onDisplay();

@@ -117,16 +117,16 @@ namespace GameEngine
 		//! An add component function (polymorphism)
 		/*!
 		  used the same way as the other function but takes in an input
-		  object reference to be passed to the initialize function
+		  object reference & FOV value to be passed to the initialize function
 		*/
 		template <typename T>
-		std::shared_ptr<T> addComponent(std::shared_ptr<Input> _input)
+		std::shared_ptr<T> addComponent(std::shared_ptr<Input> _input, float _FOV)
 		{
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 
 			rtn->m_entity = m_self;
 			rtn->m_type = typeid(T).name();
-			rtn->initialize(_input);
+			rtn->initialize(_input, _FOV);
 
 			m_components.push_back(rtn);
 

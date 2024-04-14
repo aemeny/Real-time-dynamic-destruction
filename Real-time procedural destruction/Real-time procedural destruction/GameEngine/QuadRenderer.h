@@ -1,5 +1,4 @@
 #pragma once
-#include "Component.h"
 #include "Camera.h"
 #include <GL/glew.h>
 

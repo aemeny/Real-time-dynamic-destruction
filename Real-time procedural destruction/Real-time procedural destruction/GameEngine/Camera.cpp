@@ -7,18 +7,28 @@
 namespace GameEngine
 {
 	/* Camera init used for 3D cam */
-	void Camera::initialize(std::weak_ptr<Input> _input)
+	void Camera::initialize(std::weak_ptr<Input> _input, float _FOV)
 	{
+		m_FOV = _FOV;
+		m_windowHeight = core().lock()->m_nativeWindow->m_windowHeight;
+		m_windowWidth = core().lock()->m_nativeWindow->m_windowWidth;
+		float fixedNP = 0.1f; // Near Plane
+		float fixedFP = 400.0f; // Far Plane
+		m_projectionMatrix = glm::perspective(glm::radians(m_FOV),
+			(float)(m_windowHeight / m_windowWidth),
+			fixedNP, fixedFP);
+
 		m_input = _input;
-		m_projectionMatrix = glm::perspective(glm::radians(90.0f), 
-			(float)(core().lock()->m_nativeWindow->m_windowHeight / core().lock()->m_nativeWindow->m_windowWidth), 
-			0.1f, 400.0f);
-		m_mouseSpeedX = 0.2f; m_mouseSpeedY = 0.2f; m_speed = 0.05f; m_cameraAngleX = 0.0f; m_cameraAngleY = 0.0f;
+		m_mouseSpeedX = 0.2f; m_mouseSpeedY = 0.2f; 
+		m_speed = 0.05f; 
+		m_cameraAngleX = 0.0f; m_cameraAngleY = 0.0f;
 
 		m_camRotation = glm::vec3{ 0.0f,0.0f,0.0f };
 		m_camPosition = glm::vec3{ 0.0f, 0.0f, -5.0f };
 		glm::vec3 initTarget{ 0.0f, 0.0f, 0.0f };
 		m_viewingMatrix = glm::lookAt(m_camPosition, initTarget, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		m_transformationMatrix = glm::inverse(m_viewingMatrix) * glm::inverse(m_projectionMatrix);
 
 		m_orthoCam = false;
 	}
@@ -78,5 +88,39 @@ namespace GameEngine
 
 		//update viewing matrix with new position and rotation
 		m_viewingMatrix = glm::lookAt(m_camPosition, m_camPosition + m_direction, m_up);
+	}
+
+	// Creates the initial ray from the camera
+	Ray Camera::getRay(glm::vec2 windowPos)
+	{
+		glm::vec2 output;
+		// Map pixel coordinates
+		output.x = mapping(windowPos.x, 0, m_windowWidth, -1, 1);
+		output.y = mapping(windowPos.y, 0, m_windowHeight, 1, -1);
+		// Set planes based on position
+		glm::vec4 nearPlane = { output.x, output.y, -1, 1 };
+		glm::vec4 farPlane = { output.x, output.y, 1, 1 };
+
+		glm::vec4 transformNear = m_transformationMatrix * nearPlane;
+		glm::vec4 transformFar = m_transformationMatrix * farPlane;
+
+		glm::vec3 nearProjection;
+		nearProjection = transformNear / transformNear.w;
+
+		glm::vec3 farProjection;
+		farProjection = transformFar / transformFar.w;
+
+		// Using projections from the screen position, create the direction for the new ray
+		glm::vec3 direction = farProjection - nearProjection;
+
+		// Create ray starting at the near projection with the direction into the scene
+		Ray ray = Ray(nearProjection, glm::normalize(direction));
+
+		return ray;
+	}
+	// Maps camera space
+	float Camera::mapping(float xold, float xistart, float xiend, float xostart, float xoend)
+	{
+		return (xold - xistart) * ((xoend - xostart) / (xiend - xistart)) + xostart;
 	}
 }

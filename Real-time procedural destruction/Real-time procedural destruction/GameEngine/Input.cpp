@@ -10,7 +10,7 @@ namespace GameEngine
     Input::Input(std::weak_ptr<Core> _core) : 
         m_keys(), m_pressedKeys(), m_releasedKeys(), m_mousePos(glm::ivec2(0)),
         m_core(_core), m_lockMouse(true), m_mouseDelta(glm::vec2(0)), m_controller(nullptr),
-        m_dm(false), m_mset(0)
+        m_dm(false), m_mset(0), m_mouseDown(false), m_mouseDownClick(false)
     {
         //Init controller support
         SDL_Init(SDL_INIT_GAMECONTROLLER);
@@ -197,6 +197,9 @@ namespace GameEngine
         if (isKeyPressed(SDLK_TAB))
         {   // When tab is pressed lock / unlock mouse
             m_lockMouse = m_lockMouse ? false : true;
+
+            // Turn cursor on/off when mouse locked
+            SDL_ShowCursor(!m_lockMouse);
         }
         if (m_lockMouse)
         {   // Reset the mouse to the middle of the screen each frame

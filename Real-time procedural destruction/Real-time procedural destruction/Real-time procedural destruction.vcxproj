@@ -136,7 +136,6 @@
     <ClCompile Include="GameEngine\Audio.cpp" />
     <ClCompile Include="GameEngine\AudioListener.cpp" />
     <ClCompile Include="GameEngine\AudioSource.cpp" />
-    <ClCompile Include="GameEngine\BoxCollider.cpp" />
     <ClCompile Include="GameEngine\Camera.cpp" />
     <ClCompile Include="GameEngine\Component.cpp" />
     <ClCompile Include="GameEngine\Core.cpp" />
@@ -162,15 +161,19 @@
     <ClCompile Include="Graphics\GraphicsTexture.cpp" />
     <ClCompile Include="Graphics\Vao.cpp" />
     <ClCompile Include="Graphics\Vbo.cpp" />
+    <ClCompile Include="Physics\BaseCollider.cpp" />
+    <ClCompile Include="Physics\BoxCollider.cpp" />
+    <ClCompile Include="Physics\Ray.cpp" />
+    <ClCompile Include="Physics\RayTracer.cpp" />
     <ClCompile Include="Project\Curuthers.cpp" />
     <ClCompile Include="Project\Floor.cpp" />
     <ClCompile Include="Project\main.cpp" />
+    <ClCompile Include="Project\ShootRay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\Audio.h" />
     <ClInclude Include="GameEngine\AudioListener.h" />
     <ClInclude Include="GameEngine\AudioSource.h" />
-    <ClInclude Include="GameEngine\BoxCollider.h" />
     <ClInclude Include="GameEngine\Camera.h" />
     <ClInclude Include="GameEngine\Component.h" />
     <ClInclude Include="GameEngine\Core.h" />
@@ -197,8 +200,13 @@
     <ClInclude Include="Graphics\GraphicsTexture.h" />
     <ClInclude Include="Graphics\Vao.h" />
     <ClInclude Include="Graphics\Vbo.h" />
+    <ClInclude Include="Physics\BaseCollider.h" />
+    <ClInclude Include="Physics\BoxCollider.h" />
+    <ClInclude Include="Physics\Ray.h" />
+    <ClInclude Include="Physics\RayTracer.h" />
     <ClInclude Include="Project\Curuthers.h" />
     <ClInclude Include="Project\Floor.h" />
+    <ClInclude Include="Project\ShootRay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
