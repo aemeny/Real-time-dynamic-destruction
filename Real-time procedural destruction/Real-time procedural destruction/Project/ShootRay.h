@@ -16,6 +16,7 @@ struct ShootRay : GameEngine::Component
 private:
 	glm::vec2 m_screenPos; // Location the ray is being created on screen
 	std::weak_ptr<GameEngine::Camera> m_camera; // Main 3D cam
+	std::vector<GameEngine::Ray> m_generatedRays;
 
 	void createRay(); // Creating and shooting ray
 };

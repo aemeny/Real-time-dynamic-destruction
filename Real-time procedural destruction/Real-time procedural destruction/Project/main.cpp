@@ -61,6 +61,7 @@ int main()
 	std::shared_ptr<Component> entitiyFloor = entity->addComponent<Floor>();
 	std::shared_ptr<Component> entitiyCollider = entity->addComponent<BoxCollider>();
 	std::weak_ptr<BoxCollider> boxcolliderGrab = entity->findComponent<BoxCollider>();
+	boxcolliderGrab.lock()->setColliderSize(glm::vec3(10.0f, 10.0f, 10.0f));
 	core->m_rayTracer->addObject(boxcolliderGrab);
 
 	// After entity set up run core main loop

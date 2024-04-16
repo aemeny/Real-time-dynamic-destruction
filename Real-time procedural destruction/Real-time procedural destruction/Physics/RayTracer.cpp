@@ -10,7 +10,8 @@ namespace GameEngine
 		// Using given ray check which object has been intersected with
 		finalIntersection Info = findClosestObject(_ray);
 
-		std::cout << Info.hasIntersected << std::endl;
+		if(Info.hasIntersected)
+			std::cout << "HIT" << std::endl;
 	}
 
 	finalIntersection RayTracer::findClosestObject(Ray _ray)

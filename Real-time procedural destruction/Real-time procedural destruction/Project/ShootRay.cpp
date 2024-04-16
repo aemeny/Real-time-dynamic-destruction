@@ -20,15 +20,22 @@ void ShootRay::initialize()
 
 void ShootRay::onTick()
 {
-    if (core().lock()->m_input->isMouseClicked())
-    {
-        createRay();
-    }
+	if (core().lock()->m_input->isMouseClicked())
+	{
+		createRay();
+	}
+
+	for (int i = 0; i < m_generatedRays.size(); i++)
+	{
+		m_camera.lock()->drawDebugRay(m_generatedRays[i]);
+	}
+
 }
 
 void ShootRay::createRay()
 {
 	GameEngine::Ray ray = m_camera.lock()->getRay(m_screenPos);
+	m_generatedRays.push_back(ray);
 	core().lock()->m_rayTracer->traceRay(ray);
 }
 

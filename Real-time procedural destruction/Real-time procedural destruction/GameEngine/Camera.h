@@ -15,8 +15,10 @@ namespace GameEngine
 		void initialize(std::weak_ptr<Input> _input, float _FOV) override; // Perspective init
 		void initialize() override; // Orthographic init
 		void onTick() override; // Updates camera position and rotation based off inputs
+		
 		Ray getRay(glm::vec2 windowPos); // Create ray based on window position
 		float mapping(float xold, float xistart, float xiend, float xostart, float xoend); // Map postion out of pixel space
+		void drawDebugRay(Ray _ray);
 
 		glm::mat4 getView() { return m_viewingMatrix; }; // Getter for viewing matrix
 		glm::mat4 getProj() { return m_projectionMatrix; }; // Getter for projection matrix

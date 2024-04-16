@@ -96,11 +96,18 @@ namespace GameEngine
                 m_dm = true;
                 if (m_mset > 0) //work out mouse input values
                 {
-                    m_mousePos.x = m_event.motion.x;
-                    m_mousePos.y = m_event.motion.y;
-                     
-                    m_mouseDelta.x += m_mousePos.x - m_core.lock()->m_nativeWindow->m_windowWidth / 2;
-                    m_mouseDelta.y += m_mousePos.y - m_core.lock()->m_nativeWindow->m_windowHeight / 2;
+                    int halfWindowWidth = m_core.lock()->m_nativeWindow->m_windowWidth * 0.5f;
+                    int halfWindowHeight = m_core.lock()->m_nativeWindow->m_windowHeight * 0.5f;
+
+                    //Stop mouse drag SDL motion bug (Moving when mouse isnt touched)
+                    if (glm::abs(m_event.motion.x - halfWindowWidth) > 1 || glm::abs(m_event.motion.y - halfWindowHeight) > 1)
+                    {
+                        m_mousePos.x = m_event.motion.x;
+                        m_mousePos.y = m_event.motion.y;
+
+                        m_mouseDelta.x += m_mousePos.x - halfWindowWidth;
+                        m_mouseDelta.y += m_mousePos.y - halfWindowHeight;
+                    }
                 }
             }
             else if (m_event.type == SDL_KEYDOWN) //check if any keys have been pressed down

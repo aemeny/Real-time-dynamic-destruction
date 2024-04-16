@@ -22,6 +22,9 @@ namespace GameEngine
 
 		while (m_running) // Main loop
 		{
+			//Clear depth buffer
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 			//draw background
 			glClearColor(0.2f, 0.2f, 0.8f, 1);
 
@@ -71,10 +74,6 @@ namespace GameEngine
 
 			//Swap window
 			SDL_GL_SwapWindow(m_nativeWindow->m_window);
-
-			//Clear depth buffer
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		}
 	}
 

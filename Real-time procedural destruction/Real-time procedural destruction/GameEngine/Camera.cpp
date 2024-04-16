@@ -20,15 +20,13 @@ namespace GameEngine
 
 		m_input = _input;
 		m_mouseSpeedX = 0.2f; m_mouseSpeedY = 0.2f; 
-		m_speed = 0.05f; 
+		m_speed = 0.02f; 
 		m_cameraAngleX = 0.0f; m_cameraAngleY = 0.0f;
 
 		m_camRotation = glm::vec3{ 0.0f,0.0f,0.0f };
 		m_camPosition = glm::vec3{ 0.0f, 0.0f, -5.0f };
-		glm::vec3 initTarget{ 0.0f, 0.0f, 0.0f };
+		glm::vec3 initTarget{ -100.0f, 0.0f, 0.0f };
 		m_viewingMatrix = glm::lookAt(m_camPosition, initTarget, glm::vec3(0.0f, 1.0f, 0.0f));
-
-		m_transformationMatrix = glm::inverse(m_viewingMatrix) * glm::inverse(m_projectionMatrix);
 
 		m_orthoCam = false;
 	}
@@ -101,6 +99,7 @@ namespace GameEngine
 		glm::vec4 nearPlane = { output.x, output.y, -1, 1 };
 		glm::vec4 farPlane = { output.x, output.y, 1, 1 };
 
+		m_transformationMatrix = glm::inverse(m_viewingMatrix) * glm::inverse(m_projectionMatrix);
 		glm::vec4 transformNear = m_transformationMatrix * nearPlane;
 		glm::vec4 transformFar = m_transformationMatrix * farPlane;
 
@@ -118,9 +117,20 @@ namespace GameEngine
 
 		return ray;
 	}
+
 	// Maps camera space
 	float Camera::mapping(float xold, float xistart, float xiend, float xostart, float xoend)
 	{
 		return (xold - xistart) * ((xoend - xostart) / (xiend - xistart)) + xostart;
+	}
+
+	void Camera::drawDebugRay(Ray _ray)
+	{
+		glBegin(GL_LINES);
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3fv(glm::value_ptr(_ray.origin));
+		glm::vec3 end = _ray.origin + _ray.direction;
+		glVertex3fv(glm::value_ptr(end));
+		glEnd();
 	}
 }
