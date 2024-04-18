@@ -7,7 +7,7 @@ namespace GameEngine
    */
 	void Component::initialize(){}
 
-	void Component::initialize(std::weak_ptr<Input> _input, float _FOV) {}
+	void Component::initialize(std::weak_ptr<Input> _input, float _FOV){}
 
 	void Component::onTick(){}
 

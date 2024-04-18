@@ -91,7 +91,27 @@ namespace GameEngine
 	// Creates the initial ray from the camera
 	Ray Camera::getRay(glm::vec2 windowPos)
 	{
-		glm::vec2 output;
+
+		glm::vec4 viewport = { 0, 0, m_windowWidth, m_windowHeight };
+		glm::vec3 near = glm::unProject(glm::vec3(windowPos.x, windowPos.y, -1), glm::mat4(1.0), m_projectionMatrix, viewport);
+		glm::vec3 far = glm::unProject(glm::vec3(windowPos.x, windowPos.y, 1), glm::mat4(1.0), m_projectionMatrix, viewport);
+		glm::vec4 diff = glm::vec4(far - near, 0.0f);
+
+		glm::vec4 transformNear = { near.x, near.y, near.z, 1 };
+		glm::vec4 transformFar = { diff.x, diff.y, diff.z, 0 };
+
+		glm::vec4 nearProjection = transformNear * m_viewingMatrix;
+		glm::vec4 farProjection = transformFar * m_viewingMatrix;
+
+		glm::vec3 origin = nearProjection / nearProjection.w;
+		glm::vec3 direction = farProjection / farProjection.w;
+		direction = glm::normalize(direction);
+
+		Ray ray = Ray(nearProjection, farProjection);
+
+		return ray;
+
+		/*glm::vec2 output;
 		// Map pixel coordinates
 		output.x = mapping(windowPos.x, 0, m_windowWidth, -1, 1);
 		output.y = mapping(windowPos.y, 0, m_windowHeight, 1, -1);
@@ -115,7 +135,7 @@ namespace GameEngine
 		// Create ray starting at the near projection with the direction into the scene
 		Ray ray = Ray(nearProjection, glm::normalize(direction));
 
-		return ray;
+		return ray;*/
 	}
 
 	// Maps camera space

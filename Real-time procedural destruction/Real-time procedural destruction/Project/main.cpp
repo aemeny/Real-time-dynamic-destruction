@@ -23,11 +23,8 @@ int main()
 	std::shared_ptr<Component> entityGUICamera = cameraEntity->addComponent<Camera>(); // Orthographic camera
 	
 	std::shared_ptr<Component> entityGUIQuad = cameraEntity->addComponent<QuadRenderer>();
+	std::shared_ptr<Component> entityLineRenderer = cameraEntity->addComponent<LineRenderer>();
 	std::shared_ptr<Component> entitiyAudioListener = cameraEntity->addComponent<AudioListener>();
-
-	std::shared_ptr<Component> entitiyShootRay = cameraEntity->addComponent<ShootRay>();
-	std::weak_ptr<ShootRay> entityShootRayGrab = cameraEntity->findComponent<ShootRay>();
-	entityShootRayGrab.lock()->setPos(glm::vec2(core->m_nativeWindow->m_windowWidth, core->m_nativeWindow->m_windowHeight));
 		
 
 	// Entity 2 - Point light
@@ -63,6 +60,15 @@ int main()
 	std::weak_ptr<BoxCollider> boxcolliderGrab = entity->findComponent<BoxCollider>();
 	boxcolliderGrab.lock()->setColliderSize(glm::vec3(10.0f, 10.0f, 10.0f));
 	core->m_rayTracer->addObject(boxcolliderGrab);
+
+
+	//Entity 5 - Shootray
+	entity = core->addEntity();
+	std::shared_ptr<Component> entitiyShootRay = entity->addComponent<ShootRay>();
+	std::weak_ptr<ShootRay> entityShootRayGrab = entity->findComponent<ShootRay>();
+	entityShootRayGrab.lock()->setPos(glm::vec2(core->m_nativeWindow->m_windowWidth, core->m_nativeWindow->m_windowHeight));
+	std::shared_ptr<Component> entityLineTransform = entity->addComponent<Transform>();
+
 
 	// After entity set up run core main loop
 	core->run();

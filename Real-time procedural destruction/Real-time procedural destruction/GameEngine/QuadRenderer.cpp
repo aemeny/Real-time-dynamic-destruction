@@ -20,17 +20,17 @@ namespace GameEngine
 		pos->add(glm::vec3(0.5f, 0.5f, 0.0f));
 		pos->add(glm::vec3(-0.5f, 0.5f, 0.0f));
 
-		std::shared_ptr<Renderer::Vbo> coords = std::make_shared<Renderer::Vbo>();
-		coords->add(glm::vec2(0.0f, 1.0f));
-		coords->add(glm::vec2(0.0f, 0.0f));
-		coords->add(glm::vec2(1.0f, 0.0f));
-		coords->add(glm::vec2(1.0f, 0.0f));
-		coords->add(glm::vec2(1.0f, 1.0f));
-		coords->add(glm::vec2(0.0f, 1.0f));
+		std::shared_ptr<Renderer::Vbo> textCoords = std::make_shared<Renderer::Vbo>();
+		textCoords->add(glm::vec2(0.0f, 1.0f));
+		textCoords->add(glm::vec2(0.0f, 0.0f));
+		textCoords->add(glm::vec2(1.0f, 0.0f));
+		textCoords->add(glm::vec2(1.0f, 0.0f));
+		textCoords->add(glm::vec2(1.0f, 1.0f));
+		textCoords->add(glm::vec2(0.0f, 1.0f));
 
 		m_quad = std::make_shared<Renderer::Vao>();
 		m_quad->addVbo(pos);
-		m_quad->addVbo(coords);
+		m_quad->addVbo(textCoords);
 
 		m_shader = std::make_shared<Renderer::Shader>("../Shaders/Orphographic/vertexShader.txt", "../Shaders/Orphographic/fragmentShader.txt");
 	

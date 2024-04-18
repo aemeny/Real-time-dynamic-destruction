@@ -125,6 +125,31 @@ namespace Renderer
 		glUseProgram(0);
 	}
 
+	void Shader::renderLine(std::shared_ptr<Vao> _Vao)
+	{
+		// Instruct OpenGL to use our shader program and our VAO
+		glUseProgram(m_programId);
+
+		//glBindVertexArray(vaoId);
+		glBindVertexArray(_Vao->getId());
+
+		//Depth Testing
+		glEnable(GL_DEPTH_TEST);
+
+		//Alpha Blending
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		// Draw 2 vertices (a line)
+		glDrawArrays(GL_LINE, 0, 2);
+
+		// Reset the state
+		glDisable(GL_BLEND);
+		glDisable(GL_DEPTH_TEST);
+		glBindVertexArray(0);
+		glUseProgram(0);
+	}
+
 	/* link attribute locations and link to program */
 	void Shader::link()
 	{
