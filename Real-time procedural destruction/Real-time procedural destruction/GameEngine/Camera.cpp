@@ -103,8 +103,8 @@ namespace GameEngine
 		glm::vec4 nearProjection = transformNear * m_viewingMatrix;
 		glm::vec4 farProjection = transformFar * m_viewingMatrix;
 
-		glm::vec3 origin = nearProjection / nearProjection.w;
-		glm::vec3 direction = farProjection / farProjection.w;
+		glm::vec3 origin = glm::vec3(nearProjection);
+		glm::vec3 direction = glm::vec3(farProjection);
 		direction = glm::normalize(direction);
 
 		Ray ray = Ray(nearProjection, farProjection);

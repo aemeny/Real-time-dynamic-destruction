@@ -45,7 +45,7 @@ namespace GameEngine
 		m_shader->bindShader(_line->transform().lock()->getModelMatrix(), "u_Model");
 
 		//render quad
-		m_shader->renderQuad(m_line);
+		m_shader->renderLine(m_line);
 	}
 
 }
