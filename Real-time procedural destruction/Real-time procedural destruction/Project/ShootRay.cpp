@@ -16,6 +16,12 @@ void ShootRay::initialize()
 			m_camera = cam;
 		}
 	}
+
+	std::vector<std::shared_ptr<GameEngine::LineRenderer> > lineRenderer;
+	core().lock()->find<GameEngine::LineRenderer>(lineRenderer);
+	m_lineRenderer = lineRenderer[0];
+
+	m_vbo = m_lineRenderer.lock()->addVbo();
 }
 
 void ShootRay::onTick()
@@ -24,18 +30,12 @@ void ShootRay::onTick()
 	{
 		createRay();
 	}
-
-	for (int i = 0; i < m_generatedRays.size(); i++)
-	{
-		m_camera.lock()->drawDebugRay(m_generatedRays[i]);
-	}
-
 }
 
 void ShootRay::createRay()
 {
 	GameEngine::Ray ray = m_camera.lock()->getRay(m_screenPos);
-	m_generatedRays.push_back(ray);
+	//m_lineRenderer.lock()->addLine(m_vbo, ray.origin, ray.origin + ray.direction * 100.0f);
 	core().lock()->m_rayTracer->traceRay(ray);
 }
 

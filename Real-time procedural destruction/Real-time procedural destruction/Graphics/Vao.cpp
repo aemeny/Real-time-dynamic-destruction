@@ -39,7 +39,9 @@ namespace Renderer
 	void Vao::addVbo(std::shared_ptr<Vbo> _vbo)
 	{
 		m_vbos.push_back(_vbo);
-		m_dirty = true;
+		_vbo->setVao(this);
+		if(_vbo->getComponents())
+			m_dirty = true;
 	}
 
 }

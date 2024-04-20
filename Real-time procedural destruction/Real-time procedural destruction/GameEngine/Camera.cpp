@@ -12,10 +12,10 @@ namespace GameEngine
 		m_FOV = _FOV;
 		m_windowHeight = core().lock()->m_nativeWindow->m_windowHeight;
 		m_windowWidth = core().lock()->m_nativeWindow->m_windowWidth;
-		float fixedNP = 0.1f; // Near Plane
-		float fixedFP = 400.0f; // Far Plane
+		float fixedNP = 0.01f; // Near Plane
+		float fixedFP = 100.0f; // Far Plane
 		m_projectionMatrix = glm::perspective(glm::radians(m_FOV),
-			(float)(m_windowHeight / m_windowWidth),
+			(float)(m_windowWidth / m_windowHeight),
 			fixedNP, fixedFP);
 
 		m_input = _input;
@@ -89,68 +89,13 @@ namespace GameEngine
 	}
 
 	// Creates the initial ray from the camera
-	Ray Camera::getRay(glm::vec2 windowPos)
+	Ray Camera::getRay(glm::vec2 _windowPixelPos)
 	{
-
 		glm::vec4 viewport = { 0, 0, m_windowWidth, m_windowHeight };
-		glm::vec3 near = glm::unProject(glm::vec3(windowPos.x, windowPos.y, -1), glm::mat4(1.0), m_projectionMatrix, viewport);
-		glm::vec3 far = glm::unProject(glm::vec3(windowPos.x, windowPos.y, 1), glm::mat4(1.0), m_projectionMatrix, viewport);
-		glm::vec4 diff = glm::vec4(far - near, 0.0f);
+		glm::vec3 near = glm::unProject(glm::vec3(_windowPixelPos.x, m_windowHeight - _windowPixelPos.y, -1), m_viewingMatrix, m_projectionMatrix, viewport);
 
-		glm::vec4 transformNear = { near.x, near.y, near.z, 1 };
-		glm::vec4 transformFar = { diff.x, diff.y, diff.z, 0 };
-
-		glm::vec4 nearProjection = transformNear * m_viewingMatrix;
-		glm::vec4 farProjection = transformFar * m_viewingMatrix;
-
-		glm::vec3 origin = glm::vec3(nearProjection);
-		glm::vec3 direction = glm::vec3(farProjection);
-		direction = glm::normalize(direction);
-
-		Ray ray = Ray(nearProjection, farProjection);
+		Ray ray = Ray(near, m_direction);
 
 		return ray;
-
-		/*glm::vec2 output;
-		// Map pixel coordinates
-		output.x = mapping(windowPos.x, 0, m_windowWidth, -1, 1);
-		output.y = mapping(windowPos.y, 0, m_windowHeight, 1, -1);
-		// Set planes based on position
-		glm::vec4 nearPlane = { output.x, output.y, -1, 1 };
-		glm::vec4 farPlane = { output.x, output.y, 1, 1 };
-
-		m_transformationMatrix = glm::inverse(m_viewingMatrix) * glm::inverse(m_projectionMatrix);
-		glm::vec4 transformNear = m_transformationMatrix * nearPlane;
-		glm::vec4 transformFar = m_transformationMatrix * farPlane;
-
-		glm::vec3 nearProjection;
-		nearProjection = transformNear / transformNear.w;
-
-		glm::vec3 farProjection;
-		farProjection = transformFar / transformFar.w;
-
-		// Using projections from the screen position, create the direction for the new ray
-		glm::vec3 direction = farProjection - nearProjection;
-
-		// Create ray starting at the near projection with the direction into the scene
-		Ray ray = Ray(nearProjection, glm::normalize(direction));
-
-		return ray;*/
-	}
-
-	// Maps camera space
-	float Camera::mapping(float xold, float xistart, float xiend, float xostart, float xoend)
-	{
-		return (xold - xistart) * ((xoend - xostart) / (xiend - xistart)) + xostart;
-	}
-
-	void Camera::drawDebugRay(Ray _ray)
-	{
-		glBegin(GL_LINES);
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glVertex3fv(glm::value_ptr(_ray.origin));
-		glm::vec3 end = _ray.origin + _ray.direction;
-		glVertex3fv(glm::value_ptr(end));
-		glEnd();
 	}
 }

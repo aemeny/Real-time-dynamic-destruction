@@ -21,7 +21,7 @@ namespace Renderer
 		void render(std::shared_ptr<Model> _model, std::shared_ptr<Texture> _texture, bool _skyBox = false);
 		void renderQuad(std::shared_ptr<Vao> _Vao, std::shared_ptr<Texture> _texture);
 		void renderQuad(std::shared_ptr<Vao> _Vao);
-		void renderLine(std::shared_ptr<Vao> _Vao);
+		void renderLine(std::shared_ptr<Vao> _Vao, int _numOfLines);
 
 		void bindShader(glm::mat4 _matrix, const GLchar* _type);
 		GLuint getId() { return m_programId; };
