@@ -68,6 +68,8 @@ namespace GameEngine
 
         return info;
     }
+
+
     void BoxCollider::drawBoxOutline(bool _draw)
     {
         if (_draw)

@@ -130,7 +130,6 @@ namespace Renderer
 		// Instruct OpenGL to use our shader program and our VAO
 		glUseProgram(m_programId);
 
-		//glBindVertexArray(vaoId);
 		glBindVertexArray(_Vao->getId());
 
 		//Depth Testing
@@ -142,7 +141,7 @@ namespace Renderer
 
 		// Draw 2 vertices (a line)
 		glDrawArrays(GL_LINES, 0, _numOfLines * 2);
-
+		
 		// Reset the state
 		glDisable(GL_BLEND);
 		glDisable(GL_DEPTH_TEST);

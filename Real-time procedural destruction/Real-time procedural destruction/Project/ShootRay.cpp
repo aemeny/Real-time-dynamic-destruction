@@ -21,7 +21,8 @@ void ShootRay::initialize()
 	core().lock()->find<GameEngine::LineRenderer>(lineRenderer);
 	m_lineRenderer = lineRenderer[0];
 
-	m_vbo = m_lineRenderer.lock()->addVbo();
+	//m_vbo = m_lineRenderer.lock()->addVbo();
+	//m_lineRenderer.lock()->addLine(m_vbo, glm::vec3(0), glm::vec3(10));
 }
 
 void ShootRay::onTick()

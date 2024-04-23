@@ -24,10 +24,13 @@ namespace Renderer
 			//Loop through all given vbos and set their id and components in the buffer and the attrib pointer
 			for (int i = 0; i < m_vbos.size(); i++)
 			{
-				glBindBuffer(GL_ARRAY_BUFFER, m_vbos[i]->getId());
-				glVertexAttribPointer(i, m_vbos[i]->getComponents(), GL_FLOAT, GL_FALSE, 0, (void*)0);
-				glEnableVertexAttribArray(i);
-				glBindBuffer(GL_ARRAY_BUFFER, 0);
+				if (m_vbos[i]->getComponents() != 0)
+				{
+					glBindBuffer(GL_ARRAY_BUFFER, m_vbos[i]->getId());
+					glVertexAttribPointer(i, m_vbos[i]->getComponents(), GL_FLOAT, GL_FALSE, 0, (void*)0);
+					glEnableVertexAttribArray(i);
+					glBindBuffer(GL_ARRAY_BUFFER, 0);
+				}
 			}
 			glBindVertexArray(0);
 		}

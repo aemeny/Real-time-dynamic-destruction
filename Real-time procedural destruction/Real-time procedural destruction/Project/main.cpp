@@ -17,7 +17,6 @@ int main()
 	// Entity 1 - Camera
 	std::shared_ptr<Entity> entity = core->addEntity();
 	entity->addComponent<Transform>();
-
 	float FOV = 90.0f;
 	entity->addComponent<Camera>(core->m_input, FOV); // Perspective 3D camera
 	entity->addComponent<Camera>(); // Orthographic camera
@@ -38,10 +37,6 @@ int main()
 	// Entity 3 - Curuthers
 	entity = core->addEntity();
 	entity->addComponent<Transform>();
-	std::weak_ptr<Transform> transformGrab = entity->findComponent<Transform>();
-	transformGrab.lock()->setPos(glm::vec3(0.0f, 0.0f, 0.0f));
-	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
-
 	entity->addComponent<ModelLoader>();
 	entity->addComponent<Curuthers>();
 
@@ -49,7 +44,7 @@ int main()
 	// Entity 4 - Floor
 	entity = core->addEntity();
 	entity->addComponent<Transform>();
-	transformGrab = entity->findComponent<Transform>();
+	std::weak_ptr<Transform> transformGrab = entity->findComponent<Transform>();
 	transformGrab.lock()->setPos(glm::vec3(0.0f, -2.4f, 0.0f));
 	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
 	transformGrab.lock()->setScale(glm::vec3(0.05f, 1.0f, 0.05f));
