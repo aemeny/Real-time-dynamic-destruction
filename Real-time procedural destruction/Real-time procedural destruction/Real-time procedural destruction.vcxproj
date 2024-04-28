@@ -144,7 +144,6 @@
     <ClCompile Include="GameEngine\Exception.cpp" />
     <ClCompile Include="GameEngine\GUI.cpp" />
     <ClCompile Include="GameEngine\Input.cpp" />
-    <ClCompile Include="GameEngine\Line.cpp" />
     <ClCompile Include="GameEngine\LineRenderer.cpp" />
     <ClCompile Include="GameEngine\Model.cpp" />
     <ClCompile Include="GameEngine\ModelLoader.cpp" />
@@ -186,7 +185,6 @@
     <ClInclude Include="GameEngine\GameComponents.h" />
     <ClInclude Include="GameEngine\GUI.h" />
     <ClInclude Include="GameEngine\Input.h" />
-    <ClInclude Include="GameEngine\Line.h" />
     <ClInclude Include="GameEngine\LineRenderer.h" />
     <ClInclude Include="GameEngine\Model.h" />
     <ClInclude Include="GameEngine\ModelLoader.h" />

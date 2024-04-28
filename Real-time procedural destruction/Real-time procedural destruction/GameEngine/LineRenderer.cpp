@@ -1,6 +1,5 @@
 #include "LineRenderer.h"
 #include "Transform.h"
-#include "Line.h"
 
 namespace GameEngine
 {
@@ -11,12 +10,7 @@ namespace GameEngine
 	*/
 	void LineRenderer::initialize()
 	{
-		std::shared_ptr<Renderer::Vbo> pos = std::make_shared<Renderer::Vbo>();
-		pos->add(glm::vec3(-0.5f, 0.0f, 0.0f));
-		pos->add(glm::vec3(0.5f, 0.0f, 0.0f));
-
-		m_line = std::make_shared<Renderer::Vao>();
-		m_line->addVbo(pos);
+		m_lines = std::make_shared<Renderer::Vao>();
 
 		m_shader = std::make_shared<Renderer::Shader>("../Shaders/Basic/vertexShader.txt", "../Shaders/Basic/fragmentShader.txt");
 	
@@ -25,27 +19,47 @@ namespace GameEngine
 		core().lock()->find<Camera>(cameras);
 		for(std::shared_ptr<Camera> cam : cameras)
 		{
-			if (cam->m_orthoCam == true)
+			if (cam->m_orthoCam == false)
 			{
 				m_camera = cam;
 			}
 		}
+
+		m_linesCreated = 0;
+	}
+
+	void LineRenderer::onDisplay()
+	{
+		renderLine();
 	}
 
 	/*
 	* renderes a line based on points given
 	*/
-	void LineRenderer::renderLine(Line* _line)
+	void LineRenderer::renderLine()
 	{
-		//Update Matrix
-		_line->transform().lock()->updateGUIMatrix();
-
 		//call shader bind function and pass transform position
 		m_shader->bindShader(m_camera.lock()->getProj(), "u_Projection");
-		m_shader->bindShader(_line->transform().lock()->getModelMatrix(), "u_Model");
+		m_shader->bindShader(m_camera.lock()->getView(), "u_Viewing");
 
-		//render quad
-		m_shader->renderLine(m_line);
+		//render line
+		m_shader->renderLine(m_lines, m_linesCreated);
+	}
+
+	/*
+	*  Adds a start and end position data to given vbo
+	*/
+	void LineRenderer::addLine(std::weak_ptr<Renderer::Vbo> _vbo, glm::vec3 _start, glm::vec3 _end)
+	{
+		for (size_t ei = 0; ei < m_lines->m_vbos.size(); ei++)
+		{
+			if (m_lines->m_vbos[ei]->getIdentifierID() == _vbo.lock()->getIdentifierID())
+			{
+				m_lines->m_vbos[ei]->add(_start);
+				m_lines->m_vbos[ei]->add(_end);
+				m_linesCreated++;
+			}
+		}
 	}
 
 }

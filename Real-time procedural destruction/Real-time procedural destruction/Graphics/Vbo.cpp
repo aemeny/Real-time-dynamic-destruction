@@ -1,11 +1,14 @@
 #include "Vbo.h"
+#include "Vao.h"
+#include <iostream>
 
 namespace Renderer
 {
+	Vbo::Vbo() : m_id(0), m_dirty(false), m_components(0), m_vao(nullptr),
+		vboIdentifierID(count++)
+	{}
 
-	Vbo::Vbo() : m_id(0), m_dirty(false), m_components(0)
-	{
-	}
+	int Vbo::count = 0;
 
 	/* using polymorphism add given values to m_data list and set how many components */
 	void Vbo::add(const glm::vec3& _value)
@@ -15,6 +18,8 @@ namespace Renderer
 		m_data.push_back(_value.z);
 		m_dirty = true;
 		m_components = 3;
+		if (m_vao != nullptr)
+			m_vao->setDirty(true);
 	}
 
 	void Vbo::add(const glm::vec2& _value)
@@ -23,6 +28,17 @@ namespace Renderer
 		m_data.push_back(_value.y);
 		m_dirty = true;
 		m_components = 2;
+		if (m_vao != nullptr)
+			m_vao->setDirty(true);
+	}
+
+	void Vbo::clearData()
+	{
+		m_data.clear();
+		m_dirty = false;
+		m_components = 0;
+		if (m_vao != nullptr)
+			m_vao->setDirty(false);
 	}
 
 	/* if id isnt created create a new id and bind the data */

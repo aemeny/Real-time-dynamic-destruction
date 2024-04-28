@@ -125,12 +125,11 @@ namespace Renderer
 		glUseProgram(0);
 	}
 
-	void Shader::renderLine(std::shared_ptr<Vao> _Vao)
+	void Shader::renderLine(std::shared_ptr<Vao> _Vao, int _numOfLines)
 	{
 		// Instruct OpenGL to use our shader program and our VAO
 		glUseProgram(m_programId);
 
-		//glBindVertexArray(vaoId);
 		glBindVertexArray(_Vao->getId());
 
 		//Depth Testing
@@ -141,8 +140,8 @@ namespace Renderer
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// Draw 2 vertices (a line)
-		glDrawArrays(GL_LINE, 0, 2);
-
+		glDrawArrays(GL_LINES, 0, _numOfLines * 2);
+		
 		// Reset the state
 		glDisable(GL_BLEND);
 		glDisable(GL_DEPTH_TEST);

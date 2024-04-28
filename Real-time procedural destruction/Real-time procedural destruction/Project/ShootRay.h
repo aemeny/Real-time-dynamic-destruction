@@ -1,5 +1,6 @@
 #pragma once
 #include "..\GameEngine\Camera.h"
+#include "..\GameEngine\LineRenderer.h"
 
 /*
 *  ShootRay struct inheriting from component, holds init, deconstructor and tick function
@@ -16,7 +17,8 @@ struct ShootRay : GameEngine::Component
 private:
 	glm::vec2 m_screenPos; // Location the ray is being created on screen
 	std::weak_ptr<GameEngine::Camera> m_camera; // Main 3D cam
-	std::vector<GameEngine::Ray> m_generatedRays;
+	std::weak_ptr<GameEngine::LineRenderer> m_lineRenderer;
+	std::weak_ptr< Renderer::Vbo> m_vbo;
 
 	void createRay(); // Creating and shooting ray
 };

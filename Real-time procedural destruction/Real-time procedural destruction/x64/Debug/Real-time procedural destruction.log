@@ -1,1 +1,4 @@
-﻿  Real-time procedural destruction.vcxproj -> C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe
+﻿  BoxCollider.cpp
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vao.h(14): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(90): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+  Real-time procedural destruction.vcxproj -> \\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe
