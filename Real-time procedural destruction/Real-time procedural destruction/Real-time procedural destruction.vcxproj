@@ -165,6 +165,7 @@
     <ClCompile Include="Graphics\Vbo.cpp" />
     <ClCompile Include="Physics\BaseCollider.cpp" />
     <ClCompile Include="Physics\BoxCollider.cpp" />
+    <ClCompile Include="Physics\MeshCollider.cpp" />
     <ClCompile Include="Physics\Ray.cpp" />
     <ClCompile Include="Physics\RayTracer.cpp" />
     <ClCompile Include="Project\Curuthers.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Graphics\Vbo.h" />
     <ClInclude Include="Physics\BaseCollider.h" />
     <ClInclude Include="Physics\BoxCollider.h" />
+    <ClInclude Include="Physics\MeshCollider.h" />
     <ClInclude Include="Physics\Ray.h" />
     <ClInclude Include="Physics\RayTracer.h" />
     <ClInclude Include="Project\Curuthers.h" />

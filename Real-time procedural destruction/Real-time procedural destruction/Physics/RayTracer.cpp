@@ -23,7 +23,7 @@ namespace GameEngine
 		int objIndex = 0;
 		bool checkIntersect = false;
 
-		// Loop through ech object in the scene and check if they have intersected. If intersected check if its the closest in distance and save the infomation
+		// Loop through each object in the scene and check if they have intersected. If intersected check if its the closest in distance and save the infomation
 		for (int ei = 0; ei < m_objsInScene.size(); ei++)
 		{
 			finalIntersection info = m_objsInScene.at(ei).lock()->rayIntersect(_ray);
