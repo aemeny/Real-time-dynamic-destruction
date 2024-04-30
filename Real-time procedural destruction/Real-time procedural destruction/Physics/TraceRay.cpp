@@ -1,6 +1,5 @@
 #include "TraceRay.h"
 
-
 namespace GameEngine
 {
 	TraceRay::TraceRay() {}
@@ -28,7 +27,7 @@ namespace GameEngine
 		// Loop through each object in the scene and check if they have intersected. If intersected check if its the closest in distance and save the infomation
 		for (int ei = 0; ei < m_objsInScene.size(); ei++)
 		{
-			intersectionInfo info = m_objsInScene.at(ei).lock()->rayIntersect(_ray);
+			intersectionInfo info = m_objsInScene.at(ei)->rayIntersect(_ray);
 
 			if (info.hasIntersected)
 			{

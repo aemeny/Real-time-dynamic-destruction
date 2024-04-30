@@ -59,6 +59,7 @@ int main()
 	entity->addComponent<BoxCollider>();
 	std::weak_ptr<BoxCollider> boxcolliderGrab = entity->findComponent<BoxCollider>();
 	boxcolliderGrab.lock()->setColliderSize(glm::vec3(102.4f, 0.2f, 102.4f));
+	boxcolliderGrab.lock()->setRenderOutline(false);
 
 
 

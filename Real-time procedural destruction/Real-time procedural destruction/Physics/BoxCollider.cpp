@@ -1,4 +1,5 @@
 #include "BoxCollider.h"
+#include "TraceRay.h"
 namespace GameEngine
 {
     BoxCollider::~BoxCollider() {}
@@ -9,7 +10,7 @@ namespace GameEngine
         m_lineRendererDirty = true;
         m_renderOutline = false;
         m_colliderSize = glm::vec3(0);
-        //core().lock()->m_traceRay->
+        core().lock()->m_traceRay->addObject(*this);
     }
 
     /*

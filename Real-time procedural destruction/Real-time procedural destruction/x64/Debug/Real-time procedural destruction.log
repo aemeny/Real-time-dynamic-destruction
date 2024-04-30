@@ -1,68 +1,16 @@
-﻿  AudioListener.cpp
-  AudioSource.cpp
-  Camera.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Camera.cpp(50,50): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Camera.cpp(51,50): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
-  Component.cpp
-  Core.cpp
-  Entity.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(112,18): error C2027: use of undefined type 'GameEngine::TraceRay'
-  (compiling source file 'GameEngine/Entity.cpp')
-  C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(13,9):
-  see declaration of 'GameEngine::TraceRay'
-  C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(112,18):
-  the template instantiation context (the oldest one first) is
-  	C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.cpp(10,17):
-  	see reference to function template instantiation 'std::shared_ptr<_Ty> GameEngine::Entity::addComponent<GameEngine::Transform>(void)' being compiled
-          with
-          [
-              _Ty=GameEngine::Transform
-          ]
-  
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(112,32): error C2039: 'addObject': is not a member of 'std::shared_ptr<GameEngine::TraceRay>'
-  (compiling source file 'GameEngine/Entity.cpp')
-  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\memory(1525,7):
-  see declaration of 'std::shared_ptr<GameEngine::TraceRay>'
-  
-  Environment.cpp
-  GUI.cpp
-  Input.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(99,41): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(100,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  LineRenderer.cpp
-  Model.cpp
-  ModelLoader.cpp
-  PointLight.cpp
-  QuadRenderer.cpp
-  Resources.cpp
-  Shader.cpp
-  Texture.cpp
-  Transform.cpp
-  Window.cpp
-  GraphicsModel.cpp
-  Generating Code...
-  Compiling...
-  GraphicsShader.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\GraphicsShader.cpp(61,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-  Vao.cpp
-  Vbo.cpp
+﻿  Core.cpp
   BaseCollider.cpp
   BoxCollider.cpp
   MeshCollider.cpp
   TraceRay.cpp
-  Curuthers.cpp
-  Floor.cpp
-  main.cpp
   ShootRay.cpp
+  main.cpp
   Generating Code...
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::PointLight>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::MeshCollider>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::BoxCollider>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<ShootRay>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelLoader>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelLoader>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelLoader>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(92,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::PointLight>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::MeshCollider>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::BoxCollider>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<ShootRay>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelLoader>': not all control paths return a value
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+  Real-time procedural destruction.vcxproj -> \\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe

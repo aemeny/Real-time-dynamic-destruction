@@ -1,6 +1,7 @@
 #include "MeshCollider.h"
 #include <glm/gtx/intersect.hpp>
 #include "..\GameEngine\ModelLoader.h"
+#include "TraceRay.h"
 
 namespace GameEngine
 {
@@ -11,6 +12,7 @@ namespace GameEngine
         faces = m_entity.lock()->findComponent<GameEngine::ModelLoader>().lock()->getModel().lock()->getFaces();
         m_lineRendererDirty = true;
         m_renderOutline = false;
+        core().lock()->m_traceRay->addObject(*this);
     }
 
     /*
