@@ -1,23 +1,26 @@
-#include "RayTracer.h"
+#include "TraceRay.h"
 
 
 namespace GameEngine
 {
-	RayTracer::RayTracer() {}
+	TraceRay::TraceRay() {}
 
-	void RayTracer::traceRay(Ray _ray)
+	void TraceRay::shootRay(Ray _ray)
 	{
 		// Using given ray check which object has been intersected with
-		finalIntersection Info = findClosestObject(_ray);
+		intersectionInfo Info = findClosestObject(_ray);
 
-		std::cout << "HIT:" << Info.hasIntersected << std::endl;
+		if (Info.hasIntersected)
+		{
+			std::cout << "OBJ:" << Info.objIndex << std::endl;
+			std::cout << "DIS:" << Info.distanceToIntersection << std::endl;
+		}
 	}
 
-	finalIntersection RayTracer::findClosestObject(Ray _ray)
+	intersectionInfo TraceRay::findClosestObject(Ray _ray)
 	{
 		// Init values
-		finalIntersection finalInfo;
-		glm::vec3 closestPoint{ 0 };
+		intersectionInfo finalInfo;
 		float distance = FLT_MAX;
 		int objIndex = 0;
 		bool checkIntersect = false;
@@ -25,16 +28,15 @@ namespace GameEngine
 		// Loop through each object in the scene and check if they have intersected. If intersected check if its the closest in distance and save the infomation
 		for (int ei = 0; ei < m_objsInScene.size(); ei++)
 		{
-			finalIntersection info = m_objsInScene.at(ei).lock()->rayIntersect(_ray);
+			intersectionInfo info = m_objsInScene.at(ei).lock()->rayIntersect(_ray);
 
 			if (info.hasIntersected)
 			{
 				checkIntersect = true;
 
-				if (glm::distance(_ray.origin, info.intersectionPos) < distance)
+				if (info.distanceToIntersection < distance)
 				{
-					distance = glm::distance(_ray.origin, info.intersectionPos);
-					closestPoint = info.intersectionPos;
+					distance = info.distanceToIntersection;
 					objIndex = ei;
 					finalInfo = info;
 				}
@@ -42,6 +44,7 @@ namespace GameEngine
 		}
 
 		finalInfo.objIndex = objIndex;
+		finalInfo.distanceToIntersection = distance;
 		finalInfo.hasIntersected = checkIntersect;
 
 		return finalInfo;

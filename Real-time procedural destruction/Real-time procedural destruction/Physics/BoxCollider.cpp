@@ -6,8 +6,10 @@ namespace GameEngine
     void BoxCollider::initialize()
     {
         m_transform = m_entity.lock()->findComponent<GameEngine::Transform>();
-        m_dirty = true;
+        m_lineRendererDirty = true;
+        m_renderOutline = false;
         m_colliderSize = glm::vec3(0);
+        //core().lock()->m_traceRay->
     }
 
     /*
@@ -15,7 +17,7 @@ namespace GameEngine
     */
     void BoxCollider::onTick()
     {
-        drawBoxOutline(true);
+        drawOutline(m_renderOutline);
 
         /*
         isColliding = false;
@@ -37,9 +39,9 @@ namespace GameEngine
         }*/
     }
 
-    finalIntersection BoxCollider::rayIntersect(Ray _ray)
+    intersectionInfo BoxCollider::rayIntersect(Ray _ray)
     {
-        finalIntersection info;
+        intersectionInfo info;
 
         glm::vec3 localX = glm::normalize(glm::vec3(1.0, 0.0, 0.0));  // Local X axis
         glm::vec3 localY = glm::normalize(glm::vec3(0.0, 1.0, 0.0));  // Local Y axis
@@ -63,19 +65,26 @@ namespace GameEngine
         }
 
         if (tMax >= tMin && tMax >= 0.0f)
+        {
             info.hasIntersected = true;
+
+            // Compute the intersection point along the ray
+            glm::vec3 intersectionPoint = _ray.origin + tMin * _ray.direction;
+            // Compute the distance from the ray's origin to the intersection point
+            info.distanceToIntersection = glm::length(intersectionPoint - _ray.origin);
+        }
 
         return info;
     }
 
 
-    void BoxCollider::drawBoxOutline(bool _draw)
+    void BoxCollider::drawOutline(bool _draw)
     {
         if (_draw)
         {
-            if (m_dirty)
+            if (m_lineRendererDirty)
             {
-                m_dirty = false;
+                m_lineRendererDirty = false;
                 
                 // Attach line renderer
                 std::vector<std::shared_ptr<GameEngine::LineRenderer> > lineRenderer;

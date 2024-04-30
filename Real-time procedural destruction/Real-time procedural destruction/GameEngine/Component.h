@@ -33,7 +33,7 @@ namespace GameEngine
 		/*!
 		  returns the delta time from higher up the hierarchy for a short cut
 		*/
-		double getDT()
+		double getDT() const
 		{
 			return m_entity.lock()->m_core.lock()->m_environment->getDT();
 		}
@@ -42,7 +42,7 @@ namespace GameEngine
 		/*!
 		  returns the core pointer from higher up the hierarchy for a short cut
 		*/
-		std::weak_ptr<Core> core()
+		std::weak_ptr<Core> core() const
 		{
 			return m_entity.lock()->m_core.lock();
 		}
@@ -51,7 +51,7 @@ namespace GameEngine
 		/*!
 		  returns the transform pointer from higher up the hierarchy for a short cut
 		*/
-		std::weak_ptr<Transform> transform()
+		std::weak_ptr<Transform> transform() const
 		{
 			return m_entity.lock()->m_transform.lock();
 		}

@@ -138,7 +138,7 @@
     <ClCompile Include="Project\ShootRay.cpp">
       <Filter>Source Files\Project</Filter>
     </ClCompile>
-    <ClCompile Include="Physics\RayTracer.cpp">
+    <ClCompile Include="Physics\TraceRay.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Physics\BaseCollider.cpp">
@@ -149,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="GameEngine\LineRenderer.cpp">
       <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\MeshCollider.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,7 +254,7 @@
     <ClInclude Include="Project\ShootRay.h">
       <Filter>Header Files\Project</Filter>
     </ClInclude>
-    <ClInclude Include="Physics\RayTracer.h">
+    <ClInclude Include="Physics\TraceRay.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Physics\BaseCollider.h">
@@ -262,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="GameEngine\LineRenderer.h">
       <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\MeshCollider.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

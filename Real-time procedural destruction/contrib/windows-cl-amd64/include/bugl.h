@@ -94,13 +94,12 @@ void splitString(const std::string& input, char splitter,
 }
 
 template <typename T>
-GLuint loadModel(const std::string& path, size_t& vertexCount)
+GLuint loadModel(const std::string& path, size_t& vertexCount, std::vector<Face> &faces)
 {
   std::vector<glm::vec3> positions;
   std::vector<glm::vec2> tcs;
   std::vector<glm::vec3> normals;
   std::vector<glm::vec2> lmcs;
-  std::vector<Face> faces;
   std::string currentLine;
 
   std::ifstream file(path.c_str());

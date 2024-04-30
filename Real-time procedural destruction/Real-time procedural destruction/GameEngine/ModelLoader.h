@@ -22,6 +22,11 @@ namespace GameEngine
 			m_model = core().lock()->m_resources->load<Model>("../Samples/Models/" + _modelPath)->getModel();
 		}
 
+		std::weak_ptr<Renderer::Model> getModel()
+		{
+			return m_model;
+		}
+
 		void setTexture(std::string _texturePath) // Set texture path and load texture
 		{
 			m_texture = core().lock()->m_resources->load<Texture>( "../Samples/Textures/" + _texturePath)->getTexture();

@@ -1,5 +1,5 @@
 #include "ShootRay.h"
-#include "..\Physics\RayTracer.h"
+#include "..\Physics\TraceRay.h"
 
 ShootRay::~ShootRay() {}
 ShootRay::ShootRay() {}
@@ -22,7 +22,6 @@ void ShootRay::initialize()
 	m_lineRenderer = lineRenderer[0];
 
 	//m_vbo = m_lineRenderer.lock()->addVbo();
-	//m_lineRenderer.lock()->addLine(m_vbo, glm::vec3(0), glm::vec3(10));
 }
 
 void ShootRay::onTick()
@@ -37,6 +36,6 @@ void ShootRay::createRay()
 {
 	GameEngine::Ray ray = m_camera.lock()->getRay(m_screenPos);
 	//m_lineRenderer.lock()->addLine(m_vbo, ray.origin, ray.origin + ray.direction * 100.0f);
-	core().lock()->m_rayTracer->traceRay(ray);
+	core().lock()->m_traceRay->shootRay(ray);
 }
 

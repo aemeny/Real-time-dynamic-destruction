@@ -1,12 +1,14 @@
 #include "BaseCollider.h"
-#include "RayTracer.h"
+#include "TraceRay.h"
 
 namespace GameEngine
 {
     // Override intersection
-    finalIntersection BaseCollider::rayIntersect(Ray _ray)
+    intersectionInfo BaseCollider::rayIntersect(Ray _ray)
     {
-        return finalIntersection();
+        return intersectionInfo();
     }
+
+    void BaseCollider::drawOutline(bool _draw) {}
 }
 

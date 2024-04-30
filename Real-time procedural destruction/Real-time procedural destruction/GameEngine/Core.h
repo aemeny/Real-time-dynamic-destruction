@@ -9,7 +9,7 @@
 namespace GameEngine
 {
 struct Component;
-struct RayTracer;
+struct TraceRay;
 
 //!  A Core Struct. 
 /*!
@@ -75,7 +75,7 @@ struct Core
 	std::shared_ptr<Resources> m_resources;
 	std::shared_ptr<Environment> m_environment;
 	std::shared_ptr<Input> m_input;
-	std::shared_ptr<RayTracer> m_rayTracer;
+	std::shared_ptr<TraceRay> m_traceRay;
 
 	ALCdevice* m_device;
 	ALCcontext* m_context;

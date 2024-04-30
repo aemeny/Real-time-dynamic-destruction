@@ -18,11 +18,11 @@ namespace GameEngine
 		
 		Ray getRay(glm::vec2 _windowPixelPos); // Create ray based on window position
 
-		glm::mat4 getView() { return m_viewingMatrix; }; // Getter for viewing matrix
-		glm::mat4 getProj() { return m_projectionMatrix; }; // Getter for projection matrix
+		glm::mat4 getView() const { return m_viewingMatrix; }; // Getter for viewing matrix
+		glm::mat4 getProj() const { return m_projectionMatrix; }; // Getter for projection matrix
 		void setPos(glm::vec3 _pos) { m_camPosition = _pos; } // Setter for camera position
 		void setRot(glm::vec3 _rot) { m_camRotation = _rot; } // Setter for rotation
-		float getRot() { return m_cameraAngleX; } // Getter for camera rotation
+		float getRot() const { return m_cameraAngleX; } // Getter for camera rotation
 
 		bool m_orthoCam; // check if orthographic camera
 	private:
@@ -40,8 +40,8 @@ namespace GameEngine
 		glm::vec3 m_camRotation;
 
 		//Camera & Window variables
-		float m_windowHeight;
-		float m_windowWidth;
+		int m_windowHeight;
+		int m_windowWidth;
 		float m_FOV;
 
 		// Camera movement based variables

@@ -9,6 +9,8 @@ namespace GameEngine
 	struct Core;
 	struct Component;
 	struct Transform;
+	struct BaseCollider;
+	struct TraceRay;
 
 	//!  Entity class. 
 	/*!
@@ -105,10 +107,10 @@ namespace GameEngine
 			rtn->m_type = typeid(T).name();
 			rtn->initialize();
 
-			if (typeid(T).name() == "Transform")
-			{
-				m_transform = std::dynamic_pointer_cast<Transform>(rtn);
-			}
+			if (rtn->m_type == "struct GameEngine::MeshCollider" ||
+				rtn->m_type == "struct GameEngine::BoxCollider")
+				m_core.lock()->m_traceRay->addObject(std::dynamic_pointer_cast<BaseCollider>(rtn));
+
 			m_components.push_back(rtn);
 
 			return rtn;

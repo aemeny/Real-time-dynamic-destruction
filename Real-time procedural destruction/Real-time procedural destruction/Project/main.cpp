@@ -40,6 +40,10 @@ int main()
 	entity->addComponent<ModelLoader>();
 	entity->addComponent<Curuthers>();
 
+	entity->addComponent<MeshCollider>();
+	std::weak_ptr<MeshCollider> meshcolliderGrab = entity->findComponent<MeshCollider>();
+	meshcolliderGrab.lock()->setRenderOutline(true);
+
 
 	// Entity 4 - Floor
 	entity = core->addEntity();
@@ -51,10 +55,11 @@ int main()
 
 	entity->addComponent<ModelLoader>();
 	entity->addComponent<Floor>();
+
 	entity->addComponent<BoxCollider>();
 	std::weak_ptr<BoxCollider> boxcolliderGrab = entity->findComponent<BoxCollider>();
-	boxcolliderGrab.lock()->setColliderSize(glm::vec3(10.0f, 10.0f, 10.0f));
-	core->m_rayTracer->addObject(boxcolliderGrab);
+	boxcolliderGrab.lock()->setColliderSize(glm::vec3(102.4f, 0.2f, 102.4f));
+
 
 
 	//Entity 5 - Shootray

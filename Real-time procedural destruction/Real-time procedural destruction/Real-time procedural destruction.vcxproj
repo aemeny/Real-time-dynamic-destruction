@@ -166,7 +166,7 @@
     <ClCompile Include="Physics\BoxCollider.cpp" />
     <ClCompile Include="Physics\MeshCollider.cpp" />
     <ClCompile Include="Physics\Ray.cpp" />
-    <ClCompile Include="Physics\RayTracer.cpp" />
+    <ClCompile Include="Physics\TraceRay.cpp" />
     <ClCompile Include="Project\Curuthers.cpp" />
     <ClCompile Include="Project\Floor.cpp" />
     <ClCompile Include="Project\main.cpp" />
@@ -207,7 +207,7 @@
     <ClInclude Include="Physics\BoxCollider.h" />
     <ClInclude Include="Physics\MeshCollider.h" />
     <ClInclude Include="Physics\Ray.h" />
-    <ClInclude Include="Physics\RayTracer.h" />
+    <ClInclude Include="Physics\TraceRay.h" />
     <ClInclude Include="Project\Curuthers.h" />
     <ClInclude Include="Project\Floor.h" />
     <ClInclude Include="Project\ShootRay.h" />
