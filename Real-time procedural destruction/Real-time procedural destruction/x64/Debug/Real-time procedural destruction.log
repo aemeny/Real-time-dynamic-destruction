@@ -1,9 +1,4 @@
-﻿  Core.cpp
-  BaseCollider.cpp
-  BoxCollider.cpp
-  MeshCollider.cpp
-  TraceRay.cpp
-  ShootRay.cpp
+﻿  Vao.cpp
   main.cpp
   Generating Code...
 \\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::PointLight>': not all control paths return a value
@@ -11,6 +6,4 @@
 \\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
 \\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::BoxCollider>': not all control paths return a value
 \\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<ShootRay>': not all control paths return a value
-\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelLoader>': not all control paths return a value
-\\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
   Real-time procedural destruction.vcxproj -> \\bournemouth.ac.uk\data\Student\Home\SciTech\s5415659\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe
