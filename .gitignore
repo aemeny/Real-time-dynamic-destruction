@@ -30,3 +30,4 @@
 *.exe
 *.out
 *.app
+/Real-time procedural destruction/.vs
