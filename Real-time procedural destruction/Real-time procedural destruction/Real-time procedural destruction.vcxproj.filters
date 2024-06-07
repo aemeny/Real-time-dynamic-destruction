@@ -99,7 +99,7 @@
     <ClCompile Include="GameEngine\Model.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine\ModelLoader.cpp">
+    <ClCompile Include="GameEngine\ModelRenderer.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="GameEngine\PointLight.cpp">
@@ -152,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="Physics\MeshCollider.cpp">
       <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\DestructionObjs.cpp">
+      <Filter>Source Files\Project</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +218,7 @@
     <ClInclude Include="GameEngine\Model.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine\ModelLoader.h">
+    <ClInclude Include="GameEngine\ModelRenderer.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\PointLight.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="Physics\MeshCollider.h">
       <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\DestructionObjs.h">
+      <Filter>Header Files\Project</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

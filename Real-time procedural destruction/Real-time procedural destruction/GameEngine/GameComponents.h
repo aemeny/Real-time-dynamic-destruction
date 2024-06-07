@@ -1,5 +1,5 @@
 #pragma once
-#include "ModelLoader.h"
+#include "ModelRenderer.h"
 #include "AudioSource.h"
 #include "AudioListener.h"
 #include "GUI.h"

@@ -9,6 +9,6 @@ namespace GameEngine
         return intersectionInfo();
     }
 
-    void BaseCollider::drawOutline(bool _draw) {}
+    void BaseCollider::updateOutline() {}
 }
 

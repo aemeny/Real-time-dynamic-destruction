@@ -1,5 +1,5 @@
 #include "PointLight.h"
-#include "ModelLoader.h"
+#include "ModelRenderer.h"
 #include <iostream>
 
 namespace GameEngine
@@ -23,11 +23,11 @@ namespace GameEngine
                                      + ", " + std::to_string(_pos.z) + ");";
  
 		//Find all model loaders
-		std::vector<std::shared_ptr<ModelLoader> > modelLoaders;
-		core().lock()->find<ModelLoader>(modelLoaders);
-		for(std::shared_ptr<ModelLoader> modelLoader : modelLoaders)
+		std::vector<std::shared_ptr<ModelRenderer> > modelRenderers;
+		core().lock()->find<ModelRenderer>(modelRenderers);
+		for(std::shared_ptr<ModelRenderer> modelRenderer : modelRenderers)
 		{
-			modelLoader->setShaderLightPos(newPosString);
+			modelRenderer->setShaderLightPos(newPosString);
 		}
 	}
 

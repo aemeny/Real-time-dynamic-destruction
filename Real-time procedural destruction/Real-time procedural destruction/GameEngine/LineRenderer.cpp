@@ -28,19 +28,15 @@ namespace GameEngine
 		m_linesCreated = 0;
 	}
 
-	void LineRenderer::onDisplay()
-	{
-		renderLine();
-	}
-
 	/*
 	* renderes a line based on points given
 	*/
-	void LineRenderer::renderLine()
+	void LineRenderer::renderLine(glm::mat4 _modelMatrix = glm::mat4(1))
 	{
 		//call shader bind function and pass transform position
 		m_shader->bindShader(m_camera.lock()->getProj(), "u_Projection");
 		m_shader->bindShader(m_camera.lock()->getView(), "u_Viewing");
+		m_shader->bindShader(_modelMatrix, "u_Model");
 
 		//render line
 		m_shader->renderLine(m_lines, m_linesCreated);

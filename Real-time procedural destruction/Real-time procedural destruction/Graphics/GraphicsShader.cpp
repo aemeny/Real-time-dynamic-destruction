@@ -54,8 +54,20 @@ namespace Renderer
 			glEnable(GL_CULL_FACE);
 		}
 
+		// Set texture wrapping to repeat
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		// Continue with other texture setup such as filtering modes
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		//Depth Testing
 		glEnable(GL_DEPTH_TEST);
+
+		//Alpha Blending
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// Draw 3 vertices (a triangle)
 		glDrawArrays(GL_TRIANGLES, 0, _model->getVertices());
@@ -66,6 +78,7 @@ namespace Renderer
 		{
 			glDisable(GL_CULL_FACE);
 		}
+		glDisable(GL_BLEND);
 		glBindVertexArray(0);
 		glUseProgram(0);
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -93,8 +106,8 @@ namespace Renderer
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		// Reset the state
-		glDisable(GL_BLEND);
 		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
 		glBindVertexArray(0);
 		glUseProgram(0);
 		glBindTexture(GL_TEXTURE_2D, 0);

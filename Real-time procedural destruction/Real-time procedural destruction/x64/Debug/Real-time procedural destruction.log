@@ -1,3 +1,5 @@
-﻿  GraphicsShader.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\GraphicsShader.cpp(61,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+﻿  Transform.cpp
+  MeshCollider.cpp
+  Generating Code...
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelRenderer>': not all control paths return a value
   Real-time procedural destruction.vcxproj -> C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe

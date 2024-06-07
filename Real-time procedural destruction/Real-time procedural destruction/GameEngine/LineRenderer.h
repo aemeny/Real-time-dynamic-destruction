@@ -14,8 +14,7 @@ namespace GameEngine
 		~LineRenderer();
 
 		void initialize() override;
-		void onDisplay() override;
-		void renderLine(); 
+		void renderLine(glm::mat4 _modelMatrix);
 
 		void addLine(std::weak_ptr<Renderer::Vbo> _vbo, glm::vec3 _start, glm::vec3 _end);
 		std::weak_ptr<Renderer::Vbo> addVbo()

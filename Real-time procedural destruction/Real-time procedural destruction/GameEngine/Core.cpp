@@ -20,13 +20,15 @@ namespace GameEngine
 
 		m_environment = std::make_shared<Environment>(m_self);
 
+		double fpsTimer = 0;
+		int ticks = 0;
 		while (m_running) // Main loop
 		{
 			//Clear depth buffer
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//draw background
-			glClearColor(0.2f, 0.2f, 0.8f, 1);
+			glClearColor(0.725f, 0.36f, 0.956f, 1.0f);
 
 			// Call tick
 			m_environment->tick();
@@ -74,6 +76,19 @@ namespace GameEngine
 
 			//Swap window
 			SDL_GL_SwapWindow(m_nativeWindow->m_window);
+
+			// Display FPS
+			if (fpsTimer >= 1)
+			{
+				std::cout << "FPS: " << ticks << std::endl;
+				fpsTimer = 0;
+				ticks = 0;
+			}
+			else
+			{
+				fpsTimer += m_environment->getDT();
+				ticks++;
+			}
 		}
 	}
 

@@ -146,7 +146,7 @@
     <ClCompile Include="GameEngine\Input.cpp" />
     <ClCompile Include="GameEngine\LineRenderer.cpp" />
     <ClCompile Include="GameEngine\Model.cpp" />
-    <ClCompile Include="GameEngine\ModelLoader.cpp" />
+    <ClCompile Include="GameEngine\ModelRenderer.cpp" />
     <ClCompile Include="GameEngine\PointLight.cpp" />
     <ClCompile Include="GameEngine\QuadRenderer.cpp" />
     <ClCompile Include="GameEngine\Resource.cpp" />
@@ -168,6 +168,7 @@
     <ClCompile Include="Physics\Ray.cpp" />
     <ClCompile Include="Physics\TraceRay.cpp" />
     <ClCompile Include="Project\Curuthers.cpp" />
+    <ClCompile Include="Project\DestructionObjs.cpp" />
     <ClCompile Include="Project\Floor.cpp" />
     <ClCompile Include="Project\main.cpp" />
     <ClCompile Include="Project\ShootRay.cpp" />
@@ -187,7 +188,7 @@
     <ClInclude Include="GameEngine\Input.h" />
     <ClInclude Include="GameEngine\LineRenderer.h" />
     <ClInclude Include="GameEngine\Model.h" />
-    <ClInclude Include="GameEngine\ModelLoader.h" />
+    <ClInclude Include="GameEngine\ModelRenderer.h" />
     <ClInclude Include="GameEngine\PointLight.h" />
     <ClInclude Include="GameEngine\QuadRenderer.h" />
     <ClInclude Include="GameEngine\Resource.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Physics\Ray.h" />
     <ClInclude Include="Physics\TraceRay.h" />
     <ClInclude Include="Project\Curuthers.h" />
+    <ClInclude Include="Project\DestructionObjs.h" />
     <ClInclude Include="Project\Floor.h" />
     <ClInclude Include="Project\ShootRay.h" />
   </ItemGroup>

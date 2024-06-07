@@ -1,5 +1,5 @@
 #pragma once
-#include "../GameEngine/ModelLoader.h"
+#include "../GameEngine/ModelRenderer.h"
 #include "../GameEngine/Transform.h"
 
 /*

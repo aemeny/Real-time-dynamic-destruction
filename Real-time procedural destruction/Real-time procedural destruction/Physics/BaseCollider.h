@@ -22,7 +22,7 @@ namespace GameEngine
 		// Virtual function to be overrided by children
 		virtual intersectionInfo rayIntersect(Ray _ray);
 		void setColliderOffset(glm::vec3 _offset) { m_colliderOffset = _offset; }
-		virtual void drawOutline(bool _draw);
+		virtual void updateOutline();
 		void setRenderOutline(bool _set) { m_renderOutline = _set; }
 
 		bool m_renderOutline;

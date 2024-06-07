@@ -11,7 +11,8 @@ namespace GameEngine
 		~BoxCollider();
 		void initialize() override;
 		void onTick() override;
-		void drawOutline(bool _draw) override;
+		void onDisplay() override;
+		void updateOutline() override;
 
 		// Override function from parent object
 		intersectionInfo rayIntersect(Ray _ray) override; // Ray intersection with box

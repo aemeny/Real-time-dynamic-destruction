@@ -1,6 +1,7 @@
 #include "../GameEngine/GameComponents.h"
 #include "Curuthers.h"
 #include "Floor.h"
+#include "DestructionObjs.h"
 #include "ShootRay.h"
 
 using namespace GameEngine;
@@ -23,7 +24,6 @@ int main()
 	
 	entity->addComponent<QuadRenderer>();
 	entity->addComponent<LineRenderer>();
-	entity->addComponent<AudioListener>();
 
 
 	//Entity 2 - GUI
@@ -32,13 +32,13 @@ int main()
 	std::weak_ptr<Transform> transformGrab = entityGUI->findComponent<Transform>();
 	transformGrab.lock()->setPos(glm::vec3{ core->m_nativeWindow->m_windowWidth / 2, core->m_nativeWindow->m_windowHeight / 2, 0.0f });
 	transformGrab.lock()->setRot(glm::vec3{ 0.0f, 0.0f, 0.0f });
-	transformGrab.lock()->setScale(glm::vec3{ (core->m_nativeWindow->m_windowWidth / 3.5f),
-											  (core->m_nativeWindow->m_windowHeight / 3.5f),
+	transformGrab.lock()->setScale(glm::vec3{ (core->m_nativeWindow->m_windowWidth / 130.0f),
+											  (core->m_nativeWindow->m_windowHeight / 130.0f),
 											   0.0f });
 
 	std::shared_ptr<Component> entityGUIGUI = entityGUI->addComponent<GUI>();
 	std::weak_ptr<GUI> entityGUIGrab = entityGUI->findComponent<GUI>();
-	entityGUIGrab.lock()->setTexture("Crosshair.png");
+	entityGUIGrab.lock()->setTexture("Crosshair3.png");
 	entityGUIGrab.lock()->setShown(true);
 
 
@@ -47,18 +47,18 @@ int main()
 	entity->addComponent<PointLight>();
 	std::weak_ptr<PointLight> entityPointLightGrab = entity->findComponent<PointLight>();
 	entityPointLightGrab.lock()->setFilePath("fragmentShader.txt");
-	entityPointLightGrab.lock()->setLightPos(glm::vec3(0.0f, 10.0f, 0.0f));
+	entityPointLightGrab.lock()->setLightPos(glm::vec3(10.0f, 20.0f, 10.0f));
 
 
 	// Entity 4 - Curuthers
 	entity = core->addEntity();
 	entity->addComponent<Transform>();
-	entity->addComponent<ModelLoader>();
+	entity->addComponent<ModelRenderer>();
 	entity->addComponent<Curuthers>();
 
 	entity->addComponent<MeshCollider>();
 	std::weak_ptr<MeshCollider> meshcolliderGrab = entity->findComponent<MeshCollider>();
-	meshcolliderGrab.lock()->setRenderOutline(true);
+	meshcolliderGrab.lock()->setRenderOutline(false);
 
 
 	// Entity 5 - Floor
@@ -69,13 +69,29 @@ int main()
 	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
 	transformGrab.lock()->setScale(glm::vec3(0.05f, 1.0f, 0.05f));
 
-	entity->addComponent<ModelLoader>();
+	entity->addComponent<ModelRenderer>();
 	entity->addComponent<Floor>();
 
 	entity->addComponent<BoxCollider>();
 	std::weak_ptr<BoxCollider> boxcolliderGrab = entity->findComponent<BoxCollider>();
 	boxcolliderGrab.lock()->setColliderSize(glm::vec3(102.4f, 0.2f, 102.4f));
 	boxcolliderGrab.lock()->setRenderOutline(false);
+
+
+	// Entity 5 - Desturction Objs
+	entity = core->addEntity();
+	entity->addComponent<Transform>();
+	transformGrab = entity->findComponent<Transform>();
+	transformGrab.lock()->setPos(glm::vec3(0.0f, 10.0f, -20.0f));
+	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
+	transformGrab.lock()->setScale(glm::vec3(3.0f, 3.0f, 0.2f));
+
+	entity->addComponent<ModelRenderer>();
+	entity->addComponent<DestructionObjs>();
+
+	entity->addComponent<MeshCollider>();
+	meshcolliderGrab = entity->findComponent<MeshCollider>();
+	meshcolliderGrab.lock()->setRenderOutline(true);
 
 
 

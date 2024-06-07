@@ -9,10 +9,10 @@ Floor::Floor() {}
 */
 void Floor::initialize()
 {
-	std::weak_ptr<GameEngine::ModelLoader> modelLoader = m_entity.lock()->findComponent<GameEngine::ModelLoader>();
+	std::weak_ptr<GameEngine::ModelRenderer> modelRenderer = m_entity.lock()->findComponent<GameEngine::ModelRenderer>();
 
-	modelLoader.lock()->setModel("Floor/Floor.obj");
-	modelLoader.lock()->setTexture("Floor/Floor.png");
+	modelRenderer.lock()->setModel("Floor/Floor.obj");
+	modelRenderer.lock()->setTexture("Floor/Floor.png");
 
 	m_transform = m_entity.lock()->findComponent<GameEngine::Transform>();
 }

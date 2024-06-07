@@ -1,6 +1,6 @@
 #include "MeshCollider.h"
 #include <glm/gtx/intersect.hpp>
-#include "..\GameEngine\ModelLoader.h"
+#include <glm/gtc/matrix_transform.hpp>
 #include "TraceRay.h"
 
 namespace GameEngine
@@ -9,7 +9,7 @@ namespace GameEngine
 
     void MeshCollider::initialize()
     {
-        m_faces = m_entity.lock()->findComponent<GameEngine::ModelLoader>().lock()->getModel().lock()->getFaces();
+        m_modelRenderer = m_entity.lock()->findComponent<GameEngine::ModelRenderer>();
         m_lineRendererDirty = true;
         m_renderOutline = false;
         core().lock()->m_traceRay->addObject(*this);
@@ -20,7 +20,14 @@ namespace GameEngine
     */
     void MeshCollider::onTick()
     {
-        drawOutline(m_renderOutline);
+        if(m_renderOutline)
+            updateOutline();
+    }
+
+    void MeshCollider::onDisplay()
+    {
+        if (m_renderOutline)
+            m_lineRenderer.lock()->renderLine(transform().lock()->getModelMatrix());
     }
 
     intersectionInfo MeshCollider::rayIntersect(Ray _ray)
@@ -30,11 +37,20 @@ namespace GameEngine
         float nearest = -1.0f;
         glm::vec2 baryPosition = glm::vec2(0);
         float distance;
+
+        m_faces = m_modelRenderer.lock()->getModel().lock()->getFaces();
         
-        for (size_t i = 0; i < m_faces->size(); i++)
+        transform().lock()->updateMatrix();
+        glm::mat4 modelMatrix = transform().lock()->getModelMatrix();
+
+        for (int i = 0; i < m_faces->size(); i++)
         {
+            glm::vec4 pa = modelMatrix * glm::vec4(m_faces->at(i).pa, 1.0f);
+            glm::vec4 pb = modelMatrix * glm::vec4(m_faces->at(i).pb, 1.0f);
+            glm::vec4 pc = modelMatrix * glm::vec4(m_faces->at(i).pc, 1.0f);
+
             if (glm::intersectRayTriangle(_ray.origin, _ray.direction,
-                m_faces->at(i).pa, m_faces->at(i).pb, m_faces->at(i).pc, baryPosition, distance))
+                glm::vec3(pa.x, pa.y, pa.z), glm::vec3(pb.x, pb.y, pb.z), glm::vec3(pc.x, pc.y, pc.z), baryPosition, distance))
             {
                 if (distance > 0.0f)
                 {
@@ -51,45 +67,50 @@ namespace GameEngine
         }
 
         if (info.hasIntersected)
-            info.intersectedModel = m_entity.lock()->findComponent<GameEngine::ModelLoader>().lock()->getModel();
+            info.intersectedModel = m_entity.lock()->findComponent<GameEngine::ModelRenderer>().lock()->getModel();
         
         return info;
     }
 
-    void MeshCollider::drawOutline(bool _draw)
+    void MeshCollider::updateOutline()
     {
-        if (_draw)
+        if (m_lineRendererDirty)
         {
-            if (m_lineRendererDirty)
+            m_lineRendererDirty = false;
+
+            // Attach line renderer
+            std::vector<std::shared_ptr<GameEngine::LineRenderer> > lineRenderer;
+            core().lock()->find<GameEngine::LineRenderer>(lineRenderer);
+            m_lineRenderer = lineRenderer[0];
+
+            // Create new vbo for this collider
+            m_vbo = m_lineRenderer.lock()->addVbo();
+
+            m_faces = m_modelRenderer.lock()->getModel().lock()->getFaces();
+
+            transform().lock()->updateMatrix();
+            glm::mat4 modelMatrix = transform().lock()->getModelMatrix();
+
+            for (int i = 0; i < m_faces->size(); i++)
             {
-                m_lineRendererDirty = false;
+                glm::vec4 pa = modelMatrix * glm::vec4(m_faces->at(i).pa, 1.0f);
+                glm::vec4 pb = modelMatrix * glm::vec4(m_faces->at(i).pb, 1.0f);
+                glm::vec4 pc = modelMatrix * glm::vec4(m_faces->at(i).pc, 1.0f);
 
-                // Attach line renderer
-                std::vector<std::shared_ptr<GameEngine::LineRenderer> > lineRenderer;
-                core().lock()->find<GameEngine::LineRenderer>(lineRenderer);
-                m_lineRenderer = lineRenderer[0];
+                glm::vec3 pos1(pa.x, pa.y, pa.z);
+                glm::vec3 pos2(pb.x, pb.y, pb.z);
+                glm::vec3 pos3(pc.x, pc.y, pc.z);
 
-                // Create new vbo for this box collider
-                m_vbo = m_lineRenderer.lock()->addVbo();
-
-                for (int i = 0; i < m_faces->size(); i++)
-                {
-                    glm::vec3 pos1(m_faces->at(i).pa.x, m_faces->at(i).pa.y, m_faces->at(i).pa.z);
-                    glm::vec3 pos2(m_faces->at(i).pb.x, m_faces->at(i).pb.y, m_faces->at(i).pb.z);
-                    glm::vec3 pos3(m_faces->at(i).pc.x, m_faces->at(i).pc.y, m_faces->at(i).pc.z);
-
-                    m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
-                    m_lineRenderer.lock()->addLine(m_vbo, pos2, pos3);
-                    m_lineRenderer.lock()->addLine(m_vbo, pos3, pos1);
-                }
-            }
-            else
-            {
-                // IF CHANGED POSITION
-                // CLEAR THE POSITIONS
-                // ADD NEW POSITIONS
+                m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
+                m_lineRenderer.lock()->addLine(m_vbo, pos2, pos3);
+                m_lineRenderer.lock()->addLine(m_vbo, pos3, pos1);
             }
         }
+        else
+        {
+            // IF CHANGED POSITION
+            // CLEAR THE POSITIONS
+            // ADD NEW POSITIONS
+        }
     }
-    
 }

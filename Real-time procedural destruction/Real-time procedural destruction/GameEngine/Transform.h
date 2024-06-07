@@ -21,7 +21,7 @@ namespace GameEngine
 		void updateMatrix(); // Update normal model matrix by scale rotation and position
 		void updateGUIMatrix(); // Update GUI model matrix by scale rotation and position
 		// Setters
-		void setRot(glm::vec3 _rot) { m_rotation = _rot; } 
+		void setRot(glm::vec3 _rot) { m_rotation = _rot; }
 		void setPos(glm::vec3 _pos) { m_position = _pos; }
 		void setScale(glm::vec3 _scale) { m_scale = _scale; }
 		//Getters
@@ -29,6 +29,5 @@ namespace GameEngine
 		glm::vec3 getPos() { return m_position; }
 		glm::vec3 getScale() { return m_scale; }
 		glm::mat4 getModelMatrix() { return m_modelMatrix; }
-		
 	};
 }

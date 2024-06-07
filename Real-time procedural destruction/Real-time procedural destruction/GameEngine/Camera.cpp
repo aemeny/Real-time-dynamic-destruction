@@ -23,8 +23,8 @@ namespace GameEngine
 		m_speed = 0.02f; 
 		m_cameraAngleX = 0.0f; m_cameraAngleY = 0.0f;
 
-		m_camRotation = glm::vec3{ 0.0f,0.0f,0.0f };
-		m_camPosition = glm::vec3{ 0.0f, 0.0f, -5.0f };
+		m_camRotation = glm::vec3{ 0.0f, 0.0f, 0.0f };
+		m_camPosition = glm::vec3{ 0.0f, 0.0f, 5.0f };
 		glm::vec3 initTarget{ -100.0f, 0.0f, 0.0f };
 		m_viewingMatrix = glm::lookAt(m_camPosition, initTarget, glm::vec3(0.0f, 1.0f, 0.0f));
 
