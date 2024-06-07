@@ -13,7 +13,16 @@ namespace GameEngine
 		{
 			std::cout << "OBJ:" << Info.objIndex << std::endl;
 			std::cout << "DIS:" << Info.distanceToIntersection << std::endl;
+			if (Info.collidedFace != NULL)
+			{
+				Info.collidedFace->pa += glm::vec3(10.0f);
+				Info.collidedFace->pb += glm::vec3(10.0f);
+				Info.collidedFace->pc += glm::vec3(10.0f);
+
+				Info.intersectedModel.lock()->updateModel();
+			}
 		}
+
 	}
 
 	intersectionInfo TraceRay::findClosestObject(Ray _ray)

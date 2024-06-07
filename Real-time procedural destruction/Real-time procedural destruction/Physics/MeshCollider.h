@@ -13,10 +13,7 @@ namespace GameEngine
 		void drawOutline(bool _draw) override;
 
 		// Override function from parent object
-		intersectionInfo rayIntersect(Ray _ray) override; // Ray intersection with box
-
-	private:
-		std::vector<bu::Face> faces;
+		intersectionInfo rayIntersect(Ray _ray) override; // Ray intersection with box		
 	};
 
 }

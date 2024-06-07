@@ -35,7 +35,9 @@ namespace GameEngine
 		used in displaying gui and render textures */
 	void Camera::initialize()
 	{
-		m_projectionMatrix = glm::ortho(0.0f, 700.0f, 0.0f, 700.0f, 0.0f, 1.0f);
+		m_windowHeight = core().lock()->m_nativeWindow->m_windowHeight;
+		m_windowWidth = core().lock()->m_nativeWindow->m_windowWidth;
+		m_projectionMatrix = glm::ortho(0.0f, (float)m_windowWidth, 0.0f, (float)m_windowHeight, -1.0f, 1.0f);
 		m_orthoCam = true;
 	}
 

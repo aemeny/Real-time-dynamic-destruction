@@ -94,7 +94,7 @@ void splitString(const std::string& input, char splitter,
 }
 
 template <typename T>
-GLuint loadModel(const std::string& path, size_t& vertexCount, std::vector<Face> &faces)
+GLuint loadModel(const std::string& path, size_t& vertexCount, std::vector<Face>& faces)
 {
   std::vector<glm::vec3> positions;
   std::vector<glm::vec2> tcs;
@@ -313,7 +313,109 @@ GLuint loadModel(const std::string& path, size_t& vertexCount, std::vector<Face>
   return vaoId;
 }
 
+#define buLoadModel bu::loadModel<int>
+
+
+template <typename T>
+void updateModel(GLuint modelID, std::vector<Face> faces)
+{
+    GLuint vboId = 0;
+
+    {
+        std::vector<float> b;
+
+        for (std::vector<Face>::iterator fit = faces.begin();
+            fit != faces.end(); fit++)
+        {
+            b.push_back(fit->pa.x); b.push_back(fit->pa.y); b.push_back(fit->pa.z);
+            b.push_back(fit->pb.x); b.push_back(fit->pb.y); b.push_back(fit->pb.z);
+            b.push_back(fit->pc.x); b.push_back(fit->pc.y); b.push_back(fit->pc.z);
+        }
+
+        glGenBuffers(1, &vboId);
+
+        if (!vboId)
+        {
+            throw std::runtime_error("Failed to create vertex buffer");
+        }
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboId);
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(b.at(0)) * b.size(), &b.at(0),
+            GL_STATIC_DRAW);
+
+        glBindVertexArray(modelID);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glEnableVertexAttribArray(0);
+        glBindVertexArray(0);
+
+        // TODO
+        //glDeleteBuffers(1, &vboId);
+    }
+
+    {
+        std::vector<float> b;
+
+        for (std::vector<Face>::iterator fit = faces.begin();
+            fit != faces.end(); fit++)
+        {
+            b.push_back(fit->tca.x); b.push_back(fit->tca.y);
+            b.push_back(fit->tcb.x); b.push_back(fit->tcb.y);
+            b.push_back(fit->tcc.x); b.push_back(fit->tcc.y);
+        }
+
+        glGenBuffers(1, &vboId);
+
+        if (!vboId)
+        {
+            throw std::runtime_error("Failed to create vertex buffer");
+        }
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboId);
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(b.at(0)) * b.size(), &b.at(0),
+            GL_STATIC_DRAW);
+
+        glBindVertexArray(modelID);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glEnableVertexAttribArray(1);
+        glBindVertexArray(0);
+
+        // TODO
+        //glDeleteBuffers(1, &vboId);
+    }
+
+    {
+        std::vector<float> b;
+
+        for (std::vector<Face>::iterator fit = faces.begin();
+            fit != faces.end(); fit++)
+        {
+            b.push_back(fit->na.x); b.push_back(fit->na.y); b.push_back(fit->na.z);
+            b.push_back(fit->nb.x); b.push_back(fit->nb.y); b.push_back(fit->nb.z);
+            b.push_back(fit->nc.x); b.push_back(fit->nc.y); b.push_back(fit->nc.z);
+        }
+
+        glGenBuffers(1, &vboId);
+
+        if (!vboId)
+        {
+            throw std::runtime_error("Failed to create vertex buffer");
+        }
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboId);
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(b.at(0)) * b.size(), &b.at(0),
+            GL_STATIC_DRAW);
+
+        glBindVertexArray(modelID);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glEnableVertexAttribArray(2);
+        glBindVertexArray(0);
+    }
+}
+#define buUpdateModel bu::updateModel<void>
 }
 
-#define buLoadModel bu::loadModel<int>
+
 

@@ -24,9 +24,25 @@ int main()
 	entity->addComponent<QuadRenderer>();
 	entity->addComponent<LineRenderer>();
 	entity->addComponent<AudioListener>();
-		
 
-	// Entity 2 - Point light
+
+	//Entity 2 - GUI
+	std::shared_ptr<Entity> entityGUI = core->addEntity();
+	std::shared_ptr<Component> entityGUITransform = entityGUI->addComponent<Transform>();
+	std::weak_ptr<Transform> transformGrab = entityGUI->findComponent<Transform>();
+	transformGrab.lock()->setPos(glm::vec3{ core->m_nativeWindow->m_windowWidth / 2, core->m_nativeWindow->m_windowHeight / 2, 0.0f });
+	transformGrab.lock()->setRot(glm::vec3{ 0.0f, 0.0f, 0.0f });
+	transformGrab.lock()->setScale(glm::vec3{ (core->m_nativeWindow->m_windowWidth / 3.5f),
+											  (core->m_nativeWindow->m_windowHeight / 3.5f),
+											   0.0f });
+
+	std::shared_ptr<Component> entityGUIGUI = entityGUI->addComponent<GUI>();
+	std::weak_ptr<GUI> entityGUIGrab = entityGUI->findComponent<GUI>();
+	entityGUIGrab.lock()->setTexture("Crosshair.png");
+	entityGUIGrab.lock()->setShown(true);
+
+
+	// Entity 3 - Point light
 	entity = core->addEntity();
 	entity->addComponent<PointLight>();
 	std::weak_ptr<PointLight> entityPointLightGrab = entity->findComponent<PointLight>();
@@ -34,7 +50,7 @@ int main()
 	entityPointLightGrab.lock()->setLightPos(glm::vec3(0.0f, 10.0f, 0.0f));
 
 
-	// Entity 3 - Curuthers
+	// Entity 4 - Curuthers
 	entity = core->addEntity();
 	entity->addComponent<Transform>();
 	entity->addComponent<ModelLoader>();
@@ -45,10 +61,10 @@ int main()
 	meshcolliderGrab.lock()->setRenderOutline(true);
 
 
-	// Entity 4 - Floor
+	// Entity 5 - Floor
 	entity = core->addEntity();
 	entity->addComponent<Transform>();
-	std::weak_ptr<Transform> transformGrab = entity->findComponent<Transform>();
+	transformGrab = entity->findComponent<Transform>();
 	transformGrab.lock()->setPos(glm::vec3(0.0f, -2.4f, 0.0f));
 	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
 	transformGrab.lock()->setScale(glm::vec3(0.05f, 1.0f, 0.05f));
@@ -59,11 +75,11 @@ int main()
 	entity->addComponent<BoxCollider>();
 	std::weak_ptr<BoxCollider> boxcolliderGrab = entity->findComponent<BoxCollider>();
 	boxcolliderGrab.lock()->setColliderSize(glm::vec3(102.4f, 0.2f, 102.4f));
-	boxcolliderGrab.lock()->setRenderOutline(true);
+	boxcolliderGrab.lock()->setRenderOutline(false);
 
 
 
-	//Entity 5 - Shootray
+	//Entity 6 - Shootray
 	entity = core->addEntity();
 	entity->addComponent<ShootRay>();
 	std::weak_ptr<ShootRay> entityShootRayGrab = entity->findComponent<ShootRay>();

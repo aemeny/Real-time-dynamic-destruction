@@ -1,15 +1,20 @@
 #include "BoxCollider.h"
 #include "TraceRay.h"
+#include "..\GameEngine\ModelLoader.h"
+
 namespace GameEngine
 {
     BoxCollider::~BoxCollider() {}
 
     void BoxCollider::initialize()
     {
+        m_faces = m_entity.lock()->findComponent<GameEngine::ModelLoader>().lock()->getModel().lock()->getFaces();
+       
         m_transform = m_entity.lock()->findComponent<GameEngine::Transform>();
+        m_colliderSize = glm::vec3(0);
+        
         m_lineRendererDirty = true;
         m_renderOutline = false;
-        m_colliderSize = glm::vec3(0);
         core().lock()->m_traceRay->addObject(*this);
     }
 

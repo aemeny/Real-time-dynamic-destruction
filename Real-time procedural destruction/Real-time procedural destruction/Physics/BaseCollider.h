@@ -10,11 +10,11 @@ namespace GameEngine
 	struct intersectionInfo
 	{
 		glm::vec3 intersectionPos{ 0,0,0 };
-		glm::vec3 surfaceNormal{ 0,0,0 };
 		float distanceToIntersection = FLT_MAX;
 		bool hasIntersected{ false };
 		int objIndex = 0;
-		bu::Face* collidedFace;
+		bu::Face* collidedFace = NULL;
+		std::weak_ptr<Renderer::Model> intersectedModel;
 	};
 
 	struct BaseCollider : Component
@@ -30,6 +30,7 @@ namespace GameEngine
 		std::weak_ptr<GameEngine::LineRenderer> m_lineRenderer;
 		std::weak_ptr<Renderer::Vbo> m_vbo;
 		glm::vec3 m_colliderOffset;
+		std::vector<bu::Face>* m_faces;
 	};
 
 }

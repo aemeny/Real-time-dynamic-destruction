@@ -106,10 +106,6 @@ namespace GameEngine
 			rtn->m_type = typeid(T).name();
 			rtn->initialize();
 
-			/*if (rtn->m_type == "struct GameEngine::MeshCollider" ||
-				rtn->m_type == "struct GameEngine::BoxCollider")
-				m_core.lock()->m_traceRay->addObject(std::dynamic_pointer_cast<BaseCollider>(rtn));*/
-
 			m_components.push_back(rtn);
 
 			return rtn;

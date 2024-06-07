@@ -19,7 +19,7 @@ namespace GameEngine
 		std::shared_ptr<Renderer::Texture> getTexture() { return m_texture; }
 		void setTexture(std::string _texturePath)
 		{
-			m_texture = core().lock()->m_resources->load<Texture>("../Samples/GUI/" + _texturePath)->getTexture();
+			m_texture = core().lock()->m_resources->load<Texture>("../Samples/Textures/GUI/" + _texturePath)->getTexture();
 		}
 
 		void setClickable(bool _clickable) { m_clickable = _clickable; } // Setter for if the GUI is a button
