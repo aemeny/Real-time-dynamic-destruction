@@ -30,7 +30,6 @@ namespace GameEngine
 		std::weak_ptr<GameEngine::LineRenderer> m_lineRenderer;
 		std::weak_ptr<Renderer::Vbo> m_vbo;
 		glm::vec3 m_colliderOffset;
-		std::vector<bu::Face>* m_faces;
 	};
 
 }

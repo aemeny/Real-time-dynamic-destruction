@@ -30,6 +30,24 @@ namespace GameEngine
             m_lineRenderer.lock()->renderLine(transform().lock()->getModelMatrix());
     }
 
+    void MeshCollider::preTransformVertices() 
+    {
+        transform().lock()->updateMatrix();
+        glm::mat4 modelMatrix = transform().lock()->getModelMatrix();
+        std::vector<bu::Face>* faces = m_modelRenderer.lock()->getModel().lock()->getFaces();
+
+        m_transformedVertices.clear();
+        m_transformedVertices.shrink_to_fit();
+        m_transformedVertices.reserve(faces->size());
+        for (const bu::Face& face : *faces) 
+        {
+            m_transformedVertices.push_back(modelMatrix * glm::vec4(face.pa, 1.0f));
+            m_transformedVertices.push_back(modelMatrix * glm::vec4(face.pb, 1.0f));
+            m_transformedVertices.push_back(modelMatrix * glm::vec4(face.pc, 1.0f));
+        }
+        transform().lock()->setDirty(false);
+    }
+
     intersectionInfo MeshCollider::rayIntersect(Ray _ray)
     {
         intersectionInfo info;
@@ -38,19 +56,16 @@ namespace GameEngine
         glm::vec2 baryPosition = glm::vec2(0);
         float distance;
 
-        m_faces = m_modelRenderer.lock()->getModel().lock()->getFaces();
-        
-        transform().lock()->updateMatrix();
-        glm::mat4 modelMatrix = transform().lock()->getModelMatrix();
+        if (transform().lock()->getDirty())
+            preTransformVertices();
 
-        for (int i = 0; i < m_faces->size(); i++)
+        for (int i = 0; i < m_transformedVertices.size(); i += 3)
         {
-            glm::vec4 pa = modelMatrix * glm::vec4(m_faces->at(i).pa, 1.0f);
-            glm::vec4 pb = modelMatrix * glm::vec4(m_faces->at(i).pb, 1.0f);
-            glm::vec4 pc = modelMatrix * glm::vec4(m_faces->at(i).pc, 1.0f);
-
             if (glm::intersectRayTriangle(_ray.origin, _ray.direction,
-                glm::vec3(pa.x, pa.y, pa.z), glm::vec3(pb.x, pb.y, pb.z), glm::vec3(pc.x, pc.y, pc.z), baryPosition, distance))
+                glm::vec3(m_transformedVertices[i].x,     m_transformedVertices[i].y,     m_transformedVertices[i].z), 
+                glm::vec3(m_transformedVertices[i + 1].x, m_transformedVertices[i + 1].y, m_transformedVertices[i + 1].z), 
+                glm::vec3(m_transformedVertices[i + 2].x, m_transformedVertices[i + 2].y, m_transformedVertices[i + 2].z),
+                baryPosition, distance))
             {
                 if (distance > 0.0f)
                 {
@@ -60,7 +75,9 @@ namespace GameEngine
                         info.hasIntersected = true;
                         info.intersectionPos = glm::vec3(baryPosition.x, baryPosition.y, 0);
                         info.distanceToIntersection = distance;
-                        info.collidedFace = &m_faces->at(i);
+                        std::cout << "COLLIDED" << m_transformedVertices[i].x << std::endl;
+                        std::vector<bu::Face>* faces = m_modelRenderer.lock()->getModel().lock()->getFaces();
+                        info.collidedFace = &faces->at(i / 3);
                     }
                 }
             }
@@ -86,16 +103,16 @@ namespace GameEngine
             // Create new vbo for this collider
             m_vbo = m_lineRenderer.lock()->addVbo();
 
-            m_faces = m_modelRenderer.lock()->getModel().lock()->getFaces();
+            std::vector<bu::Face>* faces = m_modelRenderer.lock()->getModel().lock()->getFaces();
 
             transform().lock()->updateMatrix();
             glm::mat4 modelMatrix = transform().lock()->getModelMatrix();
 
-            for (int i = 0; i < m_faces->size(); i++)
+            for (int i = 0; i < faces->size(); i++)
             {
-                glm::vec4 pa = modelMatrix * glm::vec4(m_faces->at(i).pa, 1.0f);
-                glm::vec4 pb = modelMatrix * glm::vec4(m_faces->at(i).pb, 1.0f);
-                glm::vec4 pc = modelMatrix * glm::vec4(m_faces->at(i).pc, 1.0f);
+                glm::vec4 pa = modelMatrix * glm::vec4(faces->at(i).pa, 1.0f);
+                glm::vec4 pb = modelMatrix * glm::vec4(faces->at(i).pb, 1.0f);
+                glm::vec4 pc = modelMatrix * glm::vec4(faces->at(i).pc, 1.0f);
 
                 glm::vec3 pos1(pa.x, pa.y, pa.z);
                 glm::vec3 pos2(pb.x, pb.y, pb.z);

@@ -7,7 +7,7 @@ namespace GameEngine
 {
 	Transform::Transform()
 		: m_position(0.0f, 0.0f, 0.0f), m_rotation(0.0f, 0.0f, 0.0f), m_scale(1.0f),
-		m_modelMatrix(glm::mat4(1.0f))
+		m_modelMatrix(glm::mat4(1.0f)), m_dirty(true)
 	{
 	}
 	/*

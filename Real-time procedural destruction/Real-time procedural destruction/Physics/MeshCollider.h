@@ -13,10 +13,14 @@ namespace GameEngine
 		void onTick() override;
 		void onDisplay() override;
 		void updateOutline() override;
-
+		
 		// Override function from parent object
 		intersectionInfo rayIntersect(Ray _ray) override; // Ray intersection with box		
 		std::weak_ptr<GameEngine::ModelRenderer> m_modelRenderer;
+	
+	private:
+		void preTransformVertices();
+		std::vector<glm::vec4> m_transformedVertices;
 	};
 
 }

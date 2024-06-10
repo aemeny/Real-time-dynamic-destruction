@@ -8,7 +8,7 @@ namespace GameEngine
 
     void BoxCollider::initialize()
     {
-        m_faces = m_entity.lock()->findComponent<GameEngine::ModelRenderer>().lock()->getModel().lock()->getFaces();
+        //m_faces = m_entity.lock()->findComponent<GameEngine::ModelRenderer>().lock()->getModel().lock()->getFaces();
        
         m_transform = m_entity.lock()->findComponent<GameEngine::Transform>();
         m_colliderSize = glm::vec3(0);
