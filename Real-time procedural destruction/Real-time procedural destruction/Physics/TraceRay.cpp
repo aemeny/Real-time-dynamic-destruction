@@ -11,8 +11,6 @@ namespace GameEngine
 
 		if (Info.hasIntersected)
 		{
-			std::cout << "OBJ:" << Info.objIndex << std::endl;
-			std::cout << "DIS:" << Info.distanceToIntersection << std::endl;
 			if (Info.collidedFace != NULL)
 			{				
 				std::vector<bu::Face>* faces = Info.intersectedModel.lock()->getFaces();
