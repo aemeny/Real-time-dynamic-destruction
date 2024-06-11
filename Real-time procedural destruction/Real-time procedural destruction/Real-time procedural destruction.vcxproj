@@ -139,6 +139,7 @@
     <ClCompile Include="GameEngine\Camera.cpp" />
     <ClCompile Include="GameEngine\Component.cpp" />
     <ClCompile Include="GameEngine\Core.cpp" />
+    <ClCompile Include="GameEngine\DestructionHandler.cpp" />
     <ClCompile Include="GameEngine\Entity.cpp" />
     <ClCompile Include="GameEngine\Environment.cpp" />
     <ClCompile Include="GameEngine\Exception.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Project\ShootRay.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DestructionHandler.h" />
     <ClInclude Include="GameEngine\Audio.h" />
     <ClInclude Include="GameEngine\AudioListener.h" />
     <ClInclude Include="GameEngine\AudioSource.h" />

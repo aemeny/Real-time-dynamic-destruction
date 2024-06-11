@@ -17,6 +17,7 @@ namespace GameEngine
 		void renderLine(glm::mat4 _modelMatrix);
 
 		void addLine(std::weak_ptr<Renderer::Vbo> _vbo, glm::vec3 _start, glm::vec3 _end);
+		void clearLines(std::weak_ptr<Renderer::Vbo> _vbo);
 		std::weak_ptr<Renderer::Vbo> addVbo()
 		{
 			std::shared_ptr<Renderer::Vbo> rtn = std::make_shared<Renderer::Vbo>();

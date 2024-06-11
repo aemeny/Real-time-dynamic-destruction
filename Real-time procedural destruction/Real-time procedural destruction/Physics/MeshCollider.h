@@ -19,7 +19,7 @@ namespace GameEngine
 		std::weak_ptr<GameEngine::ModelRenderer> m_modelRenderer;
 	
 	private:
-		void preTransformVertices();
+		bool preTransformVertices();
 		std::vector<glm::vec4> m_transformedVertices;
 	};
 

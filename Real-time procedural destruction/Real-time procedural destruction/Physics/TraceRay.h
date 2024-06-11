@@ -13,13 +13,14 @@ namespace GameEngine
 			m_objsInScene.push_back(&_obj);
 		}
 
+		std::vector<BaseCollider*>* getObjectsInScene() { return &m_objsInScene; }
+
 	private:
 		// Finding closest object a given ray intersects with
 		intersectionInfo findClosestObject(Ray _ray);
 
 		// List of objects in the scene
 		std::vector<BaseCollider*> m_objsInScene;
-
 	};
 
 }

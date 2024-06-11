@@ -156,6 +156,9 @@
     <ClCompile Include="Project\DestructionObjs.cpp">
       <Filter>Source Files\Project</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\DestructionHandler.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="Project\DestructionObjs.h">
       <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="DestructionHandler.h">
+      <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

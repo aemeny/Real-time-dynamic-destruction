@@ -17,7 +17,7 @@ namespace Renderer
 		int getComponents() { return m_components; }
 		void setVao(Vao* _vao) { m_vao = _vao; }
 		int getIdentifierID() { return vboIdentifierID; }
-
+		int getDataSize() { return m_data.size(); }
 	private:
 		GLuint m_id;
 		Vao* m_vao;

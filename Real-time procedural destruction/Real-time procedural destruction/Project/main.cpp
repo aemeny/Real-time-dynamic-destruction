@@ -55,7 +55,7 @@ int main()
 	entity->addComponent<Transform>();
 	entity->addComponent<ModelRenderer>();
 	entity->addComponent<Curuthers>();
-
+	entity->addComponent<DestructionHandler>();
 	entity->addComponent<MeshCollider>();
 	std::weak_ptr<MeshCollider> meshcolliderGrab = entity->findComponent<MeshCollider>();
 	meshcolliderGrab.lock()->setRenderOutline(false);
@@ -88,6 +88,7 @@ int main()
 
 	entity->addComponent<ModelRenderer>();
 	entity->addComponent<DestructionObjs>();
+	entity->addComponent<DestructionHandler>();
 
 	entity->addComponent<MeshCollider>();
 	meshcolliderGrab = entity->findComponent<MeshCollider>();

@@ -1,4 +1,5 @@
 #include "TraceRay.h"
+#include "../GameEngine/DestructionHandler.h"
 
 namespace GameEngine
 {
@@ -12,23 +13,25 @@ namespace GameEngine
 		if (Info.hasIntersected)
 		{
 			if (Info.collidedFace != NULL)
-			{				
-				std::vector<bu::Face>* faces = Info.intersectedModel.lock()->getFaces();
+			{			
+				std::weak_ptr<DestructionHandler> destructionHandler = m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<DestructionHandler>();
+				if (!destructionHandler.expired())
+				{
+					destructionHandler.lock()->destructObject(&Info);
+				}
+
+				/*std::vector<bu::Face>* faces = Info.intersectedModel.lock()->getFaces();
 				bu::Face* face = Info.collidedFace;
 
 				if (face >= &faces->front() && face <= &faces->back()) 
 				{
 					auto it = faces->begin() + (face - &faces->front());
-
+					
 					faces->erase(it);
 
 					m_objsInScene[Info.objIndex]->transform().lock()->setDirty(true);
 					Info.intersectedModel.lock()->updateModel();
-				}
-				else
-				{
-					std::cerr << "Found face is not pointing to an element in the models faces vector" << std::endl;
-				}
+				}*/
 			}
 		}
 	}

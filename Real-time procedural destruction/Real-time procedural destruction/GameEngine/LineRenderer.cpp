@@ -58,4 +58,16 @@ namespace GameEngine
 		}
 	}
 
+	void LineRenderer::clearLines(std::weak_ptr<Renderer::Vbo> _vbo)
+	{
+		for (size_t ei = 0; ei < m_lines->m_vbos.size(); ei++)
+		{
+			if (m_lines->m_vbos[ei]->getIdentifierID() == _vbo.lock()->getIdentifierID())
+			{
+				m_linesCreated -= m_lines->m_vbos[ei]->getDataSize() / 6; // 6 = 2(Add start + end) * 3(XYZ)
+				m_lines->m_vbos[ei]->clearData();
+			}
+		}
+	}
+
 }

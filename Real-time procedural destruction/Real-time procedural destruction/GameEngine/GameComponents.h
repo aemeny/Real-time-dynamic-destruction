@@ -5,6 +5,7 @@
 #include "GUI.h"
 #include "LineRenderer.h"
 #include "PointLight.h"
+#include "DestructionHandler.h"
 #include "..\Physics\BoxCollider.h"
 #include "..\Physics\MeshCollider.h"
 #include "..\Physics\TraceRay.h"
