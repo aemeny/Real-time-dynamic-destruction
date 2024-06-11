@@ -31,3 +31,4 @@
 *.out
 *.app
 /Real-time procedural destruction/.vs
+/Real-time procedural destruction/x64/Debug
