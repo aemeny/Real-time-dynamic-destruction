@@ -156,6 +156,7 @@
     <ClCompile Include="GameEngine\stb_vorbis.c" />
     <ClCompile Include="GameEngine\Texture.cpp" />
     <ClCompile Include="GameEngine\Transform.cpp" />
+    <ClCompile Include="GameEngine\Voronoi.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="Graphics\GraphicsModel.cpp" />
     <ClCompile Include="Graphics\RenderTexture.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="GameEngine\Shader.h" />
     <ClInclude Include="GameEngine\Texture.h" />
     <ClInclude Include="GameEngine\Transform.h" />
+    <ClInclude Include="GameEngine\Voronoi.h" />
     <ClInclude Include="GameEngine\Window.h" />
     <ClInclude Include="Graphics\GraphicsModel.h" />
     <ClInclude Include="Graphics\Graphics.h" />

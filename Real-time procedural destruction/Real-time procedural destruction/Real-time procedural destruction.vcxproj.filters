@@ -159,6 +159,9 @@
     <ClCompile Include="GameEngine\DestructionHandler.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\Voronoi.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -279,6 +282,9 @@
       <Filter>Header Files\Project</Filter>
     </ClInclude>
     <ClInclude Include="DestructionHandler.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Voronoi.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
