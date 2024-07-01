@@ -16,6 +16,7 @@ namespace GameEngine
     private:
         std::vector<glm::vec2> projectVertices(const std::vector<bu::Face>* _faces, ProjectionPlane _plane);
         ProjectionPlane determineProjectionPlane(const bu::Face* _collidedFace);
+        void injectVertices(std::vector<bu::Face>* _faces, ProjectionPlane _plane);
     };
 }
 

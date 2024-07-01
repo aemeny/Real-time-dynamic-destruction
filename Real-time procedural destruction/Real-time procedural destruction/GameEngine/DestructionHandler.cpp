@@ -46,7 +46,9 @@ namespace GameEngine
             }
             break;
         }
-
+        
+        // Add new vertices to the model for impact hole
+        injectVertices(faces, plane);
 
         // Update model
         core().lock()->m_traceRay->getObjectsInScene()->at(_info->objIndex)->transform().lock()->setDirty(true);
@@ -107,5 +109,10 @@ namespace GameEngine
         {
             return ProjectionPlane::XY;  // Normal is aligned to the z axis, project onto XY plane
         }
+    }
+
+    void DestructionHandler::injectVertices(std::vector<bu::Face>* _faces, ProjectionPlane _plane)
+    {
+        //_faces->emplace_back(glm::vec3(0, 0, 0));
     }
 }

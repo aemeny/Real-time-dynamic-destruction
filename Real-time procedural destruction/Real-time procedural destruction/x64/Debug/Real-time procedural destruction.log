@@ -1,5 +1,3 @@
 ﻿  DestructionHandler.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'GameEngine/DestructionHandler.cpp')
-  
-  Real-time procedural destruction.vcxproj -> C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe
+C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Real-time procedural destruction.vcxproj -> C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe
