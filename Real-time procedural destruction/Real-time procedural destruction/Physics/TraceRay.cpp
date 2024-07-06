@@ -3,7 +3,13 @@
 
 namespace GameEngine
 {
-	TraceRay::TraceRay() {}
+	TraceRay::TraceRay(std::weak_ptr<Core> _core)
+	{
+		m_core = _core;
+		m_renderOutline = false;
+	}
+
+	TraceRay::~TraceRay(){}
 
 	void TraceRay::shootRay(Ray _ray)
 	{
@@ -13,12 +19,17 @@ namespace GameEngine
 		if (Info.hasIntersected)
 		{
 			if (Info.collidedFace != NULL)
-			{			
+			{
+				std::weak_ptr<Transform> transform =  m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>();
+				glm::vec3 scale = transform.lock()->getScale();
+				debugDrawBox(Info.intersectionPos, 3.5f);
+
 				std::weak_ptr<DestructionHandler> destructionHandler = m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<DestructionHandler>();
 				if (!destructionHandler.expired())
 				{
-					destructionHandler.lock()->destructObject(&Info);
+					debugDrawBox(destructionHandler.lock()->destructObject(&Info));
 				}
+				
 
 				/*std::vector<bu::Face>* faces = Info.intersectedModel.lock()->getFaces();
 				bu::Face* face = Info.collidedFace;
@@ -34,6 +45,12 @@ namespace GameEngine
 				}*/
 			}
 		}
+	}
+
+	void TraceRay::display()
+	{
+		if (m_renderOutline)
+			m_lineRenderer.lock()->renderLine();
 	}
 
 	intersectionInfo TraceRay::findClosestObject(Ray _ray)
@@ -67,5 +84,91 @@ namespace GameEngine
 		finalInfo.hasIntersected = checkIntersect;
 
 		return finalInfo;
+	}
+
+	void TraceRay::debugDrawBox(glm::vec3 _pos, float _boxSize)
+	{
+		m_renderOutline = true;
+
+		if (m_vbo.expired())
+		{
+			// Attach line renderer
+			std::vector<std::shared_ptr<GameEngine::LineRenderer> > lineRenderer;
+			m_core.lock()->find<GameEngine::LineRenderer>(lineRenderer);
+			m_lineRenderer = lineRenderer[0];
+
+			// Create new vbo for this collider
+			m_vbo = m_lineRenderer.lock()->addVbo();
+		}
+
+		// Clear the already made lines from line count + clear all data from vbo list
+		m_lineRenderer.lock()->clearLines(m_vbo);
+
+		// Add positions
+		float halfBoxSize = _boxSize * 0.5f;
+
+		glm::vec3 pos1(_pos.x + halfBoxSize, _pos.y + halfBoxSize, _pos.z + halfBoxSize);
+		glm::vec3 pos2(_pos.x + halfBoxSize, _pos.y + halfBoxSize, _pos.z - halfBoxSize);
+		glm::vec3 pos3(_pos.x + halfBoxSize, _pos.y - halfBoxSize, _pos.z + halfBoxSize);
+		glm::vec3 pos4(_pos.x - halfBoxSize, _pos.y + halfBoxSize, _pos.z + halfBoxSize);
+		glm::vec3 pos5(_pos.x - halfBoxSize, _pos.y - halfBoxSize, _pos.z - halfBoxSize);
+		glm::vec3 pos6(_pos.x - halfBoxSize, _pos.y - halfBoxSize, _pos.z + halfBoxSize);
+		glm::vec3 pos7(_pos.x - halfBoxSize, _pos.y + halfBoxSize, _pos.z - halfBoxSize);
+		glm::vec3 pos8(_pos.x + halfBoxSize, _pos.y - halfBoxSize, _pos.z - halfBoxSize);
+
+		m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
+		m_lineRenderer.lock()->addLine(m_vbo, pos1, pos3);
+		m_lineRenderer.lock()->addLine(m_vbo, pos1, pos4);
+		m_lineRenderer.lock()->addLine(m_vbo, pos5, pos6);
+		m_lineRenderer.lock()->addLine(m_vbo, pos5, pos7);
+		m_lineRenderer.lock()->addLine(m_vbo, pos5, pos8);
+		m_lineRenderer.lock()->addLine(m_vbo, pos6, pos3);
+		m_lineRenderer.lock()->addLine(m_vbo, pos8, pos3);
+		m_lineRenderer.lock()->addLine(m_vbo, pos8, pos2);
+		m_lineRenderer.lock()->addLine(m_vbo, pos7, pos2);
+		m_lineRenderer.lock()->addLine(m_vbo, pos7, pos4);
+		m_lineRenderer.lock()->addLine(m_vbo, pos6, pos4);
+	}
+
+	void TraceRay::debugDrawBox(std::vector<glm::vec3> _points)
+	{
+		m_renderOutline = true;
+
+		if (m_vbo.expired())
+		{
+			// Attach line renderer
+			std::vector<std::shared_ptr<GameEngine::LineRenderer> > lineRenderer;
+			m_core.lock()->find<GameEngine::LineRenderer>(lineRenderer);
+			m_lineRenderer = lineRenderer[0];
+
+			// Create new vbo for this collider
+			m_vbo = m_lineRenderer.lock()->addVbo();
+		}
+
+		float pointSize = 0.02f;
+		for (int i = 0; i < _points.size(); i++)
+		{
+			glm::vec3 pos1(_points[i].x + pointSize, _points[i].y + pointSize, _points[i].z + pointSize);
+			glm::vec3 pos2(_points[i].x + pointSize, _points[i].y + pointSize, _points[i].z - pointSize);
+			glm::vec3 pos3(_points[i].x + pointSize, _points[i].y - pointSize, _points[i].z + pointSize);
+			glm::vec3 pos4(_points[i].x - pointSize, _points[i].y + pointSize, _points[i].z + pointSize);
+			glm::vec3 pos5(_points[i].x - pointSize, _points[i].y - pointSize, _points[i].z - pointSize);
+			glm::vec3 pos6(_points[i].x - pointSize, _points[i].y - pointSize, _points[i].z + pointSize);
+			glm::vec3 pos7(_points[i].x - pointSize, _points[i].y + pointSize, _points[i].z - pointSize);
+			glm::vec3 pos8(_points[i].x + pointSize, _points[i].y - pointSize, _points[i].z - pointSize);
+
+			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
+			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos3);
+			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos4);
+			m_lineRenderer.lock()->addLine(m_vbo, pos5, pos6);
+			m_lineRenderer.lock()->addLine(m_vbo, pos5, pos7);
+			m_lineRenderer.lock()->addLine(m_vbo, pos5, pos8);
+			m_lineRenderer.lock()->addLine(m_vbo, pos6, pos3);
+			m_lineRenderer.lock()->addLine(m_vbo, pos8, pos3);
+			m_lineRenderer.lock()->addLine(m_vbo, pos8, pos2);
+			m_lineRenderer.lock()->addLine(m_vbo, pos7, pos2);
+			m_lineRenderer.lock()->addLine(m_vbo, pos7, pos4);
+			m_lineRenderer.lock()->addLine(m_vbo, pos6, pos4);
+		}
 	}
 }

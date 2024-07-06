@@ -11,6 +11,7 @@ struct ShootRay : GameEngine::Component
 	ShootRay();
 	void initialize() override;
 	void onTick() override;
+	void onDisplay() override;
 
 	void setPos(glm::vec2 _screenPos) { m_screenPos = _screenPos; }
 

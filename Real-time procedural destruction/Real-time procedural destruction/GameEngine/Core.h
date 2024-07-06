@@ -10,6 +10,7 @@ namespace GameEngine
 {
 struct Component;
 struct TraceRay;
+struct Camera;
 
 //!  A Core Struct. 
 /*!
@@ -65,6 +66,15 @@ struct Core
 		}
 	}
 
+	void setMainCam(std::weak_ptr<Camera> _cam) { m_mainCam = _cam; }
+	std::weak_ptr<Camera> getMainCam() 
+	{ 
+		if (m_mainCam.expired())
+			throw std::runtime_error("Please Assign A Main Camera");
+		else
+			return m_mainCam;
+	}
+
 	//! Public variables.
 	/*!
 	  Object references and audio initialize variables.
@@ -90,6 +100,7 @@ private:
    */
 	bool m_running;
 	std::vector<std::shared_ptr<Entity> > m_entities;
+	std::weak_ptr<Camera> m_mainCam;
 	std::weak_ptr<Core> m_self;
 };
 

@@ -1,54 +1,25 @@
 #include "DestructionHandler.h"
 #include "../Physics/TraceRay.h"
 
+#include <random>
+
 namespace GameEngine
 {
     DestructionHandler::~DestructionHandler() {}
 
-    void DestructionHandler::destructObject(intersectionInfo* _info)
+    std::vector<glm::vec3> DestructionHandler::destructObject(intersectionInfo* _info)
     {
         // Grab faces of model
         std::vector<bu::Face>* faces = _info->intersectedModel.lock()->getFaces();
 
         // Use normal vector of the collided face to determine projection
-        ProjectionPlane plane = determineProjectionPlane(_info->collidedFace);
+        //ProjectionPlane plane = determineProjectionPlane(_info->collidedFace);
 
         // Project faces into 2D depending on normal collided with
-        std::vector<glm::vec2> projectedVertices = projectVertices(faces, plane);
+        //std::vector<glm::vec2> projectedVertices = projectVertices(faces, plane);
 
-
-        // TEMP //
-        // Set face vertices of the model to the projected vertices
-        switch (plane)
-        {
-        case XY: 
-            for (int i = 0; i < projectedVertices.size(); i += 3)
-            {
-                faces->at(i / 3).pa = glm::vec3(projectedVertices[i].x, projectedVertices[i].y, 0.0f);
-                faces->at(i / 3).pb = glm::vec3(projectedVertices[i + 1].x, projectedVertices[i + 1].y, 0.0f);
-                faces->at(i / 3).pc = glm::vec3(projectedVertices[i + 2].x, projectedVertices[i + 2].y, 0.0f);
-            }
-            break;
-        case YZ:
-            for (int i = 0; i < projectedVertices.size(); i += 3)
-            {
-                faces->at(i / 3).pa = glm::vec3(0.0f, projectedVertices[i].x, projectedVertices[i].y);
-                faces->at(i / 3).pb = glm::vec3(0.0f, projectedVertices[i + 1].x, projectedVertices[i + 1].y);
-                faces->at(i / 3).pc = glm::vec3(0.0f, projectedVertices[i + 2].x, projectedVertices[i + 2].y);
-            }
-            break;
-        case XZ:
-            for (int i = 0; i < projectedVertices.size(); i += 3)
-            {
-                faces->at(i / 3).pa = glm::vec3(projectedVertices[i].x, 0.0f, projectedVertices[i].y);
-                faces->at(i / 3).pb = glm::vec3(projectedVertices[i + 1].x, 0.0f, projectedVertices[i + 1].y);
-                faces->at(i / 3).pc = glm::vec3(projectedVertices[i + 2].x, 0.0f, projectedVertices[i + 2].y);
-            }
-            break;
-        }
-        
-        // Add new vertices to the model for impact hole
-        injectVertices(faces, plane);
+        return generateCubePoints(_info->intersectionPos, 3.5f, 100);
+       
 
         // Update model
         core().lock()->m_traceRay->getObjectsInScene()->at(_info->objIndex)->transform().lock()->setDirty(true);
@@ -111,8 +82,16 @@ namespace GameEngine
         }
     }
 
-    void DestructionHandler::injectVertices(std::vector<bu::Face>* _faces, ProjectionPlane _plane)
+    std::vector<glm::vec3> DestructionHandler::generateCubePoints(glm::vec3 _pos, float _size, int _depth)
     {
-        //_faces->emplace_back(glm::vec3(0, 0, 0));
+        std::vector<glm::vec3> points;
+        for (int i = 0; i < _depth; i++)
+        {
+            float rand1 = ((float)rand() / (RAND_MAX)) * 2 - 1;
+            float rand2 = ((float)rand() / (RAND_MAX)) * 2 - 1;
+            float rand3 = ((float)rand() / (RAND_MAX)) * 2 - 1;
+            points.push_back(glm::vec3(_pos.x + ((rand1 * _size) * 0.5f), _pos.y + ((rand2 * _size) * 0.5f), _pos.z + ((rand3 * _size) * 0.5f)));
+        }
+        return points;
     }
 }

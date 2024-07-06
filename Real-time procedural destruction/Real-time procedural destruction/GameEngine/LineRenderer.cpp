@@ -31,7 +31,7 @@ namespace GameEngine
 	/*
 	* renderes a line based on points given
 	*/
-	void LineRenderer::renderLine(glm::mat4 _modelMatrix = glm::mat4(1))
+	void LineRenderer::renderLine(glm::mat4 _modelMatrix)
 	{
 		//call shader bind function and pass transform position
 		m_shader->bindShader(m_camera.lock()->getProj(), "u_Projection");
@@ -64,7 +64,7 @@ namespace GameEngine
 		{
 			if (m_lines->m_vbos[ei]->getIdentifierID() == _vbo.lock()->getIdentifierID())
 			{
-				m_linesCreated -= m_lines->m_vbos[ei]->getDataSize() / 6; // 6 = 2(Add start + end) * 3(XYZ)
+				m_linesCreated -= m_lines->m_vbos[ei]->getDataSize() / 6; // 6 = (start + end)2 * 3(XYZ)
 				m_lines->m_vbos[ei]->clearData();
 			}
 		}

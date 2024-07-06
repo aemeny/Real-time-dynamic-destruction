@@ -5,8 +5,10 @@ namespace GameEngine
 {
 	struct TraceRay
 	{
-		TraceRay();
+		TraceRay(std::weak_ptr<Core> _core);
+		~TraceRay();
 		void shootRay(Ray _ray);
+		void display();
 
 		void addObject(BaseCollider &_obj)
 		{
@@ -19,8 +21,22 @@ namespace GameEngine
 		// Finding closest object a given ray intersects with
 		intersectionInfo findClosestObject(Ray _ray);
 
+		//! Debug Components
+		/*!
+		   Draw Box Outline Func
+		   Rendering info
+		*/
+		void debugDrawBox(glm::vec3 _pos, float _boxSize);
+		void debugDrawBox(std::vector<glm::vec3> _points);
+		bool m_renderOutline;
+		std::weak_ptr<GameEngine::LineRenderer> m_lineRenderer;
+		std::weak_ptr<Renderer::Vbo> m_vbo;
+
 		// List of objects in the scene
 		std::vector<BaseCollider*> m_objsInScene;
+
+		// Reference to Core
+		std::weak_ptr<Core> m_core;
 	};
 
 }

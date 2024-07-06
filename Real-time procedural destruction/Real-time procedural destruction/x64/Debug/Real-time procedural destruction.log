@@ -1,3 +1,10 @@
 ﻿  DestructionHandler.cpp
 C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  LineRenderer.cpp
+C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  TraceRay.cpp
+C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::DestructionHandler>': not all control paths return a value
   Real-time procedural destruction.vcxproj -> C:\Users\alexe\OneDrive\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe

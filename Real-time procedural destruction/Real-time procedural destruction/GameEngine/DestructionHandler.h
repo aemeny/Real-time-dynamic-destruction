@@ -12,11 +12,12 @@ namespace GameEngine
     {
         ~DestructionHandler();
 
-        void destructObject(intersectionInfo* _info);
+        std::vector<glm::vec3> destructObject(intersectionInfo* _info);
     private:
         std::vector<glm::vec2> projectVertices(const std::vector<bu::Face>* _faces, ProjectionPlane _plane);
         ProjectionPlane determineProjectionPlane(const bu::Face* _collidedFace);
-        void injectVertices(std::vector<bu::Face>* _faces, ProjectionPlane _plane);
+        std::vector<glm::vec3> generateCubePoints(glm::vec3 _pos, float _size, int _depth);
+        
     };
 }
 

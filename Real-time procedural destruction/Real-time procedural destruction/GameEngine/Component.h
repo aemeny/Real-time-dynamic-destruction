@@ -3,6 +3,8 @@
 
 namespace GameEngine
 {
+	struct Camera;
+
 	//!  Component Struct. 
 	/*!
 	 the base for adding components to the engine.
@@ -73,7 +75,7 @@ namespace GameEngine
 		 \param _input the first argument.
 	  */
 		virtual void initialize();
-		virtual void initialize(std::weak_ptr<Input> _input, float _FOV);
+		virtual void initialize(std::weak_ptr<Input> _input, float _FOV, std::weak_ptr<Camera> _self, bool _mainCamera);
 		virtual void onTick();
 		virtual void onGUI();
 		virtual void onDisplay();

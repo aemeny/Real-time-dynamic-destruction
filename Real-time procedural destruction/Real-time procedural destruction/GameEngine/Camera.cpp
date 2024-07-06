@@ -7,7 +7,7 @@
 namespace GameEngine
 {
 	/* Camera init used for 3D cam */
-	void Camera::initialize(std::weak_ptr<Input> _input, float _FOV)
+	void Camera::initialize(std::weak_ptr<Input> _input, float _FOV, std::weak_ptr<Camera> _self, bool _mainCamera)
 	{
 		m_FOV = _FOV;
 		m_windowHeight = core().lock()->m_nativeWindow->m_windowHeight;
@@ -29,6 +29,9 @@ namespace GameEngine
 		m_viewingMatrix = glm::lookAt(m_camPosition, initTarget, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		m_orthoCam = false;
+
+		if (_mainCamera)
+			core().lock()->setMainCam(_self);
 	}
 
 	/* Camera init uses for my orphographic camera

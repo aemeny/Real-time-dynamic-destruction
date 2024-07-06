@@ -63,7 +63,7 @@ namespace GameEngine
 			{
 				m_entities.at(ei)->display();
 			}
-
+			m_traceRay->display();
 
 			// Call gui on all entities
 			for (size_t ei = 0; ei < m_entities.size(); ++ei)
@@ -80,7 +80,7 @@ namespace GameEngine
 			// Display FPS
 			if (fpsTimer >= 1)
 			{
-				std::cout << "FPS: " << ticks << std::endl;
+				//std::cout << "FPS: " << ticks << std::endl;
 				fpsTimer = 0;
 				ticks = 0;
 			}
@@ -108,7 +108,7 @@ namespace GameEngine
 
 		rtn->m_resources = std::make_shared<Resources>();
 
-		rtn->m_traceRay = std::make_shared<TraceRay>();
+		rtn->m_traceRay = std::make_shared<TraceRay>(rtn);
 
 		rtn->m_nativeWindow = std::make_shared<Window>();
 		rtn->m_nativeWindow->m_windowHeight = 1000;

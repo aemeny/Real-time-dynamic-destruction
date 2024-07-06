@@ -87,7 +87,6 @@ namespace GameEngine
                     {
                         nearest = distance;
                         info.hasIntersected = true;
-                        info.intersectionPos = glm::vec3(baryPosition.x, baryPosition.y, 0);
                         info.distanceToIntersection = distance;
                         index = i / 3; // Divide by three to get face index rather than vertices (3 Vertice per face)
                     }
@@ -100,8 +99,11 @@ namespace GameEngine
             std::vector<bu::Face>* faces = m_modelRenderer.lock()->getModel().lock()->getFaces();
             info.collidedFace = &faces->at(index);
             info.intersectedModel = m_entity.lock()->findComponent<GameEngine::ModelRenderer>().lock()->getModel();
+
+            float d = info.distanceToIntersection;
+            info.intersectionPos = glm::vec3(_ray.origin.x + (_ray.direction.x * d), _ray.origin.y + (_ray.direction.y * d), _ray.origin.z + (_ray.direction.z * d));
         }
-        
+
         return info;
     }
 

@@ -19,7 +19,7 @@ int main()
 	std::shared_ptr<Entity> entity = core->addEntity();
 	entity->addComponent<Transform>();
 	float FOV = 90.0f;
-	entity->addComponent<Camera>(core->m_input, FOV); // Perspective 3D camera
+	entity->addComponent<Camera>(core->m_input, FOV, true); // Perspective 3D camera
 	entity->addComponent<Camera>(); // Orthographic camera
 	
 	entity->addComponent<QuadRenderer>();
@@ -92,8 +92,7 @@ int main()
 
 	entity->addComponent<MeshCollider>();
 	meshcolliderGrab = entity->findComponent<MeshCollider>();
-	meshcolliderGrab.lock()->setRenderOutline(true);
-
+	meshcolliderGrab.lock()->setRenderOutline(false);
 
 
 	//Entity 6 - Shootray
@@ -101,7 +100,6 @@ int main()
 	entity->addComponent<ShootRay>();
 	std::weak_ptr<ShootRay> entityShootRayGrab = entity->findComponent<ShootRay>();
 	entityShootRayGrab.lock()->setPos(glm::vec2(core->m_nativeWindow->m_windowWidth, core->m_nativeWindow->m_windowHeight));
-	
 
 
 	// After entity set up run core main loop

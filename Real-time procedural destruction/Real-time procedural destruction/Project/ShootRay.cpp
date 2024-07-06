@@ -32,6 +32,11 @@ void ShootRay::onTick()
 	}
 }
 
+void ShootRay::onDisplay()
+{
+	m_lineRenderer.lock()->renderLine();
+}
+
 void ShootRay::createRay()
 {
 	GameEngine::Ray ray = m_camera.lock()->getRay(m_screenPos);

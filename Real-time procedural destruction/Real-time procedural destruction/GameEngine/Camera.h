@@ -12,7 +12,7 @@ namespace GameEngine
 	*/
 	struct Camera : Component
 	{
-		void initialize(std::weak_ptr<Input> _input, float _FOV) override; // Perspective init
+		void initialize(std::weak_ptr<Input> _input, float _FOV, std::weak_ptr<Camera> _self, bool _mainCamera) override; // Perspective init
 		void initialize() override; // Orthographic init
 		void onTick() override; // Updates camera position and rotation based off inputs
 		
