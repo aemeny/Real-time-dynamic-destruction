@@ -3,6 +3,8 @@
 
 namespace GameEngine
 {
+	enum ProjectionPlane;
+
 	struct TraceRay
 	{
 		TraceRay(std::weak_ptr<Core> _core);
@@ -26,7 +28,7 @@ namespace GameEngine
 		   Draw Box Outline Func
 		   Rendering info
 		*/
-		void debugDrawBox(glm::vec3 _pos, float _boxSize);
+		void debugDrawBox(glm::vec3 _pos, float _boxSize, ProjectionPlane _plane);
 		void debugDrawBox(std::vector<glm::vec3> _points);
 		bool m_renderOutline;
 		std::weak_ptr<GameEngine::LineRenderer> m_lineRenderer;

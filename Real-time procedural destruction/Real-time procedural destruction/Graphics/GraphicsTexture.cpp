@@ -4,8 +4,8 @@
 
 namespace Renderer
 {
-	/* using polymorphism to take a texture that is from a file location or to take in a texture id(from render texture) */
-	Texture::Texture(const char* _fileName) : m_width(0), m_height(0), m_textureId(0)
+	/* using polymorphism to take a texture that is from a file location */
+	Texture::Texture(const char* _fileName) : m_width(0), m_height(0), m_textureId(0), m_fromPassedData(false)
 	{
 		m_data = stbi_load(_fileName, &m_width, &m_height, NULL, 4);
 		if (!m_data) throw std::runtime_error("Couldn't Load Data, Check File Name Is Correct?");
@@ -13,8 +13,16 @@ namespace Renderer
 		createTexture();
 	}
 
-	Texture::Texture(GLuint _textureId) :m_width(1200), m_height(1200), m_textureId(_textureId)
+	/* using polymorphism to take in a texture id(from render texture) */
+	Texture::Texture(GLuint _textureId) :m_width(1200), m_height(1200), m_textureId(_textureId), m_fromPassedData(false)
 	{}
+
+	/* using polymorphism to generate a texture based on data created */
+	Texture::Texture(std::vector<float>*_data, int _width, int _height) :
+		m_vecData(_data), m_width(_width), m_height(_height), m_textureId(NULL), m_fromPassedData(true)
+	{
+		createTexture();
+	}
 
 	/* texture deconstructor to delete the held texture */
 	Texture::~Texture()
@@ -54,12 +62,23 @@ namespace Renderer
 	/* upload the texture data to the gpu */
 	void Texture::uploadToGPU()
 	{
-		// Upload the image data to the bound texture unit in the GPU
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA,
-			GL_UNSIGNED_BYTE, m_data);
+		if (!m_fromPassedData)
+		{
+			// Upload the image data to the bound texture unit in the GPU
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0,
+				GL_RGBA, GL_UNSIGNED_BYTE, m_data);
 
-		// Free the loaded data because we now have a copy on the GPU
-		free(m_data);
+			// Free the loaded data because we now have a copy on the GPU
+			free(m_data); 
+		}
+		else
+		{
+			// Upload the image data to the bound texture unit in the GPU
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0,
+				GL_RGBA, GL_FLOAT, m_vecData->data());
+			m_vecData->clear(); // Clears the content of the vector, but does not release memory
+			m_vecData->shrink_to_fit(); // Requests the container to reduce its capacity to fit its size
+		}
 	}
 
 }

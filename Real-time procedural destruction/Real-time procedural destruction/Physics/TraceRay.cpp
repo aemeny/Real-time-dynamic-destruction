@@ -20,14 +20,11 @@ namespace GameEngine
 		{
 			if (Info.collidedFace != NULL)
 			{
-				std::weak_ptr<Transform> transform =  m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>();
-				glm::vec3 scale = transform.lock()->getScale();
-				debugDrawBox(Info.intersectionPos, 3.5f);
-
 				std::weak_ptr<DestructionHandler> destructionHandler = m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<DestructionHandler>();
 				if (!destructionHandler.expired())
 				{
-					debugDrawBox(destructionHandler.lock()->destructObject(&Info));
+					debugDrawBox(Info.intersectionPos, 3.5f, destructionHandler.lock()->determineProjectionPlane(Info.collidedFace));
+					debugDrawBox(destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>()));
 				}
 				
 
@@ -86,10 +83,9 @@ namespace GameEngine
 		return finalInfo;
 	}
 
-	void TraceRay::debugDrawBox(glm::vec3 _pos, float _boxSize)
+	void TraceRay::debugDrawBox(glm::vec3 _pos, float _boxSize, ProjectionPlane _plane)
 	{
 		m_renderOutline = true;
-
 		if (m_vbo.expired())
 		{
 			// Attach line renderer
@@ -106,15 +102,48 @@ namespace GameEngine
 
 		// Add positions
 		float halfBoxSize = _boxSize * 0.5f;
+		glm::vec3 pos1;
+		glm::vec3 pos2;
+		glm::vec3 pos3;
+		glm::vec3 pos4;
+		glm::vec3 pos5;
+		glm::vec3 pos6;
+		glm::vec3 pos7;
+		glm::vec3 pos8;
 
-		glm::vec3 pos1(_pos.x + halfBoxSize, _pos.y + halfBoxSize, _pos.z + halfBoxSize);
-		glm::vec3 pos2(_pos.x + halfBoxSize, _pos.y + halfBoxSize, _pos.z - halfBoxSize);
-		glm::vec3 pos3(_pos.x + halfBoxSize, _pos.y - halfBoxSize, _pos.z + halfBoxSize);
-		glm::vec3 pos4(_pos.x - halfBoxSize, _pos.y + halfBoxSize, _pos.z + halfBoxSize);
-		glm::vec3 pos5(_pos.x - halfBoxSize, _pos.y - halfBoxSize, _pos.z - halfBoxSize);
-		glm::vec3 pos6(_pos.x - halfBoxSize, _pos.y - halfBoxSize, _pos.z + halfBoxSize);
-		glm::vec3 pos7(_pos.x - halfBoxSize, _pos.y + halfBoxSize, _pos.z - halfBoxSize);
-		glm::vec3 pos8(_pos.x + halfBoxSize, _pos.y - halfBoxSize, _pos.z - halfBoxSize);
+		switch (_plane) // Switchs which plane I need to project the models 3D vertices to 2D
+		{
+		case XY: // Cuts the z axis
+			pos1 = glm::vec3(_pos.x + halfBoxSize, _pos.y + halfBoxSize, _pos.z);
+			pos2 = glm::vec3(_pos.x + halfBoxSize, _pos.y + halfBoxSize, _pos.z);
+			pos3 = glm::vec3(_pos.x + halfBoxSize, _pos.y - halfBoxSize, _pos.z );
+			pos4 = glm::vec3(_pos.x - halfBoxSize, _pos.y + halfBoxSize, _pos.z);
+			pos5 = glm::vec3(_pos.x - halfBoxSize, _pos.y - halfBoxSize, _pos.z);
+			pos6 = glm::vec3(_pos.x - halfBoxSize, _pos.y - halfBoxSize, _pos.z);
+			pos7 = glm::vec3(_pos.x - halfBoxSize, _pos.y + halfBoxSize, _pos.z);
+			pos8 = glm::vec3(_pos.x + halfBoxSize, _pos.y - halfBoxSize, _pos.z);
+			break;
+		case YZ: // Cuts the x axis
+			pos1 = glm::vec3(_pos.x, _pos.y + halfBoxSize, _pos.z + halfBoxSize);
+			pos2 = glm::vec3(_pos.x, _pos.y + halfBoxSize, _pos.z - halfBoxSize);
+			pos3 = glm::vec3(_pos.x, _pos.y - halfBoxSize, _pos.z + halfBoxSize);
+			pos4 = glm::vec3(_pos.x, _pos.y + halfBoxSize, _pos.z + halfBoxSize);
+			pos5 = glm::vec3(_pos.x, _pos.y - halfBoxSize, _pos.z - halfBoxSize);
+			pos6 = glm::vec3(_pos.x, _pos.y - halfBoxSize, _pos.z + halfBoxSize);
+			pos7 = glm::vec3(_pos.x, _pos.y + halfBoxSize, _pos.z - halfBoxSize);
+			pos8 = glm::vec3(_pos.x, _pos.y - halfBoxSize, _pos.z - halfBoxSize);
+			break;
+		case XZ: // Cuts the y axis
+			pos1 = glm::vec3(_pos.x + halfBoxSize, _pos.y, _pos.z + halfBoxSize);
+			pos2 = glm::vec3(_pos.x + halfBoxSize, _pos.y, _pos.z - halfBoxSize);
+			pos3 = glm::vec3(_pos.x + halfBoxSize, _pos.y, _pos.z + halfBoxSize);
+			pos4 = glm::vec3(_pos.x - halfBoxSize, _pos.y, _pos.z + halfBoxSize);
+			pos5 = glm::vec3(_pos.x - halfBoxSize, _pos.y, _pos.z - halfBoxSize);
+			pos6 = glm::vec3(_pos.x - halfBoxSize, _pos.y, _pos.z + halfBoxSize);
+			pos7 = glm::vec3(_pos.x - halfBoxSize, _pos.y, _pos.z - halfBoxSize);
+			pos8 = glm::vec3(_pos.x + halfBoxSize, _pos.y, _pos.z - halfBoxSize);
+			break;
+		}
 
 		m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
 		m_lineRenderer.lock()->addLine(m_vbo, pos1, pos3);
@@ -145,7 +174,7 @@ namespace GameEngine
 			m_vbo = m_lineRenderer.lock()->addVbo();
 		}
 
-		float pointSize = 0.02f;
+		float pointSize = 0.03f;
 		for (int i = 0; i < _points.size(); i++)
 		{
 			glm::vec3 pos1(_points[i].x + pointSize, _points[i].y + pointSize, _points[i].z + pointSize);
