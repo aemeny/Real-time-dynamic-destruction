@@ -162,6 +162,9 @@
     <ClCompile Include="GameEngine\Voronoi.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\Delaunay.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -285,6 +288,9 @@
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Voronoi.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Delaunay.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>

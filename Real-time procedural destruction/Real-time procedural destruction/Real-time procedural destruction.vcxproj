@@ -139,6 +139,7 @@
     <ClCompile Include="GameEngine\Camera.cpp" />
     <ClCompile Include="GameEngine\Component.cpp" />
     <ClCompile Include="GameEngine\Core.cpp" />
+    <ClCompile Include="GameEngine\Delaunay.cpp" />
     <ClCompile Include="GameEngine\DestructionHandler.cpp" />
     <ClCompile Include="GameEngine\Entity.cpp" />
     <ClCompile Include="GameEngine\Environment.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="GameEngine\Camera.h" />
     <ClInclude Include="GameEngine\Component.h" />
     <ClInclude Include="GameEngine\Core.h" />
+    <ClInclude Include="GameEngine\Delaunay.h" />
     <ClInclude Include="GameEngine\Entity.h" />
     <ClInclude Include="GameEngine\Environment.h" />
     <ClInclude Include="GameEngine\Exception.h" />
