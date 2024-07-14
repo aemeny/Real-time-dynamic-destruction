@@ -7,7 +7,7 @@ namespace GameEngine
 {
     DestructionHandler::~DestructionHandler() {}
 
-    std::vector<glm::vec3> DestructionHandler::destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform)
+    std::vector<Triangle> DestructionHandler::destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform)
     {
         // Grab faces of model
         //std::vector<bu::Face>* faces = _info->intersectedModel.lock()->getFaces();
@@ -16,14 +16,14 @@ namespace GameEngine
         ProjectionPlane plane = determineProjectionPlane(_info->collidedFace);
 
         // Generates a set number of points randomly in a 2D square aligned to the faces normal
-        std::vector<glm::vec3> generatedPoints = generateSquarePoints(_info->intersectionPos, 3.5f, 20, plane, _transform); //Intersect pos, Square diameter, Depth (num points), plane to project to, model transform
+        std::vector<glm::vec3> generatedPoints = generateSquarePoints(_info->intersectionPos, 3.5f, 10, plane, _transform); //Intersect pos, Square diameter, Depth (num points), plane to project to, model transform
        
         // Create a delaunay diagram from the new generated points, after projecting them into 2D
         Delaunay delaunayDiagram = Delaunay(projectVertices(&generatedPoints, plane));
 
 
 
-        return generatedPoints;
+        return delaunayDiagram.m_triangles;
         // Update model
         //core().lock()->m_traceRay->getObjectsInScene()->at(_info->objIndex)->transform().lock()->setDirty(true);
         //_info->intersectedModel.lock()->updateModel();
@@ -83,7 +83,7 @@ namespace GameEngine
                     points.push_back(glm::vec3(point1, point2, _pos.z));
                 }
 
-                if (minimumThreashold > 1) // Makes sure atleast one point is created in area before continuing
+                if (minimumThreashold > 3) // Makes sure atleast one point is created in area before continuing
                     minimumThreashold--; //Stops loop taking too much time if not found quick enough
                 i++;
                 if (i > 100)
@@ -109,7 +109,7 @@ namespace GameEngine
                     points.push_back(glm::vec3(_pos.x, point1, point2));
                 }
 
-                if (minimumThreashold > 1)
+                if (minimumThreashold > 3)
                     minimumThreashold--;
                 i++;
                 if (i > 100)
@@ -134,7 +134,7 @@ namespace GameEngine
                     points.push_back(glm::vec3(point1, _pos.y, point2));
                 }
 
-                if (minimumThreashold > 1)
+                if (minimumThreashold > 3)
                     minimumThreashold--;
                 i++;
                 if (i > 100)
@@ -144,6 +144,15 @@ namespace GameEngine
                 }
             }
             break;
+        }
+
+        if (false)
+        {
+            points.clear();
+            points.push_back(glm::vec3(_pos.x - 1, _pos.y, _pos.z));
+            points.push_back(glm::vec3(_pos.x, _pos.y + 1.5, _pos.z));
+            points.push_back(glm::vec3(_pos.x + 1, _pos.y, _pos.z));
+            points.push_back(glm::vec3(_pos.x, _pos.y - 0.75, _pos.z));
         }
 
         return points;

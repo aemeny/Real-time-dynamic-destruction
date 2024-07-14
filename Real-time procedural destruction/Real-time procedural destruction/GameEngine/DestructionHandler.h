@@ -13,7 +13,7 @@ namespace GameEngine
     {
         ~DestructionHandler();
 
-        std::vector<glm::vec3> destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform);
+        std::vector<Triangle> destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform);
         ProjectionPlane determineProjectionPlane(const bu::Face* _collidedFace);
     private:
         std::vector<glm::vec2> projectVertices(const std::vector<glm::vec3>* _points, ProjectionPlane _plane);

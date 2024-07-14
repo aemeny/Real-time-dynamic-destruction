@@ -3,12 +3,6 @@
 
 namespace GameEngine
 {
-    struct Edge
-    {
-        glm::vec2 m_start;
-        glm::vec2 m_end;
-    };
-
     struct VoronoiCell
     {
         std::vector<Edge> m_edges;

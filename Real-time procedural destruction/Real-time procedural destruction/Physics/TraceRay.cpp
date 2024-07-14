@@ -24,7 +24,7 @@ namespace GameEngine
 				if (!destructionHandler.expired())
 				{
 					debugDrawBox(Info.intersectionPos, 3.5f, destructionHandler.lock()->determineProjectionPlane(Info.collidedFace));
-					debugDrawBox(destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>()));
+					debugDrawBox(destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>()), Info.intersectionPos);
 				}
 				
 
@@ -159,7 +159,7 @@ namespace GameEngine
 		m_lineRenderer.lock()->addLine(m_vbo, pos6, pos4);
 	}
 
-	void TraceRay::debugDrawBox(std::vector<glm::vec3> _points)
+	void TraceRay::debugDrawBox(std::vector<Triangle> _tris, glm::vec3 _pos)
 	{
 		m_renderOutline = true;
 
@@ -175,29 +175,15 @@ namespace GameEngine
 		}
 
 		float pointSize = 0.03f;
-		for (int i = 0; i < _points.size(); i++)
+		for (int i = 0; i < _tris.size(); i++)
 		{
-			glm::vec3 pos1(_points[i].x + pointSize, _points[i].y + pointSize, _points[i].z + pointSize);
-			glm::vec3 pos2(_points[i].x + pointSize, _points[i].y + pointSize, _points[i].z - pointSize);
-			glm::vec3 pos3(_points[i].x + pointSize, _points[i].y - pointSize, _points[i].z + pointSize);
-			glm::vec3 pos4(_points[i].x - pointSize, _points[i].y + pointSize, _points[i].z + pointSize);
-			glm::vec3 pos5(_points[i].x - pointSize, _points[i].y - pointSize, _points[i].z - pointSize);
-			glm::vec3 pos6(_points[i].x - pointSize, _points[i].y - pointSize, _points[i].z + pointSize);
-			glm::vec3 pos7(_points[i].x - pointSize, _points[i].y + pointSize, _points[i].z - pointSize);
-			glm::vec3 pos8(_points[i].x + pointSize, _points[i].y - pointSize, _points[i].z - pointSize);
+			glm::vec3 pos1(_tris[i].vertices[0].x, _tris[i].vertices[0].y, _pos.z + 0.1f);
+			glm::vec3 pos2(_tris[i].vertices[1].x, _tris[i].vertices[1].y, _pos.z + 0.1f);
+			glm::vec3 pos3(_tris[i].vertices[2].x, _tris[i].vertices[2].y, _pos.z + 0.1f);
 
 			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
-			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos3);
-			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos4);
-			m_lineRenderer.lock()->addLine(m_vbo, pos5, pos6);
-			m_lineRenderer.lock()->addLine(m_vbo, pos5, pos7);
-			m_lineRenderer.lock()->addLine(m_vbo, pos5, pos8);
-			m_lineRenderer.lock()->addLine(m_vbo, pos6, pos3);
-			m_lineRenderer.lock()->addLine(m_vbo, pos8, pos3);
-			m_lineRenderer.lock()->addLine(m_vbo, pos8, pos2);
-			m_lineRenderer.lock()->addLine(m_vbo, pos7, pos2);
-			m_lineRenderer.lock()->addLine(m_vbo, pos7, pos4);
-			m_lineRenderer.lock()->addLine(m_vbo, pos6, pos4);
+			m_lineRenderer.lock()->addLine(m_vbo, pos2, pos3);
+			m_lineRenderer.lock()->addLine(m_vbo, pos3, pos1);
 		}
 	}
 }

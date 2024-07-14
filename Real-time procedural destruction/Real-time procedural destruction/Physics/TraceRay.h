@@ -4,6 +4,7 @@
 namespace GameEngine
 {
 	enum ProjectionPlane;
+	struct Triangle;
 
 	struct TraceRay
 	{
@@ -29,7 +30,7 @@ namespace GameEngine
 		   Rendering info
 		*/
 		void debugDrawBox(glm::vec3 _pos, float _boxSize, ProjectionPlane _plane);
-		void debugDrawBox(std::vector<glm::vec3> _points);
+		void debugDrawBox(std::vector<Triangle> _tris, glm::vec3 _pos);
 		bool m_renderOutline;
 		std::weak_ptr<GameEngine::LineRenderer> m_lineRenderer;
 		std::weak_ptr<Renderer::Vbo> m_vbo;
