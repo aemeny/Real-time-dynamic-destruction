@@ -6,6 +6,7 @@
 #include <limits>
 #include <cmath>
 #include <tuple>
+#include <iostream>
 
 namespace GameEngine
 {
@@ -34,77 +35,64 @@ namespace GameEngine
                 (m_start.x == other.m_start.x && m_start.y == other.m_start.y && m_end.x == other.m_end.x && m_end.y < other.m_end.y);
         }
 
+        // Equality comparison to consider reversed edges as the same
         bool operator==(const Edge& other) const {
-            return m_start == other.m_start && m_end == other.m_end;
+            return (m_start == other.m_start && m_end == other.m_end) || (m_start == other.m_end && m_end == other.m_start);
         }
     };
 
     struct Triangle
     {
-        glm::vec2 vertices[3];
-        mutable glm::vec2 circumcenter;
-        mutable float radius;
-        mutable bool circumcenterCalculated;
+        glm::vec2 m_vertices[3];
+        mutable glm::vec2 m_circumcenter;
+        mutable float m_radius;
+        mutable bool m_circumcircleCalculated;
 
-        Triangle() : vertices{ glm::vec2(0,0), glm::vec2(0,0), glm::vec2(0,0) },
-            circumcenter(0, 0),
-            radius(0),
-            circumcenterCalculated(false) {}
+        Triangle() : m_vertices{glm::vec2(0,0), glm::vec2(0,0), glm::vec2(0,0)},
+            m_circumcenter(0, 0), m_radius(0), m_circumcircleCalculated(false) {}
 
         Triangle(const glm::vec2& v1, const glm::vec2& v2, const glm::vec2& v3) {
-            vertices[0] = v1;
-            vertices[1] = v2;
-            vertices[2] = v3;
-            circumcenterCalculated = false;
+            m_vertices[0] = v1;
+            m_vertices[1] = v2;
+            m_vertices[2] = v3;
+            m_circumcircleCalculated = false;
         }
 
-        bool operator<(const Triangle& other) const {
-            // Simple lexicographical ordering based on vertices
-            for (int i = 0; i < 3; i++) {
-                if (vertices[i].x < other.vertices[i].x) return true;
-                if (vertices[i].x > other.vertices[i].x) return false;
-                if (vertices[i].y < other.vertices[i].y) return true;
-                if (vertices[i].y > other.vertices[i].y) return false;
-            }
-            return false; // They are equal if all coordinates match
-        }
-
-        bool circumcircleContains(const glm::vec2 _point)
+        bool circumcircleContains(const glm::vec2& _point)
         {
-            if (!circumcenterCalculated) 
+            if (!m_circumcircleCalculated)
             {
-                circumcenter = getCircumcenter();
-                radius = glm::distance(circumcenter, vertices[0]);  // Euclidean distance
-                circumcenterCalculated = true;
+                m_circumcenter = getCircumcenter();
+                m_radius = glm::distance(m_circumcenter, m_vertices[0]);  // Euclidean distance
+                m_circumcircleCalculated = true;
             }
-            float dist = glm::distance(_point, circumcenter);
-            return dist < radius * (1.0f - 1e-6f); // Adjust epsilon as needed
+            float dis = glm::distance(_point, m_circumcenter);
+            return glm::distance(_point, m_circumcenter) < m_radius;
         }
 
         glm::vec2 getCircumcenter() const 
         {
-            float ax = vertices[0].x;
-            float ay = vertices[0].y;
-            float bx = vertices[1].x;
-            float by = vertices[1].y;
-            float cx = vertices[2].x;
-            float cy = vertices[2].y;
+            double ax = m_vertices[0].x;
+            double ay = m_vertices[0].y;
+            double bx = m_vertices[1].x;
+            double by = m_vertices[1].y;
+            double cx = m_vertices[2].x;
+            double cy = m_vertices[2].y;
             
-            float d = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
-            if (std::fabs(d) < 1e-6)
-                return glm::vec2(0, 0); // Handle collinear case or return a default point
-            
-            float ux = ((ax * ax + ay * ay) * (by - cy) + (bx * bx + by * by) * (cy - ay) + (cx * cx + cy * cy) * (ay - by)) / d;
-            float uy = ((ax * ax + ay * ay) * (cx - bx) + (bx * bx + by * by) * (ax - cx) + (cx * cx + cy * cy) * (bx - ax)) / d;
+            double d = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
+            double ux = ((ax * ax + ay * ay) * (by - cy) + (bx * bx + by * by) * (cy - ay) + (cx * cx + cy * cy) * (ay - by)) / d;
+            double uy = ((ax * ax + ay * ay) * (cx - bx) + (bx * bx + by * by) * (ax - cx) + (cx * cx + cy * cy) * (bx - ax)) / d;
 
             return glm::vec2(ux, uy);
         }
 
-        bool containsVertex(const glm::vec2& _point) const {
-            const float EPSILON = 1e-6f;
-            for (const glm::vec2& v : vertices) {
-                if (std::fabs(v.x - _point.x) < EPSILON && std::fabs(v.y - _point.y) < EPSILON) {
-                    return true;  // Return immediately when a match is found
+        bool containsVertex(const glm::vec2& _otherVertex) const 
+        {
+            for (const glm::vec2& vertex : m_vertices)
+            {
+                if (vertex == _otherVertex)
+                {
+                    return true;
                 }
             }
             return false;

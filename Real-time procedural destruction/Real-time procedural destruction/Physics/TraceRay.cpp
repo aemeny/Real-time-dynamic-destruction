@@ -23,7 +23,7 @@ namespace GameEngine
 				std::weak_ptr<DestructionHandler> destructionHandler = m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<DestructionHandler>();
 				if (!destructionHandler.expired())
 				{
-					debugDrawBox(Info.intersectionPos, 3.5f, destructionHandler.lock()->determineProjectionPlane(Info.collidedFace));
+					//debugDrawBox(Info.intersectionPos, 3.5f, destructionHandler.lock()->determineProjectionPlane(Info.collidedFace));
 					debugDrawBox(destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>()), Info.intersectionPos);
 				}
 				
@@ -174,12 +174,14 @@ namespace GameEngine
 			m_vbo = m_lineRenderer.lock()->addVbo();
 		}
 
-		float pointSize = 0.03f;
+		// Clear the already made lines from line count + clear all data from vbo list
+		m_lineRenderer.lock()->clearLines(m_vbo);
+
 		for (int i = 0; i < _tris.size(); i++)
 		{
-			glm::vec3 pos1(_tris[i].vertices[0].x, _tris[i].vertices[0].y, _pos.z + 0.1f);
-			glm::vec3 pos2(_tris[i].vertices[1].x, _tris[i].vertices[1].y, _pos.z + 0.1f);
-			glm::vec3 pos3(_tris[i].vertices[2].x, _tris[i].vertices[2].y, _pos.z + 0.1f);
+			glm::vec3 pos1(_tris[i].m_vertices[0].x, _tris[i].m_vertices[0].y, _pos.z + 0.1f);
+			glm::vec3 pos2(_tris[i].m_vertices[1].x, _tris[i].m_vertices[1].y, _pos.z + 0.1f);
+			glm::vec3 pos3(_tris[i].m_vertices[2].x, _tris[i].m_vertices[2].y, _pos.z + 0.1f);
 
 			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
 			m_lineRenderer.lock()->addLine(m_vbo, pos2, pos3);

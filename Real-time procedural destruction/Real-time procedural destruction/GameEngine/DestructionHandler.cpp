@@ -146,15 +146,6 @@ namespace GameEngine
             break;
         }
 
-        if (false)
-        {
-            points.clear();
-            points.push_back(glm::vec3(_pos.x - 1, _pos.y, _pos.z));
-            points.push_back(glm::vec3(_pos.x, _pos.y + 1.5, _pos.z));
-            points.push_back(glm::vec3(_pos.x + 1, _pos.y, _pos.z));
-            points.push_back(glm::vec3(_pos.x, _pos.y - 0.75, _pos.z));
-        }
-
         return points;
     }
 
