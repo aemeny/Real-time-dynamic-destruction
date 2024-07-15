@@ -24,7 +24,10 @@ namespace GameEngine
 				if (!destructionHandler.expired())
 				{
 					//debugDrawBox(Info.intersectionPos, 3.5f, destructionHandler.lock()->determineProjectionPlane(Info.collidedFace));
-					debugDrawBox(destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>()), Info.intersectionPos);
+					d_cells = destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>());
+					debugDrawBox(d_cells, Info.intersectionPos);
+					d_pos = Info.intersectionPos;
+					d_index = 0;
 				}
 				
 
@@ -159,7 +162,7 @@ namespace GameEngine
 		m_lineRenderer.lock()->addLine(m_vbo, pos6, pos4);
 	}
 
-	void TraceRay::debugDrawBox(std::vector<Triangle> _tris, glm::vec3 _pos)
+	void TraceRay::debugDrawBox(std::vector<VoronoiCell> _cells, glm::vec3 _pos)
 	{
 		m_renderOutline = true;
 
@@ -177,15 +180,51 @@ namespace GameEngine
 		// Clear the already made lines from line count + clear all data from vbo list
 		m_lineRenderer.lock()->clearLines(m_vbo);
 
-		for (int i = 0; i < _tris.size(); i++)
+		for (int i = 0; i < _cells.size(); i++)
 		{
-			glm::vec3 pos1(_tris[i].m_vertices[0].x, _tris[i].m_vertices[0].y, _pos.z + 0.1f);
-			glm::vec3 pos2(_tris[i].m_vertices[1].x, _tris[i].m_vertices[1].y, _pos.z + 0.1f);
-			glm::vec3 pos3(_tris[i].m_vertices[2].x, _tris[i].m_vertices[2].y, _pos.z + 0.1f);
+			for (int j = 0; j < _cells[i].m_edges.size(); j++)
+			{
+				glm::vec3 pos1(_cells[i].m_edges[j].m_start.x, _cells[i].m_edges[j].m_start.y, _pos.z + 0.03f);
+				glm::vec3 pos2(_cells[i].m_edges[j].m_end.x, _cells[i].m_edges[j].m_end.y, _pos.z + 0.03f);
+
+				m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
+			}
+		}
+	}
+
+	void TraceRay::stepDebugDrawBox()
+	{
+		m_renderOutline = true;
+
+		if (m_vbo.expired())
+		{
+			// Attach line renderer
+			std::vector<std::shared_ptr<GameEngine::LineRenderer> > lineRenderer;
+			m_core.lock()->find<GameEngine::LineRenderer>(lineRenderer);
+			m_lineRenderer = lineRenderer[0];
+
+			// Create new vbo for this collider
+			m_vbo = m_lineRenderer.lock()->addVbo();
+		}
+		
+		m_lineRenderer.lock()->clearLines(m_vbo);
+
+		std::cout << "Edges:\n";
+		std::cout << d_cells[d_index].m_edges.size();
+		std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+
+		for (int j = 0; j < d_cells[d_index].m_edges.size(); j++)
+		{
+			glm::vec3 pos1(d_cells[d_index].m_edges[j].m_start.x, d_cells[d_index].m_edges[j].m_start.y, d_pos.z + 0.03f);
+			glm::vec3 pos2(d_cells[d_index].m_edges[j].m_end.x, d_cells[d_index].m_edges[j].m_end.y, d_pos.z + 0.03f);
 
 			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
-			m_lineRenderer.lock()->addLine(m_vbo, pos2, pos3);
-			m_lineRenderer.lock()->addLine(m_vbo, pos3, pos1);
+		}
+
+		d_index++;
+		if (d_index == d_cells.size())
+		{
+			d_index = 0;
 		}
 	}
 }

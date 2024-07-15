@@ -147,6 +147,7 @@
     <ClCompile Include="GameEngine\Exception.cpp" />
     <ClCompile Include="GameEngine\GUI.cpp" />
     <ClCompile Include="GameEngine\Input.cpp" />
+    <ClCompile Include="GameEngine\LineClippingAlgorithm.cpp" />
     <ClCompile Include="GameEngine\LineRenderer.cpp" />
     <ClCompile Include="GameEngine\Model.cpp" />
     <ClCompile Include="GameEngine\ModelRenderer.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="GameEngine\stb_vorbis.c" />
     <ClCompile Include="GameEngine\Texture.cpp" />
     <ClCompile Include="GameEngine\Transform.cpp" />
+    <ClCompile Include="GameEngine\Triangle.cpp" />
     <ClCompile Include="GameEngine\Voronoi.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="Graphics\GraphicsModel.cpp" />
@@ -192,6 +194,7 @@
     <ClInclude Include="GameEngine\GameComponents.h" />
     <ClInclude Include="GameEngine\GUI.h" />
     <ClInclude Include="GameEngine\Input.h" />
+    <ClInclude Include="GameEngine\LineClippingAlgorithm.h" />
     <ClInclude Include="GameEngine\LineRenderer.h" />
     <ClInclude Include="GameEngine\Model.h" />
     <ClInclude Include="GameEngine\ModelRenderer.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="GameEngine\Shader.h" />
     <ClInclude Include="GameEngine\Texture.h" />
     <ClInclude Include="GameEngine\Transform.h" />
+    <ClInclude Include="GameEngine\Triangle.h" />
     <ClInclude Include="GameEngine\Voronoi.h" />
     <ClInclude Include="GameEngine\Window.h" />
     <ClInclude Include="Graphics\GraphicsModel.h" />

@@ -7,7 +7,7 @@ namespace GameEngine
 {
     DestructionHandler::~DestructionHandler() {}
 
-    std::vector<Triangle> DestructionHandler::destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform)
+    std::vector<VoronoiCell> DestructionHandler::destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform)
     {
         // Grab faces of model
         //std::vector<bu::Face>* faces = _info->intersectedModel.lock()->getFaces();
@@ -16,14 +16,31 @@ namespace GameEngine
         ProjectionPlane plane = determineProjectionPlane(_info->collidedFace);
 
         // Generates a set number of points randomly in a 2D square aligned to the faces normal
-        std::vector<glm::vec3> generatedPoints = generateSquarePoints(_info->intersectionPos, 3.5f, 10, plane, _transform); //Intersect pos, Square diameter, Depth (num points), plane to project to, model transform
+        std::vector<glm::vec3> generatedPoints = generateSquarePoints(_info->intersectionPos, 6.0f, 30, plane, _transform); //Intersect pos, Square diameter, Depth (num points), plane to project to, model transform
        
         // Create a delaunay diagram from the new generated points, after projecting them into 2D
-        Delaunay delaunayDiagram = Delaunay(projectVertices(&generatedPoints, plane));
+        std::vector<glm::vec2> projectedVertices = projectVertices(&generatedPoints, plane);
+        Delaunay delaunayDiagram = Delaunay(projectedVertices);
 
+        // Create Voronoi diagram from generate delaunay triangles
+        VoronoiDiagram voronoiDiagram;
+        voronoiDiagram.generate(delaunayDiagram.m_triangles);
 
+        LineClippingAlgorithm lineClipper = LineClippingAlgorithm(_transform, plane);
+        for (VoronoiCell& cell : voronoiDiagram.m_voronoiCells) 
+        {
+            std::vector<Edge> cutEdges;
+            for (Edge& edge : cell.m_edges)
+            {
+                Edge clippedEdge = lineClipper.CohenSutherland(edge);
+                if (clippedEdge.m_start.x != -1) { // Check if edge is valid
+                    cutEdges.push_back(clippedEdge);
+                }
+            }
+            cell.m_edges.swap(cutEdges);
+        }
 
-        return delaunayDiagram.m_triangles;
+        return voronoiDiagram.m_voronoiCells;
         // Update model
         //core().lock()->m_traceRay->getObjectsInScene()->at(_info->objIndex)->transform().lock()->setDirty(true);
         //_info->intersectedModel.lock()->updateModel();
@@ -63,7 +80,7 @@ namespace GameEngine
            Looks to make sure there are reasonanal amount of points to destruct before continuing
            After depth is ended, try to aim for atleast 6 points in given area, to decrease loops / computation time minimum needed decreases every loop
         */
-        int minimumThreashold = _depth + 6;
+        int minimumThreashold = _depth + 10;
 
         int i = 0;
         switch (_plane) // Switchs which plane I need to keep impact position
@@ -83,7 +100,7 @@ namespace GameEngine
                     points.push_back(glm::vec3(point1, point2, _pos.z));
                 }
 
-                if (minimumThreashold > 3) // Makes sure atleast one point is created in area before continuing
+                if (minimumThreashold > 6) // Makes sure atleast one point is created in area before continuing
                     minimumThreashold--; //Stops loop taking too much time if not found quick enough
                 i++;
                 if (i > 100)
@@ -109,7 +126,7 @@ namespace GameEngine
                     points.push_back(glm::vec3(_pos.x, point1, point2));
                 }
 
-                if (minimumThreashold > 3)
+                if (minimumThreashold > 6)
                     minimumThreashold--;
                 i++;
                 if (i > 100)
@@ -134,17 +151,19 @@ namespace GameEngine
                     points.push_back(glm::vec3(point1, _pos.y, point2));
                 }
 
-                if (minimumThreashold > 3)
+                if (minimumThreashold > 6)
                     minimumThreashold--;
                 i++;
                 if (i > 100)
                 {
                     std::cout << "Too many checks, broke out point creation! \n";
+                    points.clear(); // Clear any points that might have been made
                     break;
                 }
             }
             break;
         }
+        points.push_back(glm::vec3(_pos)); // Always have a point on impact
 
         return points;
     }

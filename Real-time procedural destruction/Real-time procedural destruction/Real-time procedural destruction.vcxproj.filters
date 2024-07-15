@@ -165,6 +165,12 @@
     <ClCompile Include="GameEngine\Delaunay.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\Triangle.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\LineClippingAlgorithm.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -291,6 +297,12 @@
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Delaunay.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Triangle.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\LineClippingAlgorithm.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>

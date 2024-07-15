@@ -1,7 +1,5 @@
 #include "Delaunay.h"
-#include <array>
-#include <set>
-#include <map>
+#include <algorithm>
 
 namespace GameEngine
 {
@@ -53,15 +51,9 @@ namespace GameEngine
             while (it != m_triangles.end()) {
                 if (it->circumcircleContains(point)) {
                     // Save the edges of the 'bad' triangles before removing
-                    Edge edges[3] = { // Grab edges
-                    { it->m_vertices[0], it->m_vertices[1] },
-                    { it->m_vertices[1], it->m_vertices[2] },
-                    { it->m_vertices[2], it->m_vertices[0] }
-                    };
-                    for (const Edge& edge : edges) // Add to list of edges
-                    {
-                        polygonEdges.push_back(edge);
-                    }
+                    polygonEdges.emplace_back(it->m_edges[0]);
+                    polygonEdges.emplace_back(it->m_edges[1]);
+                    polygonEdges.emplace_back(it->m_edges[2]);
                     it = m_triangles.erase(it);  // Remove 'bad' triangle
                 }
                 else {
@@ -88,8 +80,7 @@ namespace GameEngine
             // Re-triangulate the polygonal hole
             // Create a new triangle from all the edges and the point
             for (const Edge& edge : polygonEdges) {
-                Triangle newTriangle(edge.m_start, edge.m_end, point);
-                m_triangles.push_back(newTriangle);
+                m_triangles.emplace_back(edge.m_start, edge.m_end, point);
             }
         }
 
