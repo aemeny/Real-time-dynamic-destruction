@@ -207,16 +207,15 @@ namespace GameEngine
 			m_vbo = m_lineRenderer.lock()->addVbo();
 		}
 		
-		m_lineRenderer.lock()->clearLines(m_vbo);
+		//m_lineRenderer.lock()->clearLines(m_vbo);
 
 		std::cout << "Edges:\n";
-		std::cout << d_cells[d_index].m_edges.size();
-		std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+		std::cout << d_cells[d_index].m_edges.size() << std::endl;
 
 		for (int j = 0; j < d_cells[d_index].m_edges.size(); j++)
 		{
-			glm::vec3 pos1(d_cells[d_index].m_edges[j].m_start.x, d_cells[d_index].m_edges[j].m_start.y, d_pos.z + 0.03f);
-			glm::vec3 pos2(d_cells[d_index].m_edges[j].m_end.x, d_cells[d_index].m_edges[j].m_end.y, d_pos.z + 0.03f);
+			glm::vec3 pos1(d_cells[d_index].m_edges[j].m_start.x, d_cells[d_index].m_edges[j].m_start.y, d_pos.z + 0.5f);
+			glm::vec3 pos2(d_cells[d_index].m_edges[j].m_end.x, d_cells[d_index].m_edges[j].m_end.y, d_pos.z + 0.5f);
 
 			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
 		}

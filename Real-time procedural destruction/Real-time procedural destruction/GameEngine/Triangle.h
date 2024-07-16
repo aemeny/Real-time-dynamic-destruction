@@ -7,6 +7,7 @@ namespace GameEngine
     {
         glm::vec2 m_start;
         glm::vec2 m_end;
+        int m_clipped;
 
         Edge();
         Edge(const glm::vec2& start, const glm::vec2& end);

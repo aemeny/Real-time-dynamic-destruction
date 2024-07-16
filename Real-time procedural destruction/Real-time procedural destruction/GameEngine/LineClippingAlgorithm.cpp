@@ -34,60 +34,73 @@ namespace GameEngine
         bool accept = false;
 
         while (true) {
-            if (!(outcode0 | outcode1)) {
+            if (!(outcode0 | outcode1)) 
+            {
                 // Trivially accept and exit loop
                 accept = true;
                 break;
             }
-            else if (completelyOutside(outcode0, outcode1)) {
+            else if (completelyOutside(outcode0, outcode1)) 
+            {
                 // Trivially reject and exit loop
                 break;
             }
-            else if (outcode0 & outcode1) {
-                // Logical AND is not 0, which means both endpoints are outside the clipping region in the same direction
-                break;
-            }
-            else {
+            else 
+            {
                 // Calculate the line segment to clip from an outside point to an intersection with clip edge
                 float x, y;
                 int outcodeOut = outcode0 ? outcode0 : outcode1;
 
                 // Find intersection point
-                if (outcodeOut & TOP) {
+                if (outcodeOut & TOP) 
+                {
                     x = x0 + (x1 - x0) * (m_ymax - y0) / (y1 - y0);
                     y = m_ymax;
                 }
-                else if (outcodeOut & BOTTOM) {
+                else if (outcodeOut & BOTTOM) 
+                {
                     x = x0 + (x1 - x0) * (m_ymin - y0) / (y1 - y0);
                     y = m_ymin;
                 }
-                else if (outcodeOut & RIGHT) {
+                else if (outcodeOut & RIGHT) 
+                {
                     y = y0 + (y1 - y0) * (m_xmax - x0) / (x1 - x0);
                     x = m_xmax;
                 }
-                else if (outcodeOut & LEFT) {
+                else if (outcodeOut & LEFT) 
+                {
                     y = y0 + (y1 - y0) * (m_xmin - x0) / (x1 - x0);
                     x = m_xmin;
                 }
 
                 // Move outside point to intersection point to clip and get ready for next pass
-                if (outcodeOut == outcode0) {
+                if (outcodeOut == outcode0) 
+                {
+                    // Register edge as clipped
+                    _edge.m_clipped = 1; // 1 == m_start
+
                     _edge.m_start.x = x;
                     _edge.m_start.y = y;
                     outcode0 = ComputeOutCode(_edge.m_start.x, _edge.m_start.y);
                 }
-                else {
+                else 
+                {
+                    // Register edge as clipped
+                    _edge.m_clipped = 2; // 2 == m_end
+
                     _edge.m_end.x = x;
                     _edge.m_end.y = y;
                     outcode1 = ComputeOutCode(_edge.m_end.x, _edge.m_end.y);
                 }
             }
         }
-        if (accept) {
+        if (accept) 
+        {
             return _edge; // Return the clipped edge
         }
-        else {
-            return Edge(glm::vec2(-1, -1), glm::vec2(-1, -1)); // Return an invalid edge if not accepted
+        else 
+        {
+            return Edge(glm::vec2(-1), glm::vec2(-1)); // Return an invalid edge if not accepted
         }
     }
 
@@ -112,6 +125,4 @@ namespace GameEngine
     {
         return (_outcode1 & _outcode2) != 0;
     }
-
-
 }

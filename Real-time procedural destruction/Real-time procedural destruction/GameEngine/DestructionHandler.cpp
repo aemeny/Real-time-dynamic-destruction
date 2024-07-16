@@ -26,18 +26,33 @@ namespace GameEngine
         VoronoiDiagram voronoiDiagram;
         voronoiDiagram.generate(delaunayDiagram.m_triangles);
 
+        // Cut edges to bounds of model that go out of area
         LineClippingAlgorithm lineClipper = LineClippingAlgorithm(_transform, plane);
         for (VoronoiCell& cell : voronoiDiagram.m_voronoiCells) 
         {
             std::vector<Edge> cutEdges;
+            std::vector<Edge> connectingEdges;
             for (Edge& edge : cell.m_edges)
             {
                 Edge clippedEdge = lineClipper.CohenSutherland(edge);
-                if (clippedEdge.m_start.x != -1) { // Check if edge is valid
+                if (clippedEdge.m_start.x != -1) // Only keep edges that are valid and in range
+                {
                     cutEdges.push_back(clippedEdge);
+                    if (clippedEdge.m_clipped != 0) // Has been clipped. 1 == start, 2 == end vertex
+                        connectingEdges.push_back(clippedEdge);
+                }
+                if (connectingEdges.size() == 2) // If two edges have been cliped, connect their cut vertices
+                {
+                    glm::vec2 clippedVertex1 = connectingEdges[0].m_clipped == 1 ? connectingEdges[0].m_start : connectingEdges[0].m_end;
+                    glm::vec2 clippedVertex2 = connectingEdges[1].m_clipped == 1 ? connectingEdges[1].m_start : connectingEdges[1].m_end;
+                    cutEdges.emplace_back(Edge{ clippedVertex1, clippedVertex2 });
                 }
             }
-            cell.m_edges.swap(cutEdges);
+            cell.m_edges.swap(cutEdges); // Replace old edges with new clipped edges vector
+            if (cell.m_edges.size() < 4) // Not enough edges to create a cell
+            {
+                cell.m_edges.clear();
+            }
         }
 
         return voronoiDiagram.m_voronoiCells;

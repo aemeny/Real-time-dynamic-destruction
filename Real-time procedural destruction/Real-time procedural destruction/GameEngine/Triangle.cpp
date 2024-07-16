@@ -3,10 +3,11 @@
 namespace GameEngine
 {
     // EDGE //
-    Edge::Edge() : m_start(glm::vec2(0)), m_end(glm::vec2(0)) {}
+    Edge::Edge() : m_start(glm::vec2(0)), m_end(glm::vec2(0)), m_clipped(0) {}
     
     Edge::Edge(const glm::vec2& _start, const glm::vec2& _end) 
     {
+        m_clipped = 0;
         // Compare first by x-coordinate, then by y-coordinate to ensure consistent ordering
         if (_start.x < _end.x || (_start.x == _end.x && _start.y < _end.y))
         {
