@@ -40,10 +40,10 @@ namespace GameEngine
         m_edges{ {glm::vec2(0,0), glm::vec2(0,0)}, {glm::vec2(0,0), glm::vec2(0,0)}, {glm::vec2(0,0), glm::vec2(0,0)} },
         m_circumcenter(0, 0), m_radius(0), m_circumcircleCalc(false), m_radiusCalc(false) {}
 
-    Triangle::Triangle(const glm::vec2& v1, const glm::vec2& v2, const glm::vec2& v3) {
-        m_vertices[0] = v1;
-        m_vertices[1] = v2;
-        m_vertices[2] = v3;
+    Triangle::Triangle(const glm::vec2& _v1, const glm::vec2& _v2, const glm::vec2& _v3) {
+        m_vertices[0] = _v1;
+        m_vertices[1] = _v2;
+        m_vertices[2] = _v3;
         m_edges[0] = { m_vertices[0], m_vertices[1] };
         m_edges[1] = { m_vertices[1], m_vertices[2] };
         m_edges[2] = { m_vertices[2], m_vertices[0] };
@@ -108,4 +108,6 @@ namespace GameEngine
         return m_radius;
     }
 
+    Edge3D::Edge3D(const glm::vec3& _start, const glm::vec3& _end) : 
+        m_start(_start), m_end(_end) {}
 }

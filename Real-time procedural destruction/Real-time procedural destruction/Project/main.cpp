@@ -82,9 +82,9 @@ int main()
 	entity = core->addEntity();
 	entity->addComponent<Transform>();
 	transformGrab = entity->findComponent<Transform>();
-	transformGrab.lock()->setPos(glm::vec3(0.0f, 10.0f, -20.0f));
+	transformGrab.lock()->setPos(glm::vec3(-20.0f, 10.0f, -20.0f));
 	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
-	transformGrab.lock()->setScale(glm::vec3(3.0f, 3.0f, 0.2f));
+	transformGrab.lock()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
 
 	entity->addComponent<ModelRenderer>();
 	entity->addComponent<DestructionObjs>();

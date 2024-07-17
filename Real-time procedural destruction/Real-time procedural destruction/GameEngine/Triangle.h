@@ -10,10 +10,17 @@ namespace GameEngine
         int m_clipped;
 
         Edge();
-        Edge(const glm::vec2& start, const glm::vec2& end);
+        Edge(const glm::vec2& _start, const glm::vec2& _end);
 
-        bool operator<(const Edge& other) const;
-        bool operator==(const Edge& other) const;
+        bool operator<(const Edge& _other) const;
+        bool operator==(const Edge& _other) const;
+    };
+
+    struct Edge3D // Just holds point data for when needed to translate into 3D space
+    {
+        glm::vec3 m_start;
+        glm::vec3 m_end;
+        Edge3D(const glm::vec3& _start, const glm::vec3& _end);
     };
 
     struct Triangle
@@ -22,7 +29,7 @@ namespace GameEngine
         Edge m_edges[3];
 
         Triangle();
-        Triangle(const glm::vec2& v1, const glm::vec2& v2, const glm::vec2& v3);
+        Triangle(const glm::vec2& _v1, const glm::vec2& _v2, const glm::vec2& _v3);
 
         bool circumcircleContains(const glm::vec2& _point);
         glm::vec2 getCircumcenter() const;

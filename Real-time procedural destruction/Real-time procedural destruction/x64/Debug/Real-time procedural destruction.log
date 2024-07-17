@@ -2,26 +2,4 @@
 C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'GameEngine/DestructionHandler.cpp')
   
-  LineClippingAlgorithm.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'GameEngine/LineClippingAlgorithm.cpp')
-  
-  Voronoi.cpp
-  TraceRay.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'Physics/TraceRay.cpp')
-  
-  main.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'Project/main.cpp')
-  
-  Generating Code...
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::GUI>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::PointLight>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::MeshCollider>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::BoxCollider>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<ShootRay>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::DestructionHandler>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
   Real-time procedural destruction.vcxproj -> C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe
