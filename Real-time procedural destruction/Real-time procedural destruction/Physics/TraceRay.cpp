@@ -24,8 +24,8 @@ namespace GameEngine
 				if (!destructionHandler.expired())
 				{
 					//debugDrawBox(Info.intersectionPos, 3.5f, destructionHandler.lock()->determineProjectionPlane(Info.collidedFace));
-					d_tris = destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>());
-					debugDrawBox(d_tris, Info.intersectionPos);
+					d_vec = destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>());
+					debugDrawBox(d_vec, Info.intersectionPos);
 					d_pos = Info.intersectionPos;
 					d_index = 0;
 				}
@@ -162,7 +162,7 @@ namespace GameEngine
 		m_lineRenderer.lock()->addLine(m_vbo, pos6, pos4);
 	}
 
-	void TraceRay::debugDrawBox(std::vector<Triangle> _tris, glm::vec3 _pos)
+	void TraceRay::debugDrawBox(std::vector<Edge> _vec, glm::vec3 _pos)
 	{
 		m_renderOutline = true;
 
@@ -180,16 +180,16 @@ namespace GameEngine
 		// Clear the already made lines from line count + clear all data from vbo list
 		m_lineRenderer.lock()->clearLines(m_vbo);
 
-		for (int i = 0; i < _tris.size(); i++)
+		/*for (int i = 0; i < _vec.size(); i++)
 		{
-			glm::vec3 pos1(_tris[i].m_vertices[0].x, _tris[i].m_vertices[0].y, _pos.z + 0.02f);
-			glm::vec3 pos2(_tris[i].m_vertices[1].x, _tris[i].m_vertices[1].y, _pos.z + 0.02f);
-			glm::vec3 pos3(_tris[i].m_vertices[2].x, _tris[i].m_vertices[2].y, _pos.z + 0.02f);
+			glm::vec3 pos1(_vec[i].m_vertices[0].x, _vec[i].m_vertices[0].y, _pos.z + 0.02f);
+			glm::vec3 pos2(_vec[i].m_vertices[1].x, _vec[i].m_vertices[1].y, _pos.z + 0.02f);
+			glm::vec3 pos3(_vec[i].m_vertices[2].x, _vec[i].m_vertices[2].y, _pos.z + 0.02f);
 
 			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
 			m_lineRenderer.lock()->addLine(m_vbo, pos2, pos3);
 			m_lineRenderer.lock()->addLine(m_vbo, pos3, pos1);
-		}
+		}*/
 
 		/*for (int i = 0; i < _cells.size(); i++)
 		{
@@ -201,6 +201,14 @@ namespace GameEngine
 				m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
 			}
 		}*/
+
+		for (int i = 0; i < _vec.size(); i++)
+		{
+			glm::vec3 pos1 = glm::vec3(_vec[i].m_start.x, _vec[i].m_start.y, _pos.z + 0.02f);
+			glm::vec3 pos2 = glm::vec3(_vec[i].m_end.x, _vec[i].m_end.y, _pos.z + 0.02f);
+
+			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
+		}
 	}
 
 	void TraceRay::stepDebugDrawBox()
@@ -224,13 +232,19 @@ namespace GameEngine
 		//std::cout << d_tris[d_index].m_edges.size() << std::endl;
 
 
-		glm::vec3 pos1(d_tris[d_index].m_vertices[0].x, d_tris[d_index].m_vertices[0].y, d_pos.z + 0.02f);
-		glm::vec3 pos2(d_tris[d_index].m_vertices[1].x, d_tris[d_index].m_vertices[1].y, d_pos.z + 0.02f);
-		glm::vec3 pos3(d_tris[d_index].m_vertices[2].x, d_tris[d_index].m_vertices[2].y, d_pos.z + 0.02f);
+		/*glm::vec3 pos1(d_vec[d_index].m_vertices[0].x, d_vec[d_index].m_vertices[0].y, d_pos.z + 0.02f);
+		glm::vec3 pos2(d_vec[d_index].m_vertices[1].x, d_vec[d_index].m_vertices[1].y, d_pos.z + 0.02f);
+		glm::vec3 pos3(d_vec[d_index].m_vertices[2].x, d_vec[d_index].m_vertices[2].y, d_pos.z + 0.02f);
 
 		m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
 		m_lineRenderer.lock()->addLine(m_vbo, pos2, pos3);
-		m_lineRenderer.lock()->addLine(m_vbo, pos3, pos1);
+		m_lineRenderer.lock()->addLine(m_vbo, pos3, pos1);*/
+
+
+		glm::vec3 pos1(d_vec[d_index].m_start.x, d_vec[d_index].m_start.y, d_pos.z + 0.22f);
+		glm::vec3 pos2(d_vec[d_index].m_end.x, d_vec[d_index].m_end.y, d_pos.z + 0.22f);
+
+		m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
 
 
 		/*for (int j = 0; j < d_cells[d_index].m_edges.size(); j++)
@@ -242,7 +256,7 @@ namespace GameEngine
 		}*/
 
 		d_index++;
-		if (d_index == d_tris.size())
+		if (d_index == d_vec.size())
 		{
 			d_index = 0;
 		}

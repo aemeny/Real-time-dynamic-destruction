@@ -4,7 +4,7 @@
 namespace GameEngine
 {
 	enum ProjectionPlane;
-	struct Triangle;
+	struct Edge;
 
 	struct TraceRay
 	{
@@ -21,7 +21,7 @@ namespace GameEngine
 		std::vector<BaseCollider*>* getObjectsInScene() { return &m_objsInScene; }
 
 		void stepDebugDrawBox();
-		std::vector<Triangle> d_tris;
+		std::vector<Edge> d_vec;
 		glm::vec3 d_pos;
 		int d_index;
 	private:
@@ -34,7 +34,7 @@ namespace GameEngine
 		   Rendering info
 		*/
 		void debugDrawBox(glm::vec3 _pos, float _boxSize, ProjectionPlane _plane);
-		void debugDrawBox(std::vector<Triangle> _tris, glm::vec3 _pos);
+		void debugDrawBox(std::vector<Edge> _vec, glm::vec3 _pos);
 		bool m_renderOutline;
 		std::weak_ptr<GameEngine::LineRenderer> m_lineRenderer;
 		std::weak_ptr<Renderer::Vbo> m_vbo;

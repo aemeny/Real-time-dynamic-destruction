@@ -2,39 +2,6 @@
 
 namespace GameEngine
 {
-    // EDGE //
-    Edge::Edge() : m_start(glm::vec2(0)), m_end(glm::vec2(0)), m_clipped(0) {}
-    
-    Edge::Edge(const glm::vec2& _start, const glm::vec2& _end) 
-    {
-        m_clipped = 0;
-        // Compare first by x-coordinate, then by y-coordinate to ensure consistent ordering
-        if (_start.x < _end.x || (_start.x == _end.x && _start.y < _end.y))
-        {
-            m_start = _start;
-            m_end = _end;
-        }
-        else
-        {
-            m_start = _end;
-            m_end = _start;
-        }
-    }
-    bool Edge::operator<(const Edge& _other) const 
-    {
-        // Use the same ordering logic as used in the constructor for comparison
-        return m_start.x < _other.m_start.x ||
-            (m_start.x == _other.m_start.x && m_start.y < _other.m_start.y) ||
-            (m_start.x == _other.m_start.x && m_start.y == _other.m_start.y && m_end.x < _other.m_end.x) ||
-            (m_start.x == _other.m_start.x && m_start.y == _other.m_start.y && m_end.x == _other.m_end.x && m_end.y < _other.m_end.y);
-    }
-    bool Edge::operator==(const Edge& _other) const 
-    {
-        // Equality comparison to consider reversed edges
-        return (m_start == _other.m_start && m_end == _other.m_end) || (m_start == _other.m_end && m_end == _other.m_start);
-    }
-
-
     // Triangle //
     Triangle::Triangle() : m_vertices{ glm::vec2(0,0), glm::vec2(0,0), glm::vec2(0,0) },
         m_edges{ {glm::vec2(0,0), glm::vec2(0,0)}, {glm::vec2(0,0), glm::vec2(0,0)}, {glm::vec2(0,0), glm::vec2(0,0)} },
@@ -106,8 +73,5 @@ namespace GameEngine
             m_radius = glm::distance(m_circumcenter, m_vertices[0]);  // Euclidean distance
         }
         return m_radius;
-    }
-
-    Edge3D::Edge3D(const glm::vec3& _start, const glm::vec3& _end) : 
-        m_start(_start), m_end(_end) {}
+    }    
 }

@@ -23,14 +23,5 @@ namespace GameEngine
 
         std::vector<VoronoiCell> m_voronoiCells;
     };
-
-    // Custom comparator for glm::vec2
-    struct Vec2Comparator 
-    {
-        bool operator()(const glm::vec2& a, const glm::vec2& b) const {
-            if (a.x != b.x) return a.x < b.x;
-            return a.y < b.y;
-        }
-    };
 }
 

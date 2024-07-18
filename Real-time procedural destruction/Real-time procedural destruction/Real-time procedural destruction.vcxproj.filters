@@ -171,6 +171,9 @@
     <ClCompile Include="GameEngine\LineClippingAlgorithm.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\LineEquations.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -303,6 +306,9 @@
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\LineClippingAlgorithm.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\LineEquations.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>

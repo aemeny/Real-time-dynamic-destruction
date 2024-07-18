@@ -8,7 +8,7 @@ namespace GameEngine
 {
     DestructionHandler::~DestructionHandler() {}
 
-    std::vector<Triangle> DestructionHandler::destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform)
+    std::vector<Edge> DestructionHandler::destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform)
     {
         // Use normal vector of the collided face to determine projection
         ProjectionPlane plane = determineProjectionPlane(_info->collidedFace);
@@ -29,21 +29,12 @@ namespace GameEngine
         for (VoronoiCell& cell : voronoiDiagram.m_voronoiCells) 
         {
             std::vector<Edge> cutEdges;
-            std::vector<Edge> connectingEdges;
             for (Edge& edge : cell.m_edges)
             {
                 Edge clippedEdge = lineClipper.CohenSutherland(edge);
                 if (clippedEdge.m_start.x != -1) // Only keep edges that are valid and in range
                 {
                     cutEdges.push_back(clippedEdge);
-                    if (clippedEdge.m_clipped != 0) // Has been clipped. 1 == start, 2 == end vertex
-                        connectingEdges.push_back(clippedEdge);
-                }
-                if (connectingEdges.size() == 2) // If two edges have been cliped, connect their cut vertices
-                {
-                    glm::vec2 clippedVertex1 = connectingEdges[0].m_clipped == 1 ? connectingEdges[0].m_start : connectingEdges[0].m_end;
-                    glm::vec2 clippedVertex2 = connectingEdges[1].m_clipped == 1 ? connectingEdges[1].m_start : connectingEdges[1].m_end;
-                    cutEdges.emplace_back(Edge{ clippedVertex1, clippedVertex2 });
                 }
             }
             cell.m_edges.swap(cutEdges); // Replace old edges with new clipped edges vector
@@ -54,13 +45,18 @@ namespace GameEngine
         }
 
         // Generate a convex hull cell for the orignal squares cutout
-        std::vector<VoronoiCell> convexHull;
-        convexHull.emplace_back(voronoiDiagram.generateConvexHull(voronoiDiagram.m_voronoiCells));
+        VoronoiCell convexHull = voronoiDiagram.generateConvexHull(voronoiDiagram.m_voronoiCells);
 
         // Grab faces of model with convex hull point to retriangulate
-        Delaunay newModelTriangles = Delaunay(getNewMeshVertices(_info->intersectedModel.lock()->getFaces(), convexHull[0], _transform, plane));
+        Delaunay newModelTriangles = Delaunay(modelVertices(_info->intersectedModel.lock()->getFaces(), _transform, plane), convexHull.m_edges);
 
-        return newModelTriangles.m_triangles;
+        newModelTriangles.m_polygonEdges.push_back(Edge({0,0}, {0,0}));
+        for (const Edge& edge : convexHull.m_edges)
+        {
+            newModelTriangles.m_polygonEdges.push_back(edge);
+        }
+
+        return newModelTriangles.m_polygonEdges;
 
         // Unproject vertices back into 3D space, 
         //return unProjectVertices(&convexHull, plane, savedUnprojetedPoint);
@@ -202,9 +198,9 @@ namespace GameEngine
         return points;
     }
 
-    std::vector<glm::vec2> DestructionHandler::getNewMeshVertices(const std::vector<bu::Face>* _faces, VoronoiCell& _convexhull, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane)
+    std::vector<glm::vec2> DestructionHandler::modelVertices(const std::vector<bu::Face>* _faces, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane)
     {
-        std::vector<glm::vec2> uniquePoints;
+        std::vector<glm::vec2> modelVertices;
         glm::vec3 pos = _transform.lock()->getPos();
         glm::vec3 scale = _transform.lock()->getScale();
 
@@ -213,53 +209,30 @@ namespace GameEngine
         case XY: // Cuts the z axis
             for (const bu::Face& face : *_faces)
             {
-                glm::vec2 point1 = { (face.pa.x * scale.x) + pos.x, (face.pa.y * scale.y) + pos.y };
-                glm::vec2 point2 = { (face.pb.x * scale.x) + pos.x, (face.pb.y * scale.y) + pos.y };
-                glm::vec2 point3 = { (face.pc.x * scale.x) + pos.x, (face.pc.y * scale.y) + pos.y };
-                _convexhull.m_edges.emplace_back(point1, point2);
-                _convexhull.m_edges.emplace_back(point2, point3);
-                _convexhull.m_edges.emplace_back(point3, point1);
+                modelVertices.push_back({ (face.pa.x * scale.x) + pos.x, (face.pa.y * scale.y) + pos.y });
+                modelVertices.push_back({ (face.pb.x * scale.x) + pos.x, (face.pb.y * scale.y) + pos.y });
+                modelVertices.push_back({ (face.pc.x * scale.x) + pos.x, (face.pc.y * scale.y) + pos.y });
             }
             break;
         case YZ: // Cuts the x axis
             for (const bu::Face& face : *_faces)
             {
-                glm::vec2 point1 = { (face.pa.z * scale.z) + pos.z, (face.pa.y * scale.y) + pos.y };
-                glm::vec2 point2 = { (face.pb.z * scale.z) + pos.z, (face.pb.y * scale.y) + pos.y };
-                glm::vec2 point3 = { (face.pc.z * scale.z) + pos.z, (face.pc.y * scale.y) + pos.y };
-                _convexhull.m_edges.emplace_back(point1, point2);
-                _convexhull.m_edges.emplace_back(point2, point3);
-                _convexhull.m_edges.emplace_back(point3, point1);
+                modelVertices.push_back({ (face.pa.z * scale.z) + pos.z, (face.pa.y * scale.y) + pos.y });
+                modelVertices.push_back({ (face.pb.z * scale.z) + pos.z, (face.pb.y * scale.y) + pos.y });
+                modelVertices.push_back({ (face.pc.z * scale.z) + pos.z, (face.pc.y * scale.y) + pos.y });
             }
             break;
         case XZ: // Cuts the y axis
             for (const bu::Face& face : *_faces)
             {
-                glm::vec2 point1 = { (face.pa.x * scale.x), (face.pa.z * scale.z) + pos.z };
-                glm::vec2 point2 = { (face.pb.x * scale.x), (face.pb.z * scale.z) + pos.z };
-                glm::vec2 point3 = { (face.pc.x * scale.x), (face.pc.z * scale.z) + pos.z };
-                _convexhull.m_edges.emplace_back(point1, point2);
-                _convexhull.m_edges.emplace_back(point2, point3);
-                _convexhull.m_edges.emplace_back(point3, point1);
+                modelVertices.push_back({ (face.pa.x * scale.x) + pos.x, (face.pa.z * scale.z) + pos.z });
+                modelVertices.push_back({ (face.pb.x * scale.x) + pos.x, (face.pb.z * scale.z) + pos.z });
+                modelVertices.push_back({ (face.pc.x * scale.x) + pos.x, (face.pc.z * scale.z) + pos.z });
             }
             break;
         }
 
-        // Remove duplicate edges
-        std::sort(_convexhull.m_edges.begin(), _convexhull.m_edges.end());
-        _convexhull.m_edges.erase(std::unique(_convexhull.m_edges.begin(), _convexhull.m_edges.end(),
-            [](const Edge& a, const Edge& b) {
-                return (a == b);
-            }), _convexhull.m_edges.end());
-
-        // Add all convex hull vertices
-        for (const Edge& edge : _convexhull.m_edges)
-        {
-            uniquePoints.push_back(edge.m_start);
-            uniquePoints.push_back(edge.m_end);
-        }
-
-        return uniquePoints;
+        return modelVertices;
     }
 
     std::vector<glm::vec2> DestructionHandler::projectVertices(const std::vector<glm::vec3>* _points, ProjectionPlane _plane, float& _savedPoint)

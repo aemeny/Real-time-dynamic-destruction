@@ -76,18 +76,12 @@ namespace GameEngine
                 // Move outside point to intersection point to clip and get ready for next pass
                 if (outcodeOut == outcode0) 
                 {
-                    // Register edge as clipped
-                    _edge.m_clipped = 1; // 1 == m_start
-
                     _edge.m_start.x = x;
                     _edge.m_start.y = y;
                     outcode0 = ComputeOutCode(_edge.m_start.x, _edge.m_start.y);
                 }
                 else 
                 {
-                    // Register edge as clipped
-                    _edge.m_clipped = 2; // 2 == m_end
-
                     _edge.m_end.x = x;
                     _edge.m_end.y = y;
                     outcode1 = ComputeOutCode(_edge.m_end.x, _edge.m_end.y);

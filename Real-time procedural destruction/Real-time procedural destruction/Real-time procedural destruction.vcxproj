@@ -148,6 +148,7 @@
     <ClCompile Include="GameEngine\GUI.cpp" />
     <ClCompile Include="GameEngine\Input.cpp" />
     <ClCompile Include="GameEngine\LineClippingAlgorithm.cpp" />
+    <ClCompile Include="GameEngine\LineEquations.cpp" />
     <ClCompile Include="GameEngine\LineRenderer.cpp" />
     <ClCompile Include="GameEngine\Model.cpp" />
     <ClCompile Include="GameEngine\ModelRenderer.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="GameEngine\GUI.h" />
     <ClInclude Include="GameEngine\Input.h" />
     <ClInclude Include="GameEngine\LineClippingAlgorithm.h" />
+    <ClInclude Include="GameEngine\LineEquations.h" />
     <ClInclude Include="GameEngine\LineRenderer.h" />
     <ClInclude Include="GameEngine\Model.h" />
     <ClInclude Include="GameEngine\ModelRenderer.h" />
