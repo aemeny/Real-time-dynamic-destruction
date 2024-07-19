@@ -276,7 +276,7 @@ namespace GameEngine
                     }
                 }
 
-                if (nextEdgeIndex == -1 || _constraints[nextEdgeIndex].m_start == orderedVertices.front() && _constraints[nextEdgeIndex].m_end == orderedVertices[1]) {
+                if (nextEdgeIndex == -1 || nextEdgeIndex == 0) {
                     // If no valid next edge is found or loops back to start, end current loop
                     break;
                 }

@@ -1,15 +1,26 @@
 #pragma once
-#include "Component.h"
 #include "LineClippingAlgorithm.h"
 #include "../Physics/BaseCollider.h"
 
 namespace GameEngine
 {
+    //!  DestructionHandler class. 
+    /*!
+      Components that cna be added to handle everything needed to generate destruction based on voronoi diagrams
+    */
     struct DestructionHandler : Component
     {
         ~DestructionHandler();
+        //! Core constructor.
+        /*!
+          The default constructor used to just create object and set defualt values to be changed later
+        */
         DestructionHandler();
 
+        //! Main function for destruction.
+        /*!
+          
+        */
         void destructObject(intersectionInfo* _info, std::weak_ptr<Transform> _transform);
 
         void setRandomFromCircle(bool _fromCircle) { m_randomFromCircle = _fromCircle; }

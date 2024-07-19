@@ -71,11 +71,6 @@ namespace GameEngine
 				m_entities.at(ei)->gui();
 			}
 
-			if (m_input->isKeyPressed(SDLK_e)) // When escape is pressed break out of game loop
-			{
-				m_traceRay->stepDebugDrawBox();
-			}
-
 			//Clear pressed/released keys for this frame
 			m_input->clear();
 
