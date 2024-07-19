@@ -1,5 +1,10 @@
-﻿  Delaunay.cpp
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Delaunay.cpp(61,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Delaunay.cpp(62,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Delaunay.cpp(223,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  DestructionHandler.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'GameEngine/DestructionHandler.cpp')
+  
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(255,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(365,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(387,29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(431,29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(474,29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Real-time procedural destruction.vcxproj -> C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe

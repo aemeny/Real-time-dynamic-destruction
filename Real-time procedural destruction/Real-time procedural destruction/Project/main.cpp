@@ -49,25 +49,13 @@ int main()
 	entityPointLightGrab.lock()->setFilePath("fragmentShader.txt");
 	entityPointLightGrab.lock()->setLightPos(glm::vec3(10.0f, 20.0f, 10.0f));
 
-
-	// Entity 4 - Curuthers
-	entity = core->addEntity();
-	entity->addComponent<Transform>();
-	entity->addComponent<ModelRenderer>();
-	entity->addComponent<Curuthers>();
-	entity->addComponent<DestructionHandler>();
-	entity->addComponent<MeshCollider>();
-	std::weak_ptr<MeshCollider> meshcolliderGrab = entity->findComponent<MeshCollider>();
-	meshcolliderGrab.lock()->setRenderOutline(false);
-
-
-	// Entity 5 - Floor
+	// Entity 4 - Floor
 	entity = core->addEntity();
 	entity->addComponent<Transform>();
 	transformGrab = entity->findComponent<Transform>();
 	transformGrab.lock()->setPos(glm::vec3(0.0f, -2.4f, 0.0f));
 	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
-	transformGrab.lock()->setScale(glm::vec3(0.05f, 1.0f, 0.05f));
+	transformGrab.lock()->setScale(glm::vec3(0.5f, 1.0f, 0.5f));
 
 	entity->addComponent<ModelRenderer>();
 	entity->addComponent<Floor>();
@@ -82,16 +70,16 @@ int main()
 	entity = core->addEntity();
 	entity->addComponent<Transform>();
 	transformGrab = entity->findComponent<Transform>();
-	transformGrab.lock()->setPos(glm::vec3(-20.0f, 10.0f, -20.0f));
+	transformGrab.lock()->setPos(glm::vec3(0.0f, 5.0f, -20.0f));
 	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
-	transformGrab.lock()->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
+	transformGrab.lock()->setScale(glm::vec3(4.0f, 4.0f, 0.5f));
 
 	entity->addComponent<ModelRenderer>();
 	entity->addComponent<DestructionObjs>();
 	entity->addComponent<DestructionHandler>();
 
 	entity->addComponent<MeshCollider>();
-	meshcolliderGrab = entity->findComponent<MeshCollider>();
+	std::weak_ptr<MeshCollider> meshcolliderGrab = entity->findComponent<MeshCollider>();
 	meshcolliderGrab.lock()->setRenderOutline(false);
 
 

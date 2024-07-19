@@ -20,29 +20,14 @@ namespace GameEngine
 		{
 			if (Info.collidedFace != NULL)
 			{
-				std::weak_ptr<DestructionHandler> destructionHandler = m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<DestructionHandler>();
-				if (!destructionHandler.expired())
+				if (Info.intersectedModel.lock()->getDestruction())
 				{
-					//debugDrawBox(Info.intersectionPos, 3.5f, destructionHandler.lock()->determineProjectionPlane(Info.collidedFace));
-					d_vec = destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>());
-					debugDrawBox(d_vec, Info.intersectionPos);
-					d_pos = Info.intersectionPos;
-					d_index = 0;
+					std::weak_ptr<DestructionHandler> destructionHandler = m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<DestructionHandler>();
+					if (!destructionHandler.expired())
+					{
+						destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>());
+					}
 				}
-				
-
-				/*std::vector<bu::Face>* faces = Info.intersectedModel.lock()->getFaces();
-				bu::Face* face = Info.collidedFace;
-
-				if (face >= &faces->front() && face <= &faces->back()) 
-				{
-					auto it = faces->begin() + (face - &faces->front());
-					
-					faces->erase(it);
-
-					m_objsInScene[Info.objIndex]->transform().lock()->setDirty(true);
-					Info.intersectedModel.lock()->updateModel();
-				}*/
 			}
 		}
 	}
@@ -202,10 +187,26 @@ namespace GameEngine
 			}
 		}*/
 
+		bool holeOutline = false;
 		for (int i = 0; i < _vec.size(); i++)
 		{
-			glm::vec3 pos1 = glm::vec3(_vec[i].m_start.x, _vec[i].m_start.y, _pos.z + 0.02f);
-			glm::vec3 pos2 = glm::vec3(_vec[i].m_end.x, _vec[i].m_end.y, _pos.z + 0.02f);
+			if (_vec[i].m_start == glm::vec2(0) && _vec[i].m_end == glm::vec2(0))
+			{
+				holeOutline = true;
+			}
+			glm::vec3 pos1;
+			glm::vec3 pos2;
+			if (holeOutline)
+			{
+				pos1 = glm::vec3(_vec[i].m_start.x, _vec[i].m_start.y, _pos.z + 0.32f);
+				pos2 = glm::vec3(_vec[i].m_end.x, _vec[i].m_end.y, _pos.z + 0.32f);
+			}
+			else
+			{
+				pos1 = glm::vec3(_vec[i].m_start.x, _vec[i].m_start.y, _pos.z + 0.02f);
+				pos2 = glm::vec3(_vec[i].m_end.x, _vec[i].m_end.y, _pos.z + 0.02f);
+			}
+			
 
 			m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
 		}

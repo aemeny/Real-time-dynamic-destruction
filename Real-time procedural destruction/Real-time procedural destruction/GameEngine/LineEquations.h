@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
+#include <vector>
 
 namespace GameEngine 
 {
@@ -18,6 +19,7 @@ namespace GameEngine
     {
         glm::vec2 m_start;
         glm::vec2 m_end;
+        int m_clipped;
 
         Edge();
         Edge(const glm::vec2& _start, const glm::vec2& _end);

@@ -3,7 +3,7 @@
 namespace Renderer
 {
 	/* loads model from given file location */
-	Model::Model(std::string _fileName) : m_vertices(0)
+	Model::Model(std::string _fileName) : m_vertices(0), destructable(false)
 	{
 		m_modelId = buLoadModel(_fileName, m_vertices, m_faces);
 		if (!m_modelId) {

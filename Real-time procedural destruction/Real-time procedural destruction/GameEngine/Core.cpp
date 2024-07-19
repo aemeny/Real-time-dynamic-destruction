@@ -28,7 +28,7 @@ namespace GameEngine
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//draw background
-			glClearColor(0.725f, 0.36f, 0.956f, 1.0f);
+			glClearColor(0.42f, 0.5f, 0.68f, 1.0f);
 
 			// Call tick
 			m_environment->tick();

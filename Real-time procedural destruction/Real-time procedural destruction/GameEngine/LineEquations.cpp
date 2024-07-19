@@ -3,13 +3,14 @@
 namespace GameEngine
 {
     // EDGE //
-    Edge::Edge() : m_start(glm::vec2(0)), m_end(glm::vec2(0))
+    Edge::Edge() : m_start(glm::vec2(0)), m_end(glm::vec2(0)), m_clipped(0)
     {
         lineEquation = LineEquations();
     }
 
     Edge::Edge(const glm::vec2& _start, const glm::vec2& _end)
     {
+        m_clipped = 0;
         lineEquation = LineEquations();
         // Compare first by x-coordinate, then by y-coordinate to ensure consistent ordering
         if (_start.x < _end.x || (_start.x == _end.x && _start.y < _end.y))
@@ -49,12 +50,12 @@ namespace GameEngine
     bool LineEquations::checkIntersect(const Edge& _this, const Edge& _other)
     {
         // Check if any vertex of this edge is on the other edge
-        if (isPointOnLine(_this.m_start, _other) || isPointOnLine(_this.m_end, _other))
-            return true;
+        //if (isPointOnLine(_this.m_start, _other) || isPointOnLine(_this.m_end, _other))
+        //    return true;
 
-        // Check if any vertex of the other edge is on this edge
-        if (isPointOnLine(_other.m_start, _this) || isPointOnLine(_other.m_end, _this))
-            return true;
+        ////// Check if any vertex of the other edge is on this edge
+        //if (isPointOnLine(_other.m_start, _this) || isPointOnLine(_other.m_end, _this))
+        //    return true;
 
         // Direction vectors for the edges
         glm::vec2 d1 = _this.m_end - _this.m_start;

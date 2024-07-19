@@ -13,7 +13,7 @@ namespace GameEngine
 		m_windowHeight = core().lock()->m_nativeWindow->m_windowHeight;
 		m_windowWidth = core().lock()->m_nativeWindow->m_windowWidth;
 		float fixedNP = 0.01f; // Near Plane
-		float fixedFP = 100.0f; // Far Plane
+		float fixedFP = 1000.0f; // Far Plane
 		m_projectionMatrix = glm::perspective(glm::radians(m_FOV),
 			(float)(m_windowWidth / m_windowHeight),
 			fixedNP, fixedFP);
