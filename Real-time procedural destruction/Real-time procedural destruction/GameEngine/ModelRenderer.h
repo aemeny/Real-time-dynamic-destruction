@@ -17,9 +17,9 @@ namespace GameEngine
 		void initialize() override;
 		void onDisplay() override; // Display given model an texture
 
-		void setModel(std::string _modelPath) // Set model path and load model
+		void setModel(std::string _modelPath, bool modifiableModel = false) // Set model path and load model
 		{
-			m_model = core().lock()->m_resources->load<Model>("../Samples/Models/" + _modelPath)->getModel();
+			m_model = core().lock()->m_resources->load<Model>(modifiableModel, "../Samples/Models/" + _modelPath)->getModel();
 		}
 
 		std::weak_ptr<Renderer::Model> getModel()
@@ -27,9 +27,9 @@ namespace GameEngine
 			return m_model;
 		}
 
-		void setTexture(std::string _texturePath) // Set texture path and load texture
+		void setTexture(std::string _texturePath, bool modifiableTexture = false) // Set texture path and load texture
 		{
-			m_texture = core().lock()->m_resources->load<Texture>( "../Samples/Textures/" + _texturePath)->getTexture();
+			m_texture = core().lock()->m_resources->load<Texture>(modifiableTexture, "../Samples/Textures/" + _texturePath)->getTexture();
 		}
 
 		void setShaderLightPos(std::string _newLightPos) // Set a new position for a point light in the shader and initliaze

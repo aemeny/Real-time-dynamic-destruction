@@ -17,9 +17,9 @@ namespace GameEngine
 		bool rectIntersect(); // Checks mouse position compared to GUI postion for intersection
 
 		std::shared_ptr<Renderer::Texture> getTexture() { return m_texture; }
-		void setTexture(std::string _texturePath)
+		void setTexture(std::string _texturePath, bool modifiableTexture = false)
 		{
-			m_texture = core().lock()->m_resources->load<Texture>("../Samples/Textures/GUI/" + _texturePath)->getTexture();
+			m_texture = core().lock()->m_resources->load<Texture>(modifiableTexture, "../Samples/Textures/GUI/" + _texturePath)->getTexture();
 		}
 
 		void setClickable(bool _clickable) { m_clickable = _clickable; } // Setter for if the GUI is a button

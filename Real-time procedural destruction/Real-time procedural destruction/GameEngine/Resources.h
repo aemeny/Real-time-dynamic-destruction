@@ -14,15 +14,18 @@ namespace GameEngine
 		Resources();
 
 		template <typename T>
-		std::shared_ptr<T> load(const std::string& _path, const std::string& _path2 = "")
+		std::shared_ptr<T> load(bool _modifiable, const std::string& _path, const std::string& _path2 = "")
 		{
-			//search for previosly loaded resource
-			for (size_t i = 0; i < m_resources.size(); ++i) // check through resources 
+			if (!_modifiable)
 			{
-				//return resource if found
-				if (m_resources.at(i)->getPath() == _path) // if the resource path already exists
+				//search for previosly loaded resource
+				for (size_t i = 0; i < m_resources.size(); ++i) // check through resources 
 				{
-					return std::dynamic_pointer_cast<T>(m_resources.at(i)); //return the found resource
+					//return resource if found
+					if (m_resources.at(i)->getPath() == _path) // if the resource path already exists
+					{
+						return std::dynamic_pointer_cast<T>(m_resources.at(i)); //return the found resource
+					}
 				}
 			}
 

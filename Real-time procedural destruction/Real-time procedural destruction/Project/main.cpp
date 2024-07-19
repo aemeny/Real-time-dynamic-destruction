@@ -60,28 +60,28 @@ int main()
 	entity->addComponent<ModelRenderer>();
 	entity->addComponent<Floor>();
 
-	entity->addComponent<BoxCollider>();
-	std::weak_ptr<BoxCollider> boxcolliderGrab = entity->findComponent<BoxCollider>();
-	boxcolliderGrab.lock()->setColliderSize(glm::vec3(102.4f, 0.2f, 102.4f));
-	boxcolliderGrab.lock()->setRenderOutline(false);
-
-
 	// Entity 5 - Desturction Objs
-	entity = core->addEntity();
-	entity->addComponent<Transform>();
-	transformGrab = entity->findComponent<Transform>();
-	transformGrab.lock()->setPos(glm::vec3(0.0f, 5.0f, -20.0f));
-	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
-	transformGrab.lock()->setScale(glm::vec3(4.0f, 4.0f, 0.5f));
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			entity = core->addEntity();
+			entity->addComponent<Transform>();
+			transformGrab = entity->findComponent<Transform>();
+			transformGrab.lock()->setPos(glm::vec3(-9.0f + i * 9.0f, 2.0f + j * 9.0f, -10.0f));
+			transformGrab.lock()->setScale(glm::vec3(4.0f, 4.0f, 0.5f));
 
-	entity->addComponent<ModelRenderer>();
-	entity->addComponent<DestructionObjs>();
-	entity->addComponent<DestructionHandler>();
+			entity->addComponent<ModelRenderer>();
+			entity->addComponent<DestructionObjs>();
+			entity->addComponent<DestructionHandler>();
+			std::weak_ptr<DestructionHandler> destructionHandlerGrab = entity->findComponent<DestructionHandler>();
+			destructionHandlerGrab.lock()->setRandomFromCircle(true);
+			destructionHandlerGrab.lock()->setDestructionDiameter(4.0f);
+			destructionHandlerGrab.lock()->setPointGenerationDepth(10);
 
-	entity->addComponent<MeshCollider>();
-	std::weak_ptr<MeshCollider> meshcolliderGrab = entity->findComponent<MeshCollider>();
-	meshcolliderGrab.lock()->setRenderOutline(false);
-
+			entity->addComponent<MeshCollider>();
+		}
+	}
 
 	//Entity 6 - Shootray
 	entity = core->addEntity();

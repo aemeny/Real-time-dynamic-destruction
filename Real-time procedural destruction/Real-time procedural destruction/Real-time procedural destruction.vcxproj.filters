@@ -293,9 +293,6 @@
     <ClInclude Include="Project\DestructionObjs.h">
       <Filter>Header Files\Project</Filter>
     </ClInclude>
-    <ClInclude Include="DestructionHandler.h">
-      <Filter>Header Files\GameEngine</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngine\Voronoi.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
@@ -309,6 +306,9 @@
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\LineEquations.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\DestructionHandler.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
