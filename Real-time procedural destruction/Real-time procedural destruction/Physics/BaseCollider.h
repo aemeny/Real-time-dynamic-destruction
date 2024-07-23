@@ -6,7 +6,7 @@
 
 namespace GameEngine
 {
-	// Struct for intersect value information 
+	// Struct for holding all intersection data 
 	struct intersectionInfo
 	{
 		glm::vec3 intersectionPos{ 0,0,0 };
@@ -17,6 +17,7 @@ namespace GameEngine
 		std::weak_ptr<Renderer::Model> intersectedModel;
 	};
 
+	// Base collider for all types of colliders
 	struct BaseCollider : Component
 	{
 		// Virtual function to be overrided by children

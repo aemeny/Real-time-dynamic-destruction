@@ -17,8 +17,10 @@ namespace GameEngine
 
     struct LineClippingAlgorithm
     {
+        // Gets rectangle boundaries based on a models scale
         LineClippingAlgorithm(std::weak_ptr<Transform> _transform, ProjectionPlane _plane);
 
+        // Returns a new edge, cut if out of bounds or returns same edge if already accepted
         Edge CohenSutherland(Edge& edge);
     private:
         int ComputeOutCode(const float _x, const float _y);

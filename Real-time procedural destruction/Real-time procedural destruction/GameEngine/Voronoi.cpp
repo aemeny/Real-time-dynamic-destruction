@@ -9,7 +9,9 @@ namespace GameEngine
 
     void VoronoiDiagram::generate(const std::vector<Triangle>& _delaunayTriangles)
     {
+        // Map to compared egdes with each triangle
         std::map<Edge, std::vector<const Triangle*>> edgeToTriangles;
+        // Map to see how many cells each edge connects with
         std::map<glm::vec2, VoronoiCell, Vec2Comparator> voronoiCells;
 
         // Associate edges with triangles

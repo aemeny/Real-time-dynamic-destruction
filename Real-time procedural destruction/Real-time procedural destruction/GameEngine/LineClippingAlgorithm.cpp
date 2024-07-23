@@ -5,6 +5,7 @@ namespace GameEngine
     LineClippingAlgorithm::LineClippingAlgorithm(std::weak_ptr<Transform> _transform, ProjectionPlane _plane)
     {
         glm::vec2 center = glm::vec2(0);
+        // Convert the center point ot 2D
         switch (_plane)
         {
         case XY:
@@ -18,6 +19,7 @@ namespace GameEngine
             break;
         }
         
+        // Each corner of the rectangle
         m_xmin = center.x - _transform.lock()->getScale().x;
         m_xmax = center.x + _transform.lock()->getScale().x;
         m_ymin = center.y - _transform.lock()->getScale().y;
@@ -36,13 +38,13 @@ namespace GameEngine
         while (true) {
             if (!(outcode0 | outcode1)) 
             {
-                // Trivially accept and exit loop
+                // Accept and exit loop
                 accept = true;
                 break;
             }
             else if (completelyOutside(outcode0, outcode1)) 
             {
-                // Trivially reject and exit loop
+                // Reject and exit loop
                 break;
             }
             else 

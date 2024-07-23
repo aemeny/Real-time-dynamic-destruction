@@ -10,7 +10,7 @@ namespace GameEngine
 
     DestructionHandler::DestructionHandler()
     {
-        srand(time(NULL));
+        srand(time(NULL)); // Sets random seed
         m_randomFromCircle = false;
         m_destructionDiameter = 0;
         m_pointGenerateDepth = 0;
@@ -331,9 +331,9 @@ namespace GameEngine
     {
         glm::vec3 pos = _transform.lock()->getPos();
         glm::vec3 scale = _transform.lock()->getScale();
-        for (int i = 0; i < _edgePoints.size(); i++)
+        for (int i = 0; i < _edgePoints.size(); i++) // For each vector in vectors (disconnected parts of model)
         {
-            for (int j = 0; j < _edgePoints[i].size(); j++)
+            for (int j = 0; j < _edgePoints[i].size(); j++) // Each vertex in a loop
             {
                 for (int k = 0; k < 2; k++)
                 {
@@ -359,10 +359,12 @@ namespace GameEngine
                         newFace.pc = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
                     }
 
+                    // Find the normal for the new face given the three points
                     glm::vec3 normal = glm::normalize(glm::triangleNormal(newFace.pa, newFace.pb, newFace.pc));
                     newFace.na = newFace.nb = newFace.nc = normal;
                     glm::vec3 absNorm = glm::abs(normal);
 
+                    // Set new texture coords for the face based on the normal
                     if (absNorm.x > absNorm.y && absNorm.x > absNorm.z)
                     {
                         newFace.tca = glm::vec2(newFace.pa.y * scale.y * 0.25f, newFace.pa.z * scale.z * 0.25f);

@@ -49,14 +49,6 @@ namespace GameEngine
 
     bool LineEquations::checkIntersect(const Edge& _this, const Edge& _other)
     {
-        // Check if any vertex of this edge is on the other edge
-        //if (isPointOnLine(_this.m_start, _other) || isPointOnLine(_this.m_end, _other))
-        //    return true;
-
-        ////// Check if any vertex of the other edge is on this edge
-        //if (isPointOnLine(_other.m_start, _this) || isPointOnLine(_other.m_end, _this))
-        //    return true;
-
         // Direction vectors for the edges
         glm::vec2 d1 = _this.m_end - _this.m_start;
         glm::vec2 d2 = _other.m_end - _other.m_start;
@@ -81,27 +73,5 @@ namespace GameEngine
 
         // Check if the intersection point is along the segment of the second edge
         return u >= 0 && u <= 1; 
-    }
-
-    bool LineEquations::isPointOnLine(const glm::vec2& point, const Edge& line)
-    {
-        // Direction vector of line
-        glm::vec2 d = line.m_end - line.m_start; 
-        // Vector from line start to point
-        glm::vec2 pVec = point - line.m_start;  
-
-        // Calculate the cross product
-        float crossProduct = d.x * pVec.y - d.y * pVec.x;
-
-        // Accountint for floatint point erros
-        if (std::fabs(crossProduct) > 1e-6) // Not collinear
-        {
-            return false; 
-        }
-
-        // Bounding box test to ensure the point is within the bounds
-        float dotProduct = glm::dot(pVec, d);
-        float squaredLength = glm::dot(d, d);
-        return dotProduct >= 0 && dotProduct <= squaredLength;
     }
 }

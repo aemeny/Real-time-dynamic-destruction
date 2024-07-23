@@ -10,22 +10,23 @@ namespace GameEngine
     {
         LineEquations();
 
+        // Checks if two egdes intersect at any point
         bool checkIntersect(const Edge& _this, const Edge& _other);
-    private:
-        bool isPointOnLine(const glm::vec2& point, const Edge& line);
     };
 
     struct Edge
     {
+        // Start and end point of the edge
         glm::vec2 m_start;
         glm::vec2 m_end;
+        // If the edge has been clipped, and which point
         int m_clipped;
 
         Edge();
         Edge(const glm::vec2& _start, const glm::vec2& _end);
 
-        LineEquations lineEquation;
-        bool operator<(const Edge& _other) const;
+        LineEquations lineEquation; // Each edge has their own line equation if needed
+        bool operator<(const Edge& _other) const; // Overload operators for custom comparason
         bool operator==(const Edge& _other) const;
     };
 
