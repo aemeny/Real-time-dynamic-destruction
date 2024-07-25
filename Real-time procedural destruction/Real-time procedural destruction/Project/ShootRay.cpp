@@ -28,6 +28,7 @@ void ShootRay::onTick()
 {
 	if (core().lock()->m_input->isMouseClicked())
 	{
+		core().lock()->m_checkTime = true;
 		createRay();
 	}
 }

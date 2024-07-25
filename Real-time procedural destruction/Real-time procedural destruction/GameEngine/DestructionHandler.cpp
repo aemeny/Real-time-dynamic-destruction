@@ -117,7 +117,7 @@ namespace GameEngine
                 i++;
                 if (minimumThreashold > 5) // Makes sure atleast one point is created in area before continuing
                     minimumThreashold--; //Stops loop taking too much time if not found quick enough
-                if (i > 100)
+                if (i > 100 + m_pointGenerateDepth)
                 {
                     std::cout << "Too many checks, broke out point creation! \n";  
                     break;
@@ -300,19 +300,43 @@ namespace GameEngine
                     newFace.pa = unProjectVertex({ (tri.m_vertices[0].x - pos.x) / scale.x, (tri.m_vertices[0].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
                     newFace.pb = unProjectVertex({ (tri.m_vertices[1].x - pos.x) / scale.x, (tri.m_vertices[1].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
                     newFace.pc = unProjectVertex({ (tri.m_vertices[2].x - pos.x) / scale.x, (tri.m_vertices[2].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
+                    switch (_plane)
+                    {
+                    case XY:
+                        newFace.na = newFace.nb = newFace.nc = glm::vec3(0, 0, 1);
+                        break;
+                    case YZ:
+                        newFace.na = newFace.nb = newFace.nc = glm::vec3(1, 0, 0);
+                        break;
+                    case XZ: // Cuts the y axis
+                        newFace.na = newFace.nb = newFace.nc = glm::vec3(0, 1, 0);
+                        break;
+                    }
                 }
                 else
                 {
                     newFace.pa = unProjectVertex({ (tri.m_vertices[0].x - pos.x) / scale.x, (tri.m_vertices[0].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
                     newFace.pb = unProjectVertex({ (tri.m_vertices[1].x - pos.x) / scale.x, (tri.m_vertices[1].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
                     newFace.pc = unProjectVertex({ (tri.m_vertices[2].x - pos.x) / scale.x, (tri.m_vertices[2].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
+                    switch (_plane)
+                    {
+                    case XY:
+                        newFace.na = newFace.nb = newFace.nc = glm::vec3(0, 0, -1);
+                        break;
+                    case YZ:
+                        newFace.na = newFace.nb = newFace.nc = glm::vec3(-1, 0, 0);
+                        break;
+                    case XZ: // Cuts the y axis
+                        newFace.na = newFace.nb = newFace.nc = glm::vec3(0, -1, 0);
+                        break;
+                    }
                 }
+
                 // Assign vertex positions
                 newFace.tca = glm::vec2(newFace.pa.x * scale.x * 0.25f, newFace.pa.y * scale.y * 0.25f);
                 newFace.tcb = glm::vec2(newFace.pb.x * scale.x * 0.25f, newFace.pb.y * scale.y * 0.25f);
                 newFace.tcc = glm::vec2(newFace.pc.x * scale.x * 0.25f, newFace.pc.y * scale.y * 0.25f);
 
-                newFace.na = newFace.nb = newFace.nc = glm::vec3(0, 0, 1);
                 newFace.lmca = newFace.lmcb = newFace.lmcc = glm::vec2(0);
 
                 // Add the new face to the list of faces

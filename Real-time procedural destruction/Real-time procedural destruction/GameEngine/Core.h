@@ -90,6 +90,7 @@ namespace GameEngine
 		ALCdevice* m_device;
 		ALCcontext* m_context;
 
+		bool m_checkTime;
 		bool m_gameOver;
 	private:
 		//! Function variables.
@@ -99,6 +100,7 @@ namespace GameEngine
 		 reference to itself
 	   */
 		bool m_running;
+		bool m_vsyncOn;
 		std::vector<std::shared_ptr<Entity> > m_entities;
 		std::weak_ptr<Camera> m_mainCam;
 		std::weak_ptr<Core> m_self;

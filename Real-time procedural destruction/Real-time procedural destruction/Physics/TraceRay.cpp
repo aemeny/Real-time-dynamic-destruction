@@ -25,6 +25,7 @@ namespace GameEngine
 					std::weak_ptr<DestructionHandler> destructionHandler = m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<DestructionHandler>();
 					if (!destructionHandler.expired())
 					{
+						std::cout << "Destruction Sim Started\n";
 						destructionHandler.lock()->destructObject(&Info, m_objsInScene[Info.objIndex]->m_entity.lock()->findComponent<Transform>());
 					}
 				}

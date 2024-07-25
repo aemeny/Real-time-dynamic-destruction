@@ -61,23 +61,23 @@ int main()
 	entity->addComponent<Floor>();
 
 	// Entity 5 - Desturction Objs
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		for (int j = 0; j < 2; j++)
+		for (int j = 0; j < 3; j++)
 		{
 			entity = core->addEntity();
 			entity->addComponent<Transform>();
 			transformGrab = entity->findComponent<Transform>();
-			transformGrab.lock()->setPos(glm::vec3(-9.0f + i * 9.0f, 2.0f + j * 9.0f, -10.0f));
-			transformGrab.lock()->setScale(glm::vec3(4.0f, 4.0f, 0.5f));
+			transformGrab.lock()->setPos(glm::vec3(-22.0f + i * 11.0f, 3.0f + j * 11.0f, -10.0f));
+			transformGrab.lock()->setScale(glm::vec3(5.0f, 5.0f, 0.5f));
 
 			entity->addComponent<ModelRenderer>();
 			entity->addComponent<DestructionObjs>();
 			entity->addComponent<DestructionHandler>();
 			std::weak_ptr<DestructionHandler> destructionHandlerGrab = entity->findComponent<DestructionHandler>();
 			destructionHandlerGrab.lock()->setRandomFromCircle(true);
-			destructionHandlerGrab.lock()->setDestructionDiameter(4.0f);
-			destructionHandlerGrab.lock()->setPointGenerationDepth(10);
+			destructionHandlerGrab.lock()->setDestructionDiameter(5.0f);
+			destructionHandlerGrab.lock()->setPointGenerationDepth(30);
 
 			entity->addComponent<MeshCollider>();
 		}

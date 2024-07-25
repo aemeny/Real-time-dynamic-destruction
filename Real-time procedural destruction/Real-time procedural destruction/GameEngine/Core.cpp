@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "..\Physics\TraceRay.h"
+#include <chrono>
 
 namespace GameEngine
 {
@@ -20,10 +21,12 @@ namespace GameEngine
 
 		m_environment = std::make_shared<Environment>(m_self);
 
-		double fpsTimer = 0;
-		int ticks = 0;
+		m_checkTime = false;
 		while (m_running) // Main loop
 		{
+			// Record time at the start of frame
+			std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
 			//Clear depth buffer
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -77,17 +80,15 @@ namespace GameEngine
 			//Swap window
 			SDL_GL_SwapWindow(m_nativeWindow->m_window);
 
-			// Display FPS
-			if (fpsTimer >= 1)
+			// Record time at end of frame
+			std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+			if (m_checkTime)
 			{
-				//std::cout << "FPS: " << ticks << std::endl;
-				fpsTimer = 0;
-				ticks = 0;
-			}
-			else
-			{
-				fpsTimer += m_environment->getDT();
-				ticks++;
+				std::cout << "Frame time = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]";
+				if (m_vsyncOn)
+					std::cout << " (vsync on)\n";
+				m_checkTime = false;
 			}
 		}
 	}
@@ -162,7 +163,8 @@ namespace GameEngine
 		}
 
 		// Turn vsync on for SDL
-		SDL_GL_SetSwapInterval(1);
+		rtn->m_vsyncOn = true;
+		SDL_GL_SetSwapInterval(rtn->m_vsyncOn);
 
 		// Turn off cursor
 		SDL_ShowCursor(false);
