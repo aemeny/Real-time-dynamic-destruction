@@ -6,7 +6,7 @@ namespace GameEngine
     //!  Voronoi Cell Struct. 
     /*!
       Holds information about each create voronoi cell including, a vector of the edges that make up the cell
-      and a site which is the center of the cell
+      and a site which is the centre of the cell
     */
     struct VoronoiCell
     {

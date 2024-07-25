@@ -76,17 +76,11 @@ namespace GameEngine
 
         // Find which normal is largest
         if (absX > absY && absX > absZ) 
-        {
             return ProjectionPlane::YZ;  // Normal is aligned to the x axis, project onto YZ plane
-        }
         else if (absY > absZ) 
-        {
             return ProjectionPlane::XZ;  // Normal is aligned to the y axis, project onto XZ plane
-        }
         else 
-        {
             return ProjectionPlane::XY;  // Normal is aligned to the z axis, project onto XY plane
-        }
     }
 
     std::vector<glm::vec3> DestructionHandler::generateRandomPoints(glm::vec3 _pos, ProjectionPlane _plane, std::weak_ptr<Transform> _transform)
@@ -193,8 +187,8 @@ namespace GameEngine
         glm::vec2 point;
         float randNum1 = ((float)rand() / (RAND_MAX)) * 2 - 1;
         float randNum2 = ((float)rand() / (RAND_MAX)) * 2 - 1;
-        point.x = (randNum1 * (m_destructionDiameter * 0.5f));
-        point.y = (randNum2 * (m_destructionDiameter * 0.5f));
+        point.x = _pos.x + (randNum1 * (m_destructionDiameter * 0.5f));
+        point.y = _pos.y + (randNum2 * (m_destructionDiameter * 0.5f));
         return point;
     }
 

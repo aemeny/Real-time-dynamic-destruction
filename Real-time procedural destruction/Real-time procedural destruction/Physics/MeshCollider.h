@@ -7,7 +7,6 @@ namespace GameEngine
 	// MeshCollider class, has tri collider intersection maths 
 	struct MeshCollider : BaseCollider
 	{
-	public:
 		~MeshCollider();
 		void initialize() override;
 		void onTick() override;
