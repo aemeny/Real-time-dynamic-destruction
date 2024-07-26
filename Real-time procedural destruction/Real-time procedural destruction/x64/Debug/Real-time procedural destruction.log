@@ -1,12 +1,109 @@
-﻿  Core.cpp
+﻿  Audio.cpp
+  AudioListener.cpp
 C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'GameEngine/Core.cpp')
-  
+  AudioSource.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Camera.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Camera.cpp(55,50): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Camera.cpp(56,50): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  Component.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Core.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Delaunay.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Delaunay.cpp(89,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Delaunay.cpp(90,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  DestructionHandler.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(13,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(89,15): warning C4101: 'halfSize': unreferenced local variable
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(202,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Entity.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Environment.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Exception.cpp
+  GUI.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Input.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(99,41): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Input.cpp(100,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  LineClippingAlgorithm.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  LineEquations.cpp
+  LineRenderer.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Model.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ModelRenderer.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PointLight.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  QuadRenderer.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  Resource.cpp
+  Resources.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Shader.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Texture.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Transform.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Triangle.cpp
+  Voronoi.cpp
+  Window.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  GraphicsModel.cpp
+  RenderTexture.cpp
+  GraphicsShader.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\GraphicsShader.cpp(74,52): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  GraphicsTexture.cpp
+  Vao.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Vbo.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  BaseCollider.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  BoxCollider.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  MeshCollider.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Ray.cpp
   TraceRay.cpp
 C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'Physics/TraceRay.cpp')
-  
+  Curuthers.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelRenderer>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
 C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::DestructionHandler>': not all control paths return a value
 C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelRenderer>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+  Compiling...
+  DestructionObjs.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Floor.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ShootRay.cpp
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::GUI>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::PointLight>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::DestructionHandler>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<ShootRay>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelRenderer>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::ModelRenderer>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+  stb_vorbis.c
   Real-time procedural destruction.vcxproj -> C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe
