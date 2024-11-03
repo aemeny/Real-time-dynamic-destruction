@@ -32,8 +32,8 @@ int main()
 	std::weak_ptr<Transform> transformGrab = entityGUI->findComponent<Transform>();
 	transformGrab.lock()->setPos(glm::vec3{ core->m_nativeWindow->m_windowWidth / 2, core->m_nativeWindow->m_windowHeight / 2, 0.0f });
 	transformGrab.lock()->setRot(glm::vec3{ 0.0f, 0.0f, 0.0f });
-	transformGrab.lock()->setScale(glm::vec3{ (core->m_nativeWindow->m_windowWidth / 130.0f),
-											  (core->m_nativeWindow->m_windowHeight / 130.0f),
+	transformGrab.lock()->setScale(glm::vec3{ (core->m_nativeWindow->m_windowWidth / 200.0f),
+											  (core->m_nativeWindow->m_windowHeight / 200.0f),
 											   0.0f });
 
 	std::shared_ptr<Component> entityGUIGUI = entityGUI->addComponent<GUI>();

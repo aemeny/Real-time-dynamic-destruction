@@ -112,8 +112,8 @@ namespace GameEngine
 		rtn->m_traceRay = std::make_shared<TraceRay>(rtn);
 
 		rtn->m_nativeWindow = std::make_shared<Window>();
-		rtn->m_nativeWindow->m_windowHeight = 1000;
-		rtn->m_nativeWindow->m_windowWidth = 1000;
+		rtn->m_nativeWindow->m_windowWidth = 1800;
+		rtn->m_nativeWindow->m_windowHeight = 1800;
 
 		rtn->m_self = rtn;
 
