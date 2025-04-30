@@ -15,16 +15,16 @@ namespace GameEngine
 		float fixedNP = 0.01f; // Near Plane
 		float fixedFP = 1000.0f; // Far Plane
 		m_projectionMatrix = glm::perspective(glm::radians(m_FOV),
-			(float)(m_windowWidth / m_windowHeight),
+			(float)m_windowWidth / (float)m_windowHeight,
 			fixedNP, fixedFP);
 
 		m_input = _input;
-		m_mouseSpeedX = 0.2f; m_mouseSpeedY = 0.2f; 
+		m_mouseSpeedX = 0.005f; m_mouseSpeedY = 0.005f; 
 		m_speed = 0.02f; 
 		m_cameraAngleX = glm::radians(180.0f); m_cameraAngleY = 0.0f;
 
 		m_camRotation = glm::vec3{ 0.0f, 0.0f, 0.0f };
-		m_camPosition = glm::vec3{ 0.0f, 10.0f, 10.0f };
+		m_camPosition = glm::vec3{ 0.0f, 1.5f, 3.0f };
 		glm::vec3 initTarget{ 0.0f, 0.0f, 0.0f };
 		m_viewingMatrix = glm::lookAt(m_camPosition, initTarget, glm::vec3(0.0f, 1.0f, 0.0f));
 
@@ -52,8 +52,8 @@ namespace GameEngine
 
 		glm::vec2 mouseDelta = core().lock()->m_input->getMouseDelta();
 		//Getting mouse input from input class and multiplying my set speed then my delta time for a smooth frame by frame feeling
-		m_cameraAngleX -= mouseDelta.x * m_mouseSpeedX * getDT();
-		m_cameraAngleY -= mouseDelta.y * m_mouseSpeedY * getDT();
+		m_cameraAngleX -= mouseDelta.x * m_mouseSpeedX;
+		m_cameraAngleY -= mouseDelta.y * m_mouseSpeedY;
 
 		//Lock Camera turning in the y so the camera doesnt flip upside down
 		if (m_cameraAngleY < -1)
@@ -70,22 +70,22 @@ namespace GameEngine
 		if (core().lock()->m_input->isKey(SDLK_w))
 		{
 			//translate position in forwards direction by speed multiply then delta time for smooth movement
-			m_translation = m_direction * 10.0f * (float)getDT();
+			m_translation = m_direction * 2.0f * (float)getDT();
 			m_camPosition += m_translation;
 		}
 		else if (core().lock()->m_input->isKey(SDLK_s))
 		{
-			m_translation = -(m_direction * 10.0f * (float)getDT());
+			m_translation = -(m_direction * 2.0f * (float)getDT());
 			m_camPosition += m_translation;
 		}
 		if (core().lock()->m_input->isKey(SDLK_d))
 		{
-			m_translation = m_right * 10.0f * (float)getDT();
+			m_translation = m_right * 2.0f * (float)getDT();
 			m_camPosition += m_translation;
 		}
 		else if (core().lock()->m_input->isKey(SDLK_a))
 		{
-			m_translation = -(m_right * 10.0f * (float)getDT());
+			m_translation = -(m_right * 2.0f * (float)getDT());
 			m_camPosition += m_translation;
 		}
 

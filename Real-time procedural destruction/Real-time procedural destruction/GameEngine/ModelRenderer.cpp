@@ -11,7 +11,7 @@ namespace GameEngine
 	void ModelRenderer::initialize()
 	{
 		//init shader
-		m_shader = std::make_shared<Renderer::Shader>("../Shaders/Light/vertexShader.txt", "../Shaders/Light/fragmentShader.txt");
+		m_shader = std::make_shared<Renderer::Shader>("../Shaders/Light/vertexShader.glsl", "../Shaders/Light/fragmentShader.glsl");
 
 		//Find all camera to attach main 3D cam
 		std::vector<std::shared_ptr<Camera> > cameras;

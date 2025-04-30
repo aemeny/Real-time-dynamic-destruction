@@ -12,6 +12,8 @@ namespace GameEngine
         m_core(_core), m_lockMouse(true), m_mouseDelta(glm::vec2(0)), m_controller(nullptr),
         m_dm(false), m_mset(0), m_mouseDown(false), m_mouseDownClick(false)
     {
+        SDL_SetRelativeMouseMode(m_lockMouse ? SDL_TRUE : SDL_FALSE);
+
         //Init controller support
         SDL_Init(SDL_INIT_GAMECONTROLLER);
         // Loop through all joysticks and if one is a controller assign to variable
@@ -85,30 +87,19 @@ namespace GameEngine
    */
     void Input::tick()
     {
-        //reset mouse delta each frame
+        /* Reset mouse delta(velocity) each frame */
         m_mouseDelta.x = 0;
         m_mouseDelta.y = 0;
+
+        /* Sets current mouse position */
+        SDL_GetMouseState(&m_mousePos.x, &m_mousePos.y);
 
         while (SDL_PollEvent(&m_event) != 0)
         {
             if (m_event.type == SDL_MOUSEMOTION) //check for any mouse movement
             {
-                m_dm = true;
-                if (m_mset > 0) //work out mouse input values
-                {
-                    int halfWindowWidth = m_core.lock()->m_nativeWindow->m_windowWidth * 0.5f;
-                    int halfWindowHeight = m_core.lock()->m_nativeWindow->m_windowHeight * 0.5f;
-
-                    //Stop mouse drag SDL motion bug (Moving when mouse isnt touched)
-                    if (glm::abs(m_event.motion.x - halfWindowWidth) > 1 || glm::abs(m_event.motion.y - halfWindowHeight) > 1)
-                    {
-                        m_mousePos.x = m_event.motion.x;
-                        m_mousePos.y = m_event.motion.y;
-
-                        m_mouseDelta.x += m_mousePos.x - halfWindowWidth;
-                        m_mouseDelta.y += m_mousePos.y - halfWindowHeight;
-                    }
-                }
+                m_mouseDelta.x += m_event.motion.xrel;
+                m_mouseDelta.y += m_event.motion.yrel;
             }
             else if (m_event.type == SDL_KEYDOWN) //check if any keys have been pressed down
             {
@@ -204,19 +195,8 @@ namespace GameEngine
         if (isKeyPressed(SDLK_TAB))
         {   // When tab is pressed lock / unlock mouse
             m_lockMouse = m_lockMouse ? false : true;
-
             // Turn cursor on/off when mouse locked
-            SDL_ShowCursor(!m_lockMouse);
-        }
-        if (m_lockMouse)
-        {   // Reset the mouse to the middle of the screen each frame
-            SDL_WarpMouseInWindow(NULL, m_core.lock()->m_nativeWindow->m_windowWidth / 2, m_core.lock()->m_nativeWindow->m_windowHeight / 2);
-        }
-
-        // When the mouse first gets on the screen
-        if (m_dm)
-        {
-            m_mset = 1;
+            SDL_SetRelativeMouseMode(m_lockMouse ? SDL_TRUE : SDL_FALSE);
         }
     }
 

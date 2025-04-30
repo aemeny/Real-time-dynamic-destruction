@@ -22,16 +22,25 @@ namespace GameEngine
 		m_environment = std::make_shared<Environment>(m_self);
 
 		m_checkTime = false;
+
+		/* FPS tracker */
+		int tickCount = 0;
+		double DTCount = 0;
+
 		while (m_running) // Main loop
 		{
 			// Record time at the start of frame
 			std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
+			tickCount++;
+			DTCount += m_environment->getDT();
+
 			//Clear depth buffer
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//draw background
-			glClearColor(0.42f, 0.5f, 0.68f, 1.0f);
+			//glClearColor(0.35f, 0.4f, 0.45f, 1.0f);
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 			// Call tick
 			m_environment->tick();
@@ -90,6 +99,14 @@ namespace GameEngine
 					std::cout << " (vsync on)\n";
 				m_checkTime = false;
 			}
+
+			if (DTCount >= 1.0)
+			{
+				std::cout << tickCount << std::endl;
+
+				DTCount -= 1.0;
+				tickCount = 0;
+			}
 		}
 	}
 
@@ -112,8 +129,8 @@ namespace GameEngine
 		rtn->m_traceRay = std::make_shared<TraceRay>(rtn);
 
 		rtn->m_nativeWindow = std::make_shared<Window>();
-		rtn->m_nativeWindow->m_windowWidth = 1800;
-		rtn->m_nativeWindow->m_windowHeight = 1800;
+		rtn->m_nativeWindow->m_windowWidth = 1920;
+		rtn->m_nativeWindow->m_windowHeight = 1080;
 
 		rtn->m_self = rtn;
 

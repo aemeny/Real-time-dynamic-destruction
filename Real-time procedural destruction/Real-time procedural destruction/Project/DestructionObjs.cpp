@@ -13,13 +13,13 @@ void DestructionObjs::initialize()
 	std::weak_ptr<GameEngine::ModelRenderer> modelRenderer = m_entity.lock()->findComponent<GameEngine::ModelRenderer>();
 
 	modelRenderer.lock()->setModel("Cube/Cube.obj", true); // Path, model will change later so load individually
-	modelRenderer.lock()->setTexture("Floor/Tile_Diffuse.png");
+	modelRenderer.lock()->setTexture("Floor/CustomUV.png");
 
 	m_transform = m_entity.lock()->findComponent<GameEngine::Transform>();
 
 	std::weak_ptr<Renderer::Model> model = modelRenderer.lock()->getModel();
 	std::vector<bu::Face>* faces = model.lock()->getFaces();
-	glm::vec3 scale = m_transform.lock()->getScale() * 0.25f;
+	glm::vec3 scale = m_transform.lock()->getScale() * (1.0f/1.3f);
 	for (bu::Face& face : *faces)
 	{
 		if (face.na.z == 1 || face.na.z == -1)

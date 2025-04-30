@@ -228,6 +228,10 @@
     <ClInclude Include="Project\Floor.h" />
     <ClInclude Include="Project\ShootRay.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Shaders\Light\fragmentShader.glsl" />
+    <None Include="..\Shaders\Light\vertexShader.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

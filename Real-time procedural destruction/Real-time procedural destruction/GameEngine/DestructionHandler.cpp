@@ -1,4 +1,5 @@
 #include "DestructionHandler.h"
+#include "ModelRenderer.h"
 #include "../Physics/TraceRay.h"
 
 #include <glm/gtx/normal.hpp>
@@ -35,6 +36,43 @@ namespace GameEngine
         // Cut edges to bounds of model that go out of area
         LineClippingAlgorithm lineClipper = LineClippingAlgorithm(_transform, plane);
         cutEdges(&voronoiDiagram.m_voronoiCells, &lineClipper);
+
+
+
+
+
+
+        // Generate fragment pieces based on the voronoi diagram
+        std::vector<std::shared_ptr<LineRenderer> > lineRenderer;
+        core().lock()->find<LineRenderer>(lineRenderer);
+        std::weak_ptr<Renderer::Vbo> vbo = lineRenderer[0]->addVbo();
+        
+        for (const VoronoiCell& cell : voronoiDiagram.m_voronoiCells)
+        {
+            // Make new entity for this cell
+            std::shared_ptr<Entity> newCellEntity = core().lock()->addEntity();
+            newCellEntity->addComponent<Transform>();
+            std::weak_ptr<Renderer::Model> model = newCellEntity->addComponent<ModelRenderer>()->getModel();
+
+            // Trianglulate new cell
+
+            // Grab outer edges?
+
+            // Connect faces
+
+            // Update model
+
+            // Draw edges
+            for (const Edge& edge : cell.m_edges)
+            {
+                lineRenderer[0]->addLine(vbo, glm::vec3(edge.m_start.x, edge.m_start.y, savedUnprojetedPoint), glm::vec3(edge.m_end.x, edge.m_end.y, savedUnprojetedPoint));
+            }
+        }
+
+
+
+
+
 
         // Generate a convex hull cell for the orignal squares cutout
         VoronoiCell convexHull = voronoiDiagram.generateConvexHull(voronoiDiagram.m_voronoiCells);
@@ -333,9 +371,10 @@ namespace GameEngine
                 }
 
                 // Assign vertex positions
-                newFace.tca = glm::vec2(newFace.pa.x * scale.x * 0.25f, newFace.pa.y * scale.y * 0.25f);
-                newFace.tcb = glm::vec2(newFace.pb.x * scale.x * 0.25f, newFace.pb.y * scale.y * 0.25f);
-                newFace.tcc = glm::vec2(newFace.pc.x * scale.x * 0.25f, newFace.pc.y * scale.y * 0.25f);
+                float scaleSize = 1.0f / 1.3f;
+                newFace.tca = glm::vec2(newFace.pa.x * scale.x * scaleSize, newFace.pa.y * scale.y * scaleSize);
+                newFace.tcb = glm::vec2(newFace.pb.x * scale.x * scaleSize, newFace.pb.y * scale.y * scaleSize);
+                newFace.tcc = glm::vec2(newFace.pc.x * scale.x * scaleSize, newFace.pc.y * scale.y * scaleSize);
 
                 newFace.lmca = newFace.lmcb = newFace.lmcc = glm::vec2(0);
 
@@ -383,23 +422,24 @@ namespace GameEngine
                     glm::vec3 absNorm = glm::abs(normal);
 
                     // Set new texture coords for the face based on the normal
+                    float scaleSize = 1.0f / 1.3f;
                     if (absNorm.x > absNorm.y && absNorm.x > absNorm.z)
                     {
-                        newFace.tca = glm::vec2(newFace.pa.y * scale.y * 0.25f, newFace.pa.z * scale.z * 0.25f);
-                        newFace.tcb = glm::vec2(newFace.pb.y * scale.y * 0.25f, newFace.pb.z * scale.z * 0.25f);
-                        newFace.tcc = glm::vec2(newFace.pc.y * scale.y * 0.25f, newFace.pc.z * scale.z * 0.25f);
+                        newFace.tca = glm::vec2(newFace.pa.y * scale.y * scaleSize, newFace.pa.z * scale.z * scaleSize);
+                        newFace.tcb = glm::vec2(newFace.pb.y * scale.y * scaleSize, newFace.pb.z * scale.z * scaleSize);
+                        newFace.tcc = glm::vec2(newFace.pc.y * scale.y * scaleSize, newFace.pc.z * scale.z * scaleSize);
                     }
                     else if (absNorm.y > absNorm.x && absNorm.y > absNorm.z)
                     {
-                        newFace.tca = glm::vec2(newFace.pa.x * scale.x * 0.25f, newFace.pa.z * scale.z * 0.25f);
-                        newFace.tcb = glm::vec2(newFace.pb.x * scale.x * 0.25f, newFace.pb.z * scale.z * 0.25f);
-                        newFace.tcc = glm::vec2(newFace.pc.x * scale.x * 0.25f, newFace.pc.z * scale.z * 0.25f);
+                        newFace.tca = glm::vec2(newFace.pa.x * scale.x * scaleSize, newFace.pa.z * scale.z * scaleSize);
+                        newFace.tcb = glm::vec2(newFace.pb.x * scale.x * scaleSize, newFace.pb.z * scale.z * scaleSize);
+                        newFace.tcc = glm::vec2(newFace.pc.x * scale.x * scaleSize, newFace.pc.z * scale.z * scaleSize);
                     }
                     else
                     {
-                        newFace.tca = glm::vec2(newFace.pa.x * scale.x * 0.25f, newFace.pa.y * scale.y * 0.25f);
-                        newFace.tcb = glm::vec2(newFace.pb.x * scale.x * 0.25f, newFace.pb.y * scale.y * 0.25f);
-                        newFace.tcc = glm::vec2(newFace.pc.x * scale.x * 0.25f, newFace.pc.y * scale.y * 0.25f);
+                        newFace.tca = glm::vec2(newFace.pa.x * scale.x * scaleSize, newFace.pa.y * scale.y * scaleSize);
+                        newFace.tcb = glm::vec2(newFace.pb.x * scale.x * scaleSize, newFace.pb.y * scale.y * scaleSize);
+                        newFace.tcc = glm::vec2(newFace.pc.x * scale.x * scaleSize, newFace.pc.y * scale.y * scaleSize);
                     }
 
                     newFace.lmca = newFace.lmcb = newFace.lmcc = glm::vec2(0); // Default value

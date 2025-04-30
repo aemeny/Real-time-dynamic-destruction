@@ -37,6 +37,9 @@
     <Filter Include="Header Files\Physics">
       <UniqueIdentifier>{76e5b3d2-84ca-4769-97b0-b34b42458ca9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{7b455fe0-3d78-4a13-96ef-ef7513a96732}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project\main.cpp">
@@ -311,5 +314,13 @@
     <ClInclude Include="GameEngine\DestructionHandler.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Shaders\Light\fragmentShader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\Light\vertexShader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

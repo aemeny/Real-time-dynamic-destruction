@@ -200,7 +200,7 @@ namespace Renderer
 		{
 			while (std::getline(file, line))
 			{
-				if (line == "vec3 lightPos = vec3(0, 0, 0);")
+				if (line == "    vec3 lightPos = vec3(0, 0, 0);")
 				{
 					fileString += m_newLightPos + '\n';
 				}

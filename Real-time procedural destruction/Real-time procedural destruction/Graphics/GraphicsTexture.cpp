@@ -7,6 +7,7 @@ namespace Renderer
 	/* using polymorphism to take a texture that is from a file location */
 	Texture::Texture(const char* _fileName) : m_width(0), m_height(0), m_textureId(0), m_fromPassedData(false)
 	{
+		stbi_set_flip_vertically_on_load(true);
 		m_data = stbi_load(_fileName, &m_width, &m_height, NULL, 4);
 		if (!m_data) throw std::runtime_error("Couldn't Load Data, Check File Name Is Correct?");
 
@@ -37,10 +38,17 @@ namespace Renderer
 		uploadToGPU();
 
 		// Generate Mipmap so the texture can be mapped correctly
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		// Unbind the texture because we are done operating on it
 		glBindTexture(GL_TEXTURE_2D, 0);
+
+		// Anisotropic Filtering
+		float aniso = 0.0f;
+		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &aniso);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, aniso);
 
 		//Alpha Blending
 		glEnable(GL_BLEND);
