@@ -1,10 +1,8 @@
-﻿  main.cpp
+﻿  DestructionHandler.cpp
 C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\Graphics\Vbo.h(20,41): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'Project/main.cpp')
+  (compiling source file 'GameEngine/DestructionHandler.cpp')
   
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::GUI>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::PointLight>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::DestructionHandler>': not all control paths return a value
-C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\Entity.h(91): warning C4715: 'GameEngine::Entity::findComponent<ShootRay>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(15,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(147,15): warning C4101: 'halfSize': unreferenced local variable
+C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\Real-time procedural destruction\GameEngine\DestructionHandler.cpp(260,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Real-time procedural destruction.vcxproj -> C:\Users\alexe\Documents\GitHub\Dissertation-Project\Real-time procedural destruction\x64\Debug\Real-time procedural destruction.exe

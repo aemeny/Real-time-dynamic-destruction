@@ -72,8 +72,8 @@ int main()
 	entity->addComponent<DestructionHandler>();
 	std::weak_ptr<DestructionHandler> destructionHandlerGrab = entity->findComponent<DestructionHandler>();
 	destructionHandlerGrab.lock()->setRandomFromCircle(true);
-	destructionHandlerGrab.lock()->setDestructionDiameter(4.0f);
-	destructionHandlerGrab.lock()->setPointGenerationDepth(50);
+	destructionHandlerGrab.lock()->setDestructionDiameter(2.0f);
+	destructionHandlerGrab.lock()->setPointGenerationDepth(30);
 
 	entity->addComponent<MeshCollider>();
 

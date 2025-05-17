@@ -177,6 +177,9 @@
     <ClCompile Include="GameEngine\LineEquations.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Project\DestructedObject.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="GameEngine\DestructionHandler.h">
       <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\DestructedObject.h">
+      <Filter>Header Files\Project</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

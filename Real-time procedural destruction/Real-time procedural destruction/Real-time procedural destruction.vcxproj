@@ -176,6 +176,7 @@
     <ClCompile Include="Physics\Ray.cpp" />
     <ClCompile Include="Physics\TraceRay.cpp" />
     <ClCompile Include="Project\Curuthers.cpp" />
+    <ClCompile Include="Project\DestructedObject.cpp" />
     <ClCompile Include="Project\DestructionObjs.cpp" />
     <ClCompile Include="Project\Floor.cpp" />
     <ClCompile Include="Project\main.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="Physics\Ray.h" />
     <ClInclude Include="Physics\TraceRay.h" />
     <ClInclude Include="Project\Curuthers.h" />
+    <ClInclude Include="Project\DestructedObject.h" />
     <ClInclude Include="Project\DestructionObjs.h" />
     <ClInclude Include="Project\Floor.h" />
     <ClInclude Include="Project\ShootRay.h" />

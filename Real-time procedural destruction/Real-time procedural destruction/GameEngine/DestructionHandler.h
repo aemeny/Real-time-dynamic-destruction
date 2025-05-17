@@ -82,13 +82,13 @@ namespace GameEngine
           Generates a vector of bu::Face's based on the new tris generated to be updated in the model later.
           Takes into account the projected plane and places them back into 3D using the unProjectVertex() func
         */
-        void addNewFaces(std::vector<bu::Face>* _newFaces, const std::vector<Triangle>& _tris, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane, float _savedPoint);
+        void addNewFaces(std::vector<bu::Face>* _newFaces, const std::vector<Triangle>& _tris, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane, float _savedPoint, float _customDepth = NULL);
         //! Connects the back and front face
         /*!
           Given the inner holes edge vertices connects the back and front face with new bu::Face's to fill the holes new inner walls.
           Provided the edges are in a connected winding order.
         */
-        void connectFaces(std::vector<bu::Face>* _newFaces, std::vector<std::vector<glm::vec2> >& _edgePoints, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane, float _savedPoint);
+        void connectFaces(std::vector<bu::Face>* _newFaces, std::vector<std::vector<glm::vec2> >& _edgePoints, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane, float _savedPoint, float _customDepth = NULL);
     };
 }
 

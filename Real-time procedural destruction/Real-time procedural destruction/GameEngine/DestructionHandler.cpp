@@ -1,6 +1,7 @@
 #include "DestructionHandler.h"
 #include "ModelRenderer.h"
 #include "../Physics/TraceRay.h"
+#include "../Project/DestructedObject.h"
 
 #include <glm/gtx/normal.hpp>
 #include <random>
@@ -39,39 +40,53 @@ namespace GameEngine
 
 
 
-
-
-
-        // Generate fragment pieces based on the voronoi diagram
-        std::vector<std::shared_ptr<LineRenderer> > lineRenderer;
-        core().lock()->find<LineRenderer>(lineRenderer);
-        std::weak_ptr<Renderer::Vbo> vbo = lineRenderer[0]->addVbo();
-        
-        for (const VoronoiCell& cell : voronoiDiagram.m_voronoiCells)
+        /* -- Generate fragment pieces based on the voronoi diagram -- */   
+        for (VoronoiCell cell : voronoiDiagram.m_voronoiCells)
         {
-            // Make new entity for this cell
+            /* --- Make new entity for this cell --- */
             std::shared_ptr<Entity> newCellEntity = core().lock()->addEntity();
-            newCellEntity->addComponent<Transform>();
-            std::weak_ptr<Renderer::Model> model = newCellEntity->addComponent<ModelRenderer>()->getModel();
+            std::weak_ptr<Transform> cellTransform = newCellEntity->addComponent<Transform>();
+            newCellEntity->addComponent<DestructedObject>();
+            std::weak_ptr<ModelRenderer> modelRenderer = newCellEntity->addComponent<ModelRenderer>();
+            modelRenderer.lock()->setModel("Cube/Cube.obj", true);
+            modelRenderer.lock()->setTexture("Floor/CustomUV.png");
 
-            // Trianglulate new cell
-
-            // Grab outer edges?
-
-            // Connect faces
-
-            // Update model
-
-            // Draw edges
+            /*  --- Trianglulate new cell --- */
+            // Add all vertices to list
+            std::vector<glm::vec2> cellVertices;
             for (const Edge& edge : cell.m_edges)
             {
-                lineRenderer[0]->addLine(vbo, glm::vec3(edge.m_start.x, edge.m_start.y, savedUnprojetedPoint), glm::vec3(edge.m_end.x, edge.m_end.y, savedUnprojetedPoint));
+                cellVertices.push_back(edge.m_start);
+                cellVertices.push_back(edge.m_end);
             }
+            // Remove duplicates
+            std::sort(cellVertices.begin(), cellVertices.end(), [](const glm::vec2& a, const glm::vec2& b) {
+                if (a.x != b.x) return a.x < b.x; // Compare x components
+                return a.y < b.y; // Compare y components
+                });
+            auto last = std::unique(cellVertices.begin(), cellVertices.end());
+            cellVertices.erase(last, cellVertices.end());
+
+            // Create delaunay from points
+            Delaunay localCellDelaunay = Delaunay(cellVertices);
+
+            // Create new faces
+            float customZDepth = _transform.lock()->getPos().z - _transform.lock()->getScale().z;
+            std::vector<bu::Face> newCellFaces;
+            addNewFaces(&newCellFaces, localCellDelaunay.m_triangles, cellTransform, plane, savedUnprojetedPoint, customZDepth);
+
+            // Connect faces
+            std::vector<std::vector<glm::vec2> > orderedEdgePoints = localCellDelaunay.getOrderedTrianglePoints(cell.m_edges);
+            connectFaces(&newCellFaces, orderedEdgePoints, cellTransform, plane, savedUnprojetedPoint, customZDepth);
+
+            // Update model
+            std::weak_ptr<Renderer::Model> model = modelRenderer.lock()->getModel();
+            model.lock()->setVertices(newCellFaces.size() * 3);
+            model.lock()->setFaces(newCellFaces);
+            model.lock()->updateModel();
+            model.lock()->setDestruction(false);
+            cellTransform.lock()->setDirty(true);
         }
-
-
-
-
 
 
         // Generate a convex hull cell for the orignal squares cutout
@@ -323,7 +338,7 @@ namespace GameEngine
         }
     }
 
-    void DestructionHandler::addNewFaces(std::vector<bu::Face>* _newFaces, const std::vector<Triangle>& _tris, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane, float _savedPoint)
+    void DestructionHandler::addNewFaces(std::vector<bu::Face>* _newFaces, const std::vector<Triangle>& _tris, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane, float _savedPoint, float _customDepth)
     {
         glm::vec3 pos = _transform.lock()->getPos();
         glm::vec3 scale = _transform.lock()->getScale();
@@ -353,9 +368,15 @@ namespace GameEngine
                 }
                 else
                 {
-                    newFace.pa = unProjectVertex({ (tri.m_vertices[0].x - pos.x) / scale.x, (tri.m_vertices[0].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
-                    newFace.pb = unProjectVertex({ (tri.m_vertices[1].x - pos.x) / scale.x, (tri.m_vertices[1].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
-                    newFace.pc = unProjectVertex({ (tri.m_vertices[2].x - pos.x) / scale.x, (tri.m_vertices[2].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
+                    float zPos;
+                    if (_customDepth != NULL)
+                        zPos = _customDepth;
+                    else
+                        zPos = ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z;
+                    
+                    newFace.pa = unProjectVertex({ (tri.m_vertices[0].x - pos.x) / scale.x, (tri.m_vertices[0].y - pos.y) / scale.y }, _plane, zPos);
+                    newFace.pb = unProjectVertex({ (tri.m_vertices[1].x - pos.x) / scale.x, (tri.m_vertices[1].y - pos.y) / scale.y }, _plane, zPos);
+                    newFace.pc = unProjectVertex({ (tri.m_vertices[2].x - pos.x) / scale.x, (tri.m_vertices[2].y - pos.y) / scale.y }, _plane, zPos);
                     switch (_plane)
                     {
                     case XY:
@@ -384,7 +405,7 @@ namespace GameEngine
         }
     }
 
-    void DestructionHandler::connectFaces(std::vector<bu::Face>* _newFaces, std::vector<std::vector<glm::vec2>>& _edgePoints, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane, float _savedPoint)
+    void DestructionHandler::connectFaces(std::vector<bu::Face>* _newFaces, std::vector<std::vector<glm::vec2>>& _edgePoints, const std::weak_ptr<Transform>& _transform, ProjectionPlane _plane, float _savedPoint, float _customDepth)
     {
         glm::vec3 pos = _transform.lock()->getPos();
         glm::vec3 scale = _transform.lock()->getScale();
@@ -404,16 +425,34 @@ namespace GameEngine
                     if (k == 0)
                     {
                         // Assign vertex positions
-                        newFace.pa = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
-                        newFace.pb = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
-                        newFace.pc = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
+                        if (_customDepth == NULL)
+                        {
+                            newFace.pa = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
+                            newFace.pb = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
+                            newFace.pc = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
+                        }
+                        else
+                        {
+                            newFace.pa = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, -_customDepth);
+                            newFace.pb = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, _customDepth);
+                            newFace.pc = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, _customDepth);
+                        }
                     }
                     else
                     {
                         // Assign vertex positions
-                        newFace.pa = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
-                        newFace.pb = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
-                        newFace.pc = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
+                        if (_customDepth == NULL)
+                        {
+                            newFace.pa = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
+                            newFace.pb = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, (_savedPoint - pos.z) / scale.z);
+                            newFace.pc = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, ((_savedPoint - scale.z * 2.0f) - pos.z) / scale.z);
+                        }
+                        else
+                        {
+                            newFace.pa = unProjectVertex({ (_edgePoints[i][j].x - pos.x) / scale.x, (_edgePoints[i][j].y - pos.y) / scale.y }, _plane, -_customDepth);
+                            newFace.pb = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, -_customDepth);
+                            newFace.pc = unProjectVertex({ (_edgePoints[i][nextPoint].x - pos.x) / scale.x, (_edgePoints[i][nextPoint].y - pos.y) / scale.y }, _plane, _customDepth);
+                        }
                     }
 
                     // Find the normal for the new face given the three points

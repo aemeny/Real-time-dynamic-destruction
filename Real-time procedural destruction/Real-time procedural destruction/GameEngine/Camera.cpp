@@ -19,7 +19,7 @@ namespace GameEngine
 			fixedNP, fixedFP);
 
 		m_input = _input;
-		m_mouseSpeedX = 0.005f; m_mouseSpeedY = 0.005f; 
+		m_mouseSpeedX = 0.003f; m_mouseSpeedY = 0.003f; 
 		m_speed = 0.02f; 
 		m_cameraAngleX = glm::radians(180.0f); m_cameraAngleY = 0.0f;
 
