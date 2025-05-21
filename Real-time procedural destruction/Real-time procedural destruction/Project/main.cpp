@@ -17,7 +17,6 @@ int main()
 
 	// Entity 1 - Camera
 	std::shared_ptr<Entity> entity = core->addEntity();
-	entity->addComponent<Transform>();
 	float FOV = 90.0f;
 	entity->addComponent<Camera>(core->m_input, FOV, true); // Perspective 3D camera
 	entity->addComponent<Camera>(); // Orthographic camera
@@ -28,8 +27,7 @@ int main()
 
 	//Entity 2 - GUI
 	std::shared_ptr<Entity> entityGUI = core->addEntity();
-	std::shared_ptr<Component> entityGUITransform = entityGUI->addComponent<Transform>();
-	std::weak_ptr<Transform> transformGrab = entityGUI->findComponent<Transform>();
+	std::weak_ptr<Transform> transformGrab = entityGUI->m_transform;
 	transformGrab.lock()->setPos(glm::vec3{ core->m_nativeWindow->m_windowWidth / 2, core->m_nativeWindow->m_windowHeight / 2, 0.0f });
 	transformGrab.lock()->setRot(glm::vec3{ 0.0f, 0.0f, 0.0f });
 	transformGrab.lock()->setScale(glm::vec3{ 8.0f, 8.0f, 0.0f });
@@ -61,8 +59,7 @@ int main()
 	// Entity 5 - Desturction Objs
 
 	entity = core->addEntity();
-	entity->addComponent<Transform>();
-	transformGrab = entity->findComponent<Transform>();
+	transformGrab = entity->m_transform;
 	//transformGrab.lock()->setPos(glm::vec3(-22.0f + i * 11.0f, 3.0f + j * 11.0f, -10.0f));
 	transformGrab.lock()->setPos(glm::vec3(0.0f, 1.40f, 0.0f));
 	transformGrab.lock()->setScale(glm::vec3(1.95f, 1.3f, 0.16f));
@@ -72,8 +69,8 @@ int main()
 	entity->addComponent<DestructionHandler>();
 	std::weak_ptr<DestructionHandler> destructionHandlerGrab = entity->findComponent<DestructionHandler>();
 	destructionHandlerGrab.lock()->setRandomFromCircle(true);
-	destructionHandlerGrab.lock()->setDestructionDiameter(2.0f);
-	destructionHandlerGrab.lock()->setPointGenerationDepth(30);
+	destructionHandlerGrab.lock()->setDestructionDiameter(6.0f);
+	destructionHandlerGrab.lock()->setPointGenerationDepth(60);
 
 	entity->addComponent<MeshCollider>();
 

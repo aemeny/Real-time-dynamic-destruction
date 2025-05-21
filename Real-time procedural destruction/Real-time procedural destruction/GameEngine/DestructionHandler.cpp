@@ -1,6 +1,7 @@
-#include "DestructionHandler.h"
+﻿#include "DestructionHandler.h"
 #include "ModelRenderer.h"
 #include "../Physics/TraceRay.h"
+#include "../Physics/RigidBody.h"
 #include "../Project/DestructedObject.h"
 
 #include <glm/gtx/normal.hpp>
@@ -40,13 +41,19 @@ namespace GameEngine
 
 
 
+        // Debug line renderer
+        std::vector<std::shared_ptr<LineRenderer> > lineRenderer;
+        core().lock()->find<LineRenderer>(lineRenderer);
+        std::weak_ptr<Renderer::Vbo> vbo = lineRenderer[0]->addVbo();
+
         /* -- Generate fragment pieces based on the voronoi diagram -- */   
         for (VoronoiCell cell : voronoiDiagram.m_voronoiCells)
         {
             /* --- Make new entity for this cell --- */
             std::shared_ptr<Entity> newCellEntity = core().lock()->addEntity();
-            std::weak_ptr<Transform> cellTransform = newCellEntity->addComponent<Transform>();
+            std::weak_ptr<Transform> cellTransform = newCellEntity->m_transform;
             newCellEntity->addComponent<DestructedObject>();
+            std::weak_ptr<RigidBody> cellRigidBody = newCellEntity->addComponent<RigidBody>();
             std::weak_ptr<ModelRenderer> modelRenderer = newCellEntity->addComponent<ModelRenderer>();
             modelRenderer.lock()->setModel("Cube/Cube.obj", true);
             modelRenderer.lock()->setTexture("Floor/CustomUV.png");
@@ -86,6 +93,21 @@ namespace GameEngine
             model.lock()->updateModel();
             model.lock()->setDestruction(false);
             cellTransform.lock()->setDirty(true);
+
+            // Apply physics
+            // Calculate center of the cell
+            glm::vec2 centroid(0.0f, 0.0f);
+            for (const glm::vec2& vertex : cellVertices) {
+                centroid += vertex;
+            }
+            centroid /= cellVertices.size();
+
+            // Calculate exposion point velocity impact
+            glm::vec3 diff = glm::vec3(centroid, 0) - _info->intersectionPos;
+            // Increase Strength
+            diff *= 3;
+
+            cellRigidBody.lock()->addImpulse(glm::vec3(diff.x, 2 + diff.y, -3));
         }
 
 

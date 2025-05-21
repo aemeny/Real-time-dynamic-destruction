@@ -35,7 +35,7 @@ void main() {
    vec3 rimColor = vec3(1.0, 0.8, 0.6) * fresnel * 0.3;
    
    // Dynamic ambient (optional)
-   float facing = max(dot(norm, vec3(0,1,0)), 0.0);
+   float facing = max(dot(norm, vec3(0,1,0)), 1.0);
    vec3 dynamicAmbient = ambientColor * (0.3 + 0.7 * facing);
    
    // Texture sampling

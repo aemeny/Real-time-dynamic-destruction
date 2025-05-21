@@ -180,6 +180,9 @@
     <ClCompile Include="Project\DestructedObject.cpp">
       <Filter>Source Files\Project</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\RigidBody.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsModel.h">
@@ -319,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="Project\DestructedObject.h">
       <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\RigidBody.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
