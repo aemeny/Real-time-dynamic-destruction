@@ -15,6 +15,7 @@ namespace GameEngine
 	{
 		// Using given ray check which object has been intersected with
 		intersectionInfo Info = findClosestObject(_ray);
+		Info.rayOrigin = _ray.origin;
 
 		if (Info.hasIntersected)
 		{

@@ -30,6 +30,6 @@ namespace GameEngine
         bool m_useGravity;
         glm::vec3 m_gravity;
 
-        float m_dampening = 1.00f;
+        float m_dampening = 1.0f;
     };
 }

@@ -10,6 +10,7 @@ namespace GameEngine
 	struct intersectionInfo
 	{
 		glm::vec3 intersectionPos{ 0,0,0 };
+		glm::vec3 rayOrigin = glm::vec3(NULL);
 		float distanceToIntersection = FLT_MAX;
 		bool hasIntersected{ false };
 		int objIndex = 0;

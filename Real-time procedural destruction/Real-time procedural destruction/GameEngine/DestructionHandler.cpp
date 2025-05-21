@@ -96,18 +96,47 @@ namespace GameEngine
 
             // Apply physics
             // Calculate center of the cell
-            glm::vec2 centroid(0.0f, 0.0f);
+            glm::vec2 centroid2D(0.0f, 0.0f);
             for (const glm::vec2& vertex : cellVertices) {
-                centroid += vertex;
+                centroid2D += vertex;
             }
-            centroid /= cellVertices.size();
+            centroid2D /= cellVertices.size();
+            glm::vec3 piecePos = glm::vec3(centroid2D, 0.0f);
 
-            // Calculate exposion point velocity impact
-            glm::vec3 diff = glm::vec3(centroid, 0) - _info->intersectionPos;
-            // Increase Strength
-            diff *= 3;
+            // Radial direction (More force applied closer to impact point)
+            glm::vec3 diff = piecePos - _info->intersectionPos;
+            float dist = glm::length(diff);
+            if (dist < 0.0001f) dist = 0.0001f;
+            glm::vec3 radialDir = diff / dist;
 
-            cellRigidBody.lock()->addImpulse(glm::vec3(diff.x, 2 + diff.y, -3));
+            // Add "bullet" direction vias
+            float biasStrength = 0.3f;
+            glm::vec3 shotDir = _info->intersectionPos - _info->rayOrigin;
+            shotDir = glm::normalize(shotDir);
+            glm::vec3 dir = glm::normalize(radialDir * (1.0f - biasStrength) + shotDir * biasStrength);
+
+            // Caculate falloff strength
+            float explosionStrength = 2.0f;
+            float falloff = glm::clamp(1.0f - dist / m_destructionDiameter, 0.0f, 1.0f);
+            float kick = explosionStrength * falloff;
+
+            // Add little random direction to it's not perfectly even
+            auto rndSphere = [&](){
+                glm::vec3 r {
+                    (rand() / float(RAND_MAX)) * 2 - 1,
+                    (rand() / float(RAND_MAX)) * 2 - 1,
+                    (rand() / float(RAND_MAX)) * 2 - 1 
+                };
+                return glm::normalize(r) * 0.2f; // Jitter strength
+            };
+
+            dir += rndSphere();
+            dir = glm::normalize(dir);
+
+            // Final impulse with bias up
+            glm::vec3 impulse = dir * kick;
+            impulse.y += 2.0f * falloff;
+            cellRigidBody.lock()->addImpulse(impulse);
         }
 
 

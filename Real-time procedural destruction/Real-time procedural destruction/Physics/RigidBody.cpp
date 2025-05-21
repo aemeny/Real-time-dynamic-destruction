@@ -9,7 +9,7 @@ namespace GameEngine
         m_acceleration = glm::vec3(0.0f);
         m_mass = 1.0f;
         m_useGravity = true;
-        m_gravity = glm::vec3(0.0f, -9.81f, 0.0f);
+        m_gravity = glm::vec3(0.0f, -5.81f, 0.0f);
         m_forces = glm::vec3(0.0f);
         if (m_useGravity)
         {

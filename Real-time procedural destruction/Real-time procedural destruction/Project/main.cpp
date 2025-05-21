@@ -15,6 +15,7 @@ int main()
 	// Core init
 	std::shared_ptr<Core> core = Core::initialize();
 
+
 	// Entity 1 - Camera
 	std::shared_ptr<Entity> entity = core->addEntity();
 	float FOV = 90.0f;
@@ -25,42 +26,17 @@ int main()
 	entity->addComponent<LineRenderer>();
 
 
-	//Entity 2 - GUI
-	std::shared_ptr<Entity> entityGUI = core->addEntity();
-	std::weak_ptr<Transform> transformGrab = entityGUI->m_transform;
-	transformGrab.lock()->setPos(glm::vec3{ core->m_nativeWindow->m_windowWidth / 2, core->m_nativeWindow->m_windowHeight / 2, 0.0f });
-	transformGrab.lock()->setRot(glm::vec3{ 0.0f, 0.0f, 0.0f });
-	transformGrab.lock()->setScale(glm::vec3{ 8.0f, 8.0f, 0.0f });
-
-	std::shared_ptr<Component> entityGUIGUI = entityGUI->addComponent<GUI>();
-	std::weak_ptr<GUI> entityGUIGrab = entityGUI->findComponent<GUI>();
-	entityGUIGrab.lock()->setTexture("Crosshair3.png");
-	entityGUIGrab.lock()->setShown(true);
-
-
-	// Entity 3 - Point light
+	// Entity 2 - Point light
 	entity = core->addEntity();
 	entity->addComponent<PointLight>();
 	std::weak_ptr<PointLight> entityPointLightGrab = entity->findComponent<PointLight>();
 	entityPointLightGrab.lock()->setFilePath("fragmentShader.glsl");
 	entityPointLightGrab.lock()->setLightPos(glm::vec3(20.0f, 40.0f, 20.0f));
 
-	// Entity 4 - Floor
-	/*entity = core->addEntity();
-	entity->addComponent<Transform>();
-	transformGrab = entity->findComponent<Transform>();
-	transformGrab.lock()->setPos(glm::vec3(0.0f, 0.0f, 0.0f));
-	transformGrab.lock()->setRot(glm::vec3(0.0f, 0.0f, 0.0f));
-	transformGrab.lock()->setScale(glm::vec3(0.006f, 1.0f, 0.006f));
 
-	entity->addComponent<ModelRenderer>();
-	entity->addComponent<Floor>();*/
-
-	// Entity 5 - Desturction Objs
-
+	// Entity 3 - Desturction Objs
 	entity = core->addEntity();
-	transformGrab = entity->m_transform;
-	//transformGrab.lock()->setPos(glm::vec3(-22.0f + i * 11.0f, 3.0f + j * 11.0f, -10.0f));
+	std::weak_ptr<Transform> transformGrab = entity->m_transform;
 	transformGrab.lock()->setPos(glm::vec3(0.0f, 1.40f, 0.0f));
 	transformGrab.lock()->setScale(glm::vec3(1.95f, 1.3f, 0.16f));
 
@@ -68,11 +44,12 @@ int main()
 	entity->addComponent<DestructionObjs>();
 	entity->addComponent<DestructionHandler>();
 	std::weak_ptr<DestructionHandler> destructionHandlerGrab = entity->findComponent<DestructionHandler>();
-	destructionHandlerGrab.lock()->setRandomFromCircle(true);
-	destructionHandlerGrab.lock()->setDestructionDiameter(6.0f);
-	destructionHandlerGrab.lock()->setPointGenerationDepth(60);
+	destructionHandlerGrab.lock()->setRandomFromCircle(false);
+	destructionHandlerGrab.lock()->setDestructionDiameter(9.0f);
+	destructionHandlerGrab.lock()->setPointGenerationDepth(50);
 
 	entity->addComponent<MeshCollider>();
+
 
 	//Entity 6 - Shootray
 	entity = core->addEntity();
