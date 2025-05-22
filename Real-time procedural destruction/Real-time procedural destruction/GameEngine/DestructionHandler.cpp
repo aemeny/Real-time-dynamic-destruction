@@ -109,7 +109,7 @@ namespace GameEngine
             if (dist < 0.0001f) dist = 0.0001f;
             glm::vec3 radialDir = diff / dist;
 
-            // Add "bullet" direction vias
+            // Add "bullet" direction bias
             float biasStrength = 0.3f;
             glm::vec3 shotDir = _info->intersectionPos - _info->rayOrigin;
             shotDir = glm::normalize(shotDir);
@@ -133,8 +133,9 @@ namespace GameEngine
             dir += rndSphere();
             dir = glm::normalize(dir);
 
-            // Final impulse with bias up
+            // Final impulse with bias
             glm::vec3 impulse = dir * kick;
+            impulse.x /= 1.4f;
             impulse.y += 2.0f * falloff;
             cellRigidBody.lock()->addImpulse(impulse);
         }
